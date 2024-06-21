@@ -11,7 +11,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       
     - name: Download SDK
       run: wget https://github.com/arichornlover/iPhoneOS-SDK/releases/download/v1.0/iPhoneOS18.0.sdk.zip
