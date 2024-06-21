@@ -14,20 +14,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download SDK
-        run: |
-          mkdir extracted_folder
-          curl -LJO https://github.com/arichornlover/iPhoneOS-SDK/releases/download/v1.0/iPhoneOS18.0.sdk.zip
+        run: wget https://github.com/arichornlover/iPhoneOS-SDK/releases/download/v1.0/iPhoneOS18.0.sdk.zip
+
+      - name: Check if zip file exists
+        run: test -f iPhoneOS18.0.sdk.zip
+        continue-on-error: true
 
       - name: Unpack SDK
-        run: |
-          if [ -f iPhoneOS18.0.sdk.zip ]; then
-            unzip iPhoneOS18.0.sdk.zip -d extracted_folder
-          else
-            echo "Failed to download the SDK ZIP file"
-            exit 1
-          fi
-      
+        if: success()
+        run: unzip iPhoneOS18.0.sdk.zip -d extracted_folder
+
       - name: Move files
+        if: success()
         run: mv extracted_folder/* .
       
       - name: Commit changes
