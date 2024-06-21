@@ -1,0 +1,31 @@
+name: Upload SDK
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Download SDK
+      run: wget https://github.com/arichornlover/iPhoneOS-SDK/releases/download/v1.0/iPhoneOS18.0.sdk.zip
+      
+    - name: Unpack SDK
+      run: unzip iPhoneOS18.0.sdk.zip
+      
+    - name: Move files
+      run: mv extracted_folder/* .
+      
+    - name: Commit changes
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add .
+        git commit -m "Add SDK files"
+        git push
