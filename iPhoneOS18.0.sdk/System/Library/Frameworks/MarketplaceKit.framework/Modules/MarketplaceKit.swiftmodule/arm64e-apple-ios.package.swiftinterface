@@ -1,0 +1,973 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.3.38 clang-1600.0.20.6)
+// swift-module-flags: -target arm64e-apple-ios18.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature ConciseMagicFile -enable-upcoming-feature ForwardTrailingClosures -enable-bare-slash-regex -user-module-version 2.0.23 -module-name MarketplaceKit -package-name ManagedAppDistributionFrameworks
+@_spiOnly import BackBoardServices
+import CoreGraphics
+@_spiOnly import BackBoardServices.HID.Event
+import ExtensionFoundation
+import Foundation
+import LocalAuthentication
+@_spiOnly @_spi(Internal) @_spi(MarketplaceKit) import ManagedAppDistribution
+import Observation
+import Swift
+@_spiOnly import UIKitServices
+@_spiOnly import UIKitServices.UISSlotTag
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_spiOnly import os.log
+@_spiOnly import os
+@_spi(Internal) extension os.Logger {
+  @_spi(Internal) nonisolated(unsafe) public static let ald: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let general: os.Logger
+}
+@available(iOS 17.4, *)
+public protocol MarketplaceExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
+}
+@available(iOS 17.4, *)
+public struct AppVersion : Swift.Sendable, Swift.CustomStringConvertible {
+  public let appleItemID: MarketplaceKit.AppleItemID
+  public let appleVersionID: Swift.UInt64
+  public init(appleItemID: MarketplaceKit.AppleItemID, appleVersionID: Swift.UInt64)
+  public var description: Swift.String {
+    get
+  }
+}
+@_spi(Internal) extension MarketplaceKit.AppVersion : Swift.Codable {
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.4, *)
+public struct AutomaticUpdate : Swift.Sendable {
+  public let appleItemID: MarketplaceKit.AppleItemID
+  public let alternativeDistributionPackage: Foundation.URL
+  public let account: Swift.String
+  public let installVerificationToken: Swift.String
+  public init(appleItemID: MarketplaceKit.AppleItemID, alternativeDistributionPackage: Foundation.URL, account: Swift.String, installVerificationToken: Swift.String)
+}
+@_spi(Internal) extension MarketplaceKit.AutomaticUpdate : Swift.Codable {
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.4, *)
+public protocol MarketplaceExtension : ExtensionFoundation.AppExtension, Swift.Sendable {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  func additionalHeaders(for request: Foundation.URLRequest, account: Swift.String) -> [Swift.String : Swift.String]?
+  #else
+  func additionalHeaders(for request: Foundation.URLRequest, account: Swift.String) -> [Swift.String : Swift.String]?
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  func availableAppVersions(forAppleItemIDs ids: [MarketplaceKit.AppleItemID]) -> [MarketplaceKit.AppVersion]?
+  #else
+  func availableAppVersions(forAppleItemIDs ids: [MarketplaceKit.AppleItemID]) -> [MarketplaceKit.AppVersion]?
+  #endif
+  func requestFailed(with response: Foundation.HTTPURLResponse) -> Swift.Bool
+  func automaticUpdates(for installedAppVersions: [MarketplaceKit.AppVersion]) async throws -> [MarketplaceKit.AutomaticUpdate]
+}
+extension MarketplaceKit.MarketplaceExtension {
+  @available(iOS 17.4, *)
+  public var configuration: some MarketplaceKit.MarketplaceExtensionConfiguration {
+    get
+  }
+}
+@available(iOS 17.4, *)
+public struct InstallRequirements : Swift.Sendable, Swift.Codable {
+  public var minimumSystemVersion: Swift.String?
+  public var requiredDeviceCapabilities: Swift.Set<Swift.String>?
+  public var ageRatingRank: Swift.Int?
+  public var expectedInstallSize: Swift.UInt64?
+  public init()
+  public func satisfiedByDevice() -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Localization) public struct LocalizedStringsRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Localization) public struct LocalizedString : Swift.Codable, Swift.Sendable {
+    @_spi(Localization) public let key: Swift.String
+    @_spi(Localization) public let replacementTokens: [Swift.String : Swift.String]
+    @_spi(Localization) public init(key: Swift.String, replacementTokens: [Swift.String : Swift.String] = [:])
+    @_spi(Localization) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Localization) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Localization) public let strings: [MarketplaceKit.LocalizedStringsRequest.LocalizedString]
+  @_spi(Localization) public init(strings: [MarketplaceKit.LocalizedStringsRequest.LocalizedString])
+  @_spi(Localization) public func run() async throws -> MarketplaceKit.LocalizedStringsResponse
+  @_spi(Localization) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Localization) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Localization) public struct LocalizedStringsResponse : Swift.Codable, Swift.Sendable {
+  @_spi(Localization) public let localizedStrings: [Swift.String : Swift.String]
+  @_spi(Localization) public init(localizedStrings: [Swift.String : Swift.String])
+  @_spi(Localization) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Localization) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(LaunchAngel) public struct LaunchAngelXPCRequest : Swift.Sendable, Swift.Codable {
+  @_spi(LaunchAngel) public enum RequestType : Swift.Sendable, Swift.Codable {
+    @_spi(LaunchAngel) case displayProductPage(itemID: Swift.UInt64, versionID: Swift.UInt64?, distributorID: Swift.String)
+    @_spi(LaunchAngel) case displaySearchResults(query: Swift.String, distributorID: Swift.String)
+    @_spi(LaunchAngel) case displayAuthorization(account: Swift.String, distributorID: Swift.String)
+    @_spi(LaunchAngel) case getInstallConfirmation(context: MarketplaceKit.InstallSheetContext)
+    @_spi(LaunchAngel) case oauthAuthorization(context: MarketplaceKit.OAuthAuthorizationContext)
+    @_spi(LaunchAngel) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(LaunchAngel) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(LaunchAngel) public let requestType: MarketplaceKit.LaunchAngelXPCRequest.RequestType
+  @_spi(LaunchAngel) public init(requestType: MarketplaceKit.LaunchAngelXPCRequest.RequestType)
+  @_spi(LaunchAngel) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(LaunchAngel) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(LaunchAngel) public struct LaunchAngelXPCResponse : Swift.Sendable, Swift.Codable {
+  @_spi(LaunchAngel) public enum ResponseType : Swift.Sendable, Swift.Codable {
+    @_spi(LaunchAngel) case ignored
+    @_spi(LaunchAngel) case installSheetConfirmation(confirmed: Swift.Bool)
+    @_spi(LaunchAngel) case oauthAuthorization(response: [Swift.String : Swift.String])
+    @_spi(LaunchAngel) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(LaunchAngel) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(LaunchAngel) public let responseType: MarketplaceKit.LaunchAngelXPCResponse.ResponseType
+  @_spi(LaunchAngel) public init(responseType: MarketplaceKit.LaunchAngelXPCResponse.ResponseType)
+  @_spi(LaunchAngel) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(LaunchAngel) public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.4, *)
+public let MarketplaceKitURIScheme: Swift.String
+@_spi(LaunchAngel) public struct OAuthAuthorizationRequest {
+  @_spi(LaunchAngel) public let context: MarketplaceKit.OAuthAuthorizationContext
+  @_spi(LaunchAngel) public init(context: MarketplaceKit.OAuthAuthorizationContext)
+  @_spi(LaunchAngel) public func run() async throws -> [Swift.String : Swift.String]
+}
+@_spi(Internal) public enum MarketplaceKitServiceResult<Success> : Swift.Codable where Success : Swift.Decodable, Success : Swift.Encodable {
+  @_spi(Internal) case success(Success)
+  @_spi(Internal) case failure(MarketplaceKit.MarketplaceKitError)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+#if compiler(>=5.3) && $NoncopyableGenerics
+@_spi(Internal) extension Swift.Result {
+  @_spi(Internal) public init(_ serviceResult: MarketplaceKit.MarketplaceKitServiceResult<Success>) where Success : Swift.Decodable, Success : Swift.Encodable, Failure == MarketplaceKit.MarketplaceKitError
+}
+#else
+@_spi(Internal) extension Swift.Result {
+  @_spi(Internal) public init(_ serviceResult: MarketplaceKit.MarketplaceKitServiceResult<Success>) where Success : Swift.Decodable, Success : Swift.Encodable, Failure == MarketplaceKit.MarketplaceKitError
+}
+#endif
+@_spi(LaunchAngel) public struct InstallConfirmationRequest {
+  @_spi(LaunchAngel) public let context: MarketplaceKit.InstallSheetContext
+  @_spi(LaunchAngel) public init(context: MarketplaceKit.InstallSheetContext)
+  @_spi(LaunchAngel) public func run() async throws -> Swift.Bool
+}
+@_spi(LaunchAngel) @objc public protocol AppDistributionLaunchAngelInterface : ObjectiveC.NSObjectProtocol {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(LaunchAngel) @objc func handleXPCRequest(_ request: Foundation.Data, reply: @escaping @Sendable (Foundation.Data, Foundation.NSError?) -> Swift.Void)
+  #else
+  @_spi(LaunchAngel) @objc func handleXPCRequest(_ request: Foundation.Data, reply: @escaping @Sendable (Foundation.Data, Foundation.NSError?) -> Swift.Void)
+  #endif
+}
+@_spi(Internal) public struct ManifestValidationRequest : Swift.Codable {
+  @_spi(Internal) public let url: Foundation.URL
+  @_spi(Internal) public let primaryProductVariant: Swift.String?
+  @_spi(Internal) public let compatibleProductVariants: Swift.Set<Swift.String>?
+  @_spi(Internal) public let osVersion: Swift.String?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init(url: Foundation.URL, primaryProductVariant: Swift.String?, compatibleProductVariants: Swift.Set<Swift.String>?, osVersion: Swift.String?)
+  #else
+  @_spi(Internal) public init(url: Foundation.URL, primaryProductVariant: Swift.String?, compatibleProductVariants: Swift.Set<Swift.String>?, osVersion: Swift.String?)
+  #endif
+  @_spi(Internal) public func run() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Private) public struct ApprovedDeveloper : Swift.Codable, Swift.Sendable {
+  @_spi(Private) public let name: Swift.String
+  @_spi(Private) public let identifier: Swift.String
+  @_spi(Private) public let supportURL: Swift.String?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Private) public init(name: Swift.String, identifier: Swift.String, supportURL: Swift.String?)
+  #else
+  @_spi(Private) public init(name: Swift.String, identifier: Swift.String, supportURL: Swift.String?)
+  #endif
+  @_spi(Private) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Private) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Private) extension MarketplaceKit.AppDistributor {
+  @_spi(Private) public static func allApprovedDevelopers() -> [MarketplaceKit.ApprovedDeveloper]
+  @_spi(Private) public static func revokeDeveloperApproval(_ identifier: Swift.String, removeInstalledApps: Swift.Bool) throws
+  @_spi(Private) public static func isDeveloperApproved(_ identifier: Swift.String) -> Swift.Bool
+}
+@_spi(Internal) public enum PrivateNotifications {
+  @_spi(Internal) public static var priorityOrAllowedDevelopersChangedNotificationName: Swift.String {
+    @_spi(Internal) get
+  }
+}
+@_spi(Private) extension MarketplaceKit.AppDistributor {
+  @_spi(Private) public static let AppDistributorsOrTrustedDevelopersChangedNotification: Foundation.NSNotification.Name
+  @_spi(Private) public static var distributorPriorityList: [Swift.String] {
+    @_spi(Private) get async
+  }
+  @_spi(Private) public static func setDistributorPriorityList(_ list: [Swift.String]) async throws
+  @_spi(Private) public static var synchronousDistributorPriorityList: [Swift.String] {
+    @_spi(Private) get
+  }
+  @_spi(Private) public static var synchronousAllApprovedDevelopers: [MarketplaceKit.ApprovedDeveloper] {
+    @_spi(Private) get
+  }
+  @_spi(Private) public static func setShouldShowInstallConfirmations(for distributorID: Swift.String, shouldShow: Swift.Bool) async
+  @_spi(Private) public static func synchronousSetShouldShowInstallConfirmations(for distributorID: Swift.String, shouldShow: Swift.Bool)
+  @_spi(Private) public static func synchronousShouldShowInstallConfirmations(for distributorID: Swift.String) -> Swift.Bool
+  @_spi(Private) public static func shouldShowInstallConfirmations(for distributorID: Swift.String) async -> Swift.Bool
+  @_spi(Private) public static func shouldShowAppInstallationSettings() async -> Swift.Bool
+}
+@_spi(Internal) public struct AvailableAppMetadataRequest : Swift.Codable {
+  @_spi(Internal) public let distributorID: Swift.String
+  @_spi(Internal) public let ids: [Swift.UInt64]
+  @_spi(Internal) public init(distributorID: Swift.String, ids: [Swift.UInt64])
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Distributor) extension MarketplaceKit.AppDistributor {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Distributor) public static func availableApp(for id: Swift.UInt64, distributor: Swift.String) async -> MarketplaceKit.AppVersion?
+  #else
+  @_spi(Distributor) public static func availableApp(for id: Swift.UInt64, distributor: Swift.String) async -> MarketplaceKit.AppVersion?
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Distributor) public static func availableApps(for ids: [Swift.UInt64], distributor: Swift.String) async -> [MarketplaceKit.AppVersion]?
+  #else
+  @_spi(Distributor) public static func availableApps(for ids: [Swift.UInt64], distributor: Swift.String) async -> [MarketplaceKit.AppVersion]?
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Distributor) public static func requestProductPage(_ distributorID: Swift.String, itemID: Swift.UInt64, versionID: Swift.UInt64? = nil) async throws
+  #else
+  @_spi(Distributor) public static func requestProductPage(_ distributorID: Swift.String, itemID: Swift.UInt64, versionID: Swift.UInt64? = nil) async throws
+  #endif
+  @_spi(Distributor) public static func requestSearchPage(_ distributorID: Swift.String, searchString: Swift.String) async throws
+  @_spi(Distributor) public static func requestAuthorization(_ distributorID: Swift.String, account: Swift.String) async throws
+  @_spi(Distributor) public static func handleEmergencyReset() async throws
+}
+@_spi(FollowUp) extension MarketplaceKit.AppDistributor {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(FollowUp) public static func addAllowedDeveloper(_ developerID: Swift.String, name: Swift.String, supportURL: Swift.String?) throws
+  #else
+  @_spi(FollowUp) public static func addAllowedDeveloper(_ developerID: Swift.String, name: Swift.String, supportURL: Swift.String?) throws
+  #endif
+}
+@_spi(Restores) public struct Restores {
+  @_spi(Restores) public static func discover() async throws
+  @_spi(Restores) @available(iOS 17.5, *)
+  public static func discover(for accountID: Swift.String) async throws
+  @_spi(Restores) public static func prioritize(app: Swift.String) async throws
+  @_spi(Restores) public static func promote(apps: [Swift.String]) async throws
+}
+@_spi(Restores) public struct DiscoverRestoresRequest : Swift.Codable {
+  @_spi(Restores) public let accountID: Swift.String?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Restores) @available(iOS 17.5, *)
+  public init(accountID: Swift.String? = nil)
+  #else
+  @_spi(Restores) @available(iOS 17.5, *)
+  public init(accountID: Swift.String? = nil)
+  #endif
+  @_spi(Restores) public init()
+  @_spi(Restores) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Restores) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Restores) public struct PromoteAppsRequest : Swift.Codable {
+  @_spi(Restores) public var appsToPromote: [Swift.String]
+  @_spi(Restores) public init(_ appsToPromote: [Swift.String])
+  @_spi(Restores) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Restores) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Restores) public struct PrioritizeAppRequest : Swift.Codable {
+  @_spi(Restores) public var appToPrioritize: Swift.String
+  @_spi(Restores) public init(_ appToPrioritize: Swift.String)
+  @_spi(Restores) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Restores) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(LaunchAngel) public struct InstallSheetContext : Swift.Codable, Swift.Sendable {
+  @_spi(LaunchAngel) public enum Source : Swift.Codable, Swift.Sendable, Swift.Equatable {
+    @_spi(LaunchAngel) case appStore
+    @_spi(LaunchAngel) case distributor(name: Swift.String, id: Swift.String)
+    @_spi(LaunchAngel) case web(domain: Swift.String, developerName: Swift.String)
+    @_spi(LaunchAngel) public static func == (a: MarketplaceKit.InstallSheetContext.Source, b: MarketplaceKit.InstallSheetContext.Source) -> Swift.Bool
+    @_spi(LaunchAngel) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(LaunchAngel) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(LaunchAngel) public enum InstallType : Swift.Codable, Swift.Sendable {
+    @_spi(LaunchAngel) case app
+    @_spi(LaunchAngel) case marketplace
+    @_spi(LaunchAngel) public static func == (a: MarketplaceKit.InstallSheetContext.InstallType, b: MarketplaceKit.InstallSheetContext.InstallType) -> Swift.Bool
+    @_spi(LaunchAngel) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(LaunchAngel) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(LaunchAngel) public var hashValue: Swift.Int {
+      @_spi(LaunchAngel) get
+    }
+    @_spi(LaunchAngel) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(LaunchAngel) public let itemID: Swift.String
+  @_spi(LaunchAngel) public let versionID: Swift.String?
+  @_spi(LaunchAngel) public let logKey: Swift.String
+  @_spi(LaunchAngel) public let source: MarketplaceKit.InstallSheetContext.Source
+  @_spi(LaunchAngel) public let type: MarketplaceKit.InstallSheetContext.InstallType
+  @_spi(LaunchAngel) public let authenticationContextData: Foundation.Data?
+  @_spi(LaunchAngel) public let learnMoreURL: Swift.String
+  @_spi(LaunchAngel) public let showBiometricsForAppStoreInstall: Swift.Bool
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(LaunchAngel) public init(itemID: Swift.String, versionID: Swift.String?, source: MarketplaceKit.InstallSheetContext.Source, type: MarketplaceKit.InstallSheetContext.InstallType, logKey: Swift.String, learnMoreURL: Swift.String, authenticationContextData: Foundation.Data? = nil, showBiometricsForAppStoreInstall: Swift.Bool = false)
+  #else
+  @_spi(LaunchAngel) public init(itemID: Swift.String, versionID: Swift.String?, source: MarketplaceKit.InstallSheetContext.Source, type: MarketplaceKit.InstallSheetContext.InstallType, logKey: Swift.String, learnMoreURL: Swift.String, authenticationContextData: Foundation.Data? = nil, showBiometricsForAppStoreInstall: Swift.Bool = false)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(LaunchAngel) public init(itemID: Swift.String, versionID: Swift.String?, source: MarketplaceKit.InstallSheetContext.Source, type: MarketplaceKit.InstallSheetContext.InstallType, logKey: Swift.String, learnMoreURL: Swift.String, authenticationContextData: Foundation.Data? = nil)
+  #else
+  @_spi(LaunchAngel) public init(itemID: Swift.String, versionID: Swift.String?, source: MarketplaceKit.InstallSheetContext.Source, type: MarketplaceKit.InstallSheetContext.InstallType, logKey: Swift.String, learnMoreURL: Swift.String, authenticationContextData: Foundation.Data? = nil)
+  #endif
+  @_spi(LaunchAngel) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(LaunchAngel) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(SecureButton) @objc @available(iOS 17.4, *)
+public class SecureButtonTag : UIKitServices.UISSlotTag, Foundation.NSSecureCoding {
+  @_spi(SecureButton) public enum ButtonImagePlacement : Swift.Int {
+    @_spi(SecureButton) case top
+    @_spi(SecureButton) case leading
+    @_spi(SecureButton) case bottom
+    @_spi(SecureButton) case trailing
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(SecureButton) public init?(rawValue: Swift.Int)
+    #else
+    @_spi(SecureButton) public init?(rawValue: Swift.Int)
+    #endif
+    @_spi(SecureButton) @available(iOS 17.4, *)
+    public typealias RawValue = Swift.Int
+    @_spi(SecureButton) public var rawValue: Swift.Int {
+      @_spi(SecureButton) get
+    }
+  }
+  @_spi(SecureButton) @objc public static var supportsSecureCoding: Swift.Bool {
+    @_spi(SecureButton) @objc get
+  }
+  @_spi(SecureButton) final public let label: Swift.String
+  @_spi(SecureButton) final public let imageName: Swift.String?
+  @_spi(SecureButton) final public let imagePlacement: MarketplaceKit.SecureButtonTag.ButtonImagePlacement
+  @_spi(SecureButton) final public let backgroundColor: CoreGraphics.CGColor
+  @_spi(SecureButton) final public let foregroundColor: CoreGraphics.CGColor
+  @_spi(SecureButton) final public let cornerRadius: CoreFoundation.CGFloat
+  @_spi(SecureButton) final public let size: CoreFoundation.CGSize
+  @_spi(SecureButton) final public let fontSize: CoreFoundation.CGFloat
+  @_spi(SecureButton) final public let borderWidth: CoreFoundation.CGFloat
+  @_spi(SecureButton) final public let borderColor: CoreGraphics.CGColor
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SecureButton) public init(label: Swift.String, imageName: Swift.String? = nil, imagePlacement: MarketplaceKit.SecureButtonTag.ButtonImagePlacement? = nil, backgroundColor: CoreGraphics.CGColor, foregroundColor: CoreGraphics.CGColor, cornerRadius: CoreFoundation.CGFloat, size: CoreFoundation.CGSize, fontSize: CoreFoundation.CGFloat, borderWidth: CoreFoundation.CGFloat, borderColor: CoreGraphics.CGColor)
+  #else
+  @_spi(SecureButton) public init(label: Swift.String, imageName: Swift.String? = nil, imagePlacement: MarketplaceKit.SecureButtonTag.ButtonImagePlacement? = nil, backgroundColor: CoreGraphics.CGColor, foregroundColor: CoreGraphics.CGColor, cornerRadius: CoreFoundation.CGFloat, size: CoreFoundation.CGSize, fontSize: CoreFoundation.CGFloat, borderWidth: CoreFoundation.CGFloat, borderColor: CoreGraphics.CGColor)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SecureButton) @objc required public init?(coder: Foundation.NSCoder)
+  #else
+  @_spi(SecureButton) @objc required public init?(coder: Foundation.NSCoder)
+  #endif
+  @_spi(SecureButton) @objc public func encode(with coder: Foundation.NSCoder)
+  @_spi(SecureButton) @objc override dynamic public var hash: Swift.Int {
+    @_spi(SecureButton) @objc get
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SecureButton) @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  #else
+  @_spi(SecureButton) @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  #endif
+  @_spi(SecureButton) @objc deinit
+}
+@_spi(Updates) public struct UpdateService {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Updates) public static func availableUpdate(for bundleID: Swift.String, checkInWithServer: Swift.Bool) async throws -> MarketplaceKit.UpdateMetadata?
+  #else
+  @_spi(Updates) public static func availableUpdate(for bundleID: Swift.String, checkInWithServer: Swift.Bool) async throws -> MarketplaceKit.UpdateMetadata?
+  #endif
+  @_spi(Updates) public static func requestUpdate(for metadata: MarketplaceKit.UpdateMetadata) async throws
+}
+@_spi(Internal) public struct UpdateMetadataRequest : Swift.Codable {
+  @_spi(Internal) public let bundleID: Swift.String
+  @_spi(Internal) public let shouldCheckInWithServer: Swift.Bool
+  @_spi(Internal) public init(bundleID: Swift.String, shouldCheckInWithServer: Swift.Bool)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Search) extension MarketplaceKit.AppLibrary {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Search) @_Concurrency.MainActor public static func getSearchTerritory(for distributorID: Swift.String) async -> Swift.String?
+  #else
+  @_spi(Search) @_Concurrency.MainActor public static func getSearchTerritory(for distributorID: Swift.String) async -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Search) @_Concurrency.MainActor public static func setSearchTerritory(_ territory: Swift.String?, for distributorID: Swift.String) async
+  #else
+  @_spi(Search) @_Concurrency.MainActor public static func setSearchTerritory(_ territory: Swift.String?, for distributorID: Swift.String) async
+  #endif
+}
+@_spi(Private) extension MarketplaceKit.AppLibrary {
+  @_spi(Private) @available(*, deprecated, renamed: "app(forAppleItemID:)")
+  @_Concurrency.MainActor public static func getApp(itemID: Swift.String, bundleID: Swift.String) -> MarketplaceKit.AppLibrary.App
+  @_spi(Private) @_Concurrency.MainActor public static func associatedApps(developerID: Swift.String) async -> [Swift.String]
+  @_spi(Private) nonisolated public static func synchronousAssociatedApps(developerID: Swift.String) -> [Swift.String]
+}
+@_spi(SecureButton) extension MarketplaceKit.AppLibrary {
+  @_spi(SecureButton) @available(*, deprecated, renamed: "beginIndeterminantProgress(itemID:versionID:account:)")
+  @_Concurrency.MainActor final public func beginIndeterminantProgress(itemID: MarketplaceKit.AppleItemID, bundleID: Swift.String)
+  @_spi(SecureButton) @available(*, deprecated, renamed: "beginIndeterminantProgress(itemID:versionID:account:)")
+  @_Concurrency.MainActor final public func beginIndeterminantProgress(itemID: MarketplaceKit.AppleItemID)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SecureButton) @_Concurrency.MainActor final public func beginIndeterminantProgress(itemID: MarketplaceKit.AppleItemID, versionID: MarketplaceKit.AppleVersionID, version: Swift.String, shortVersion: Swift.String, account: Swift.String?)
+  #else
+  @_spi(SecureButton) @_Concurrency.MainActor final public func beginIndeterminantProgress(itemID: MarketplaceKit.AppleItemID, versionID: MarketplaceKit.AppleVersionID, version: Swift.String, shortVersion: Swift.String, account: Swift.String?)
+  #endif
+  @_spi(SecureButton) @_Concurrency.MainActor final public func resetAppToAvailable(_ app: MarketplaceKit.AppLibrary.App)
+}
+@_spi(Repair) public struct RepairRequest : Swift.Sendable {
+  @_spi(Repair) public let bundleID: Swift.String
+  @_spi(Repair) public let isBackground: Swift.Bool
+  @_spi(Repair) public let reason: Swift.UInt64
+  @_spi(Repair) public init(bundleID: Swift.String, isBackground: Swift.Bool, reason: Swift.UInt64)
+}
+@_spi(Repair) extension MarketplaceKit.AppLibrary {
+  @_spi(Repair) @_Concurrency.MainActor final public func handleRepairRequest(_ request: MarketplaceKit.RepairRequest) async throws
+}
+@_spi(Internal) public struct FetchPrivateDataRequest : Swift.Codable {
+  @_spi(Internal) public enum Request : Swift.Codable {
+    @_spi(Internal) case allApprovedDevelopers
+    @_spi(Internal) case approvedDeveloper(Swift.String)
+    @_spi(Internal) case associatedApps(developerID: Swift.String)
+    @_spi(Internal) case distributorPriorityList
+    @_spi(Internal) case passbookProvisioning(MarketplaceKit.CodableAuditToken, Foundation.Data)
+    @_spi(Internal) case showInstallSheet(Swift.String)
+    @_spi(Internal) case showAppInstallationSettings
+    @_spi(Internal) case searchTerritoryForDistributor(Swift.String)
+    @_spi(Internal) case localizedStrings([MarketplaceKit.LocalizedStringsRequest.LocalizedString])
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let request: MarketplaceKit.FetchPrivateDataRequest.Request
+  @_spi(Internal) public init(request: MarketplaceKit.FetchPrivateDataRequest.Request)
+  @_spi(Internal) public func run() async throws -> MarketplaceKit.FetchDataResponse
+  @_spi(Internal) public func runSynchronously() throws -> MarketplaceKit.FetchDataResponse
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct FetchDataResponse : Swift.Codable {
+  @_spi(Internal) public enum Response : Swift.Codable {
+    @_spi(Internal) case allApprovedDevelopers([MarketplaceKit.ApprovedDeveloper])
+    @_spi(Internal) case approvedDeveloper(Swift.Bool)
+    @_spi(Internal) case associatedApps([Swift.String])
+    @_spi(Internal) case distributorPriorityList([Swift.String])
+    @_spi(Internal) case passbookProvisioning(Foundation.Data)
+    @_spi(Internal) case showInstallSheet(Swift.Bool)
+    @_spi(Internal) case showAppInstallationSettings(Swift.Bool)
+    @_spi(Internal) case searchTerritory(Swift.String?)
+    @_spi(Internal) case localizedStrings([Swift.String : Swift.String])
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let response: MarketplaceKit.FetchDataResponse.Response
+  @_spi(Internal) public init(response: MarketplaceKit.FetchDataResponse.Response)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct FetchPublicDataRequest : Swift.Codable {
+  @_spi(Internal) public enum Request : Swift.Codable {
+    @_spi(Internal) case searchTerritory
+    @_spi(Internal) public static func == (a: MarketplaceKit.FetchPublicDataRequest.Request, b: MarketplaceKit.FetchPublicDataRequest.Request) -> Swift.Bool
+    @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public var hashValue: Swift.Int {
+      @_spi(Internal) get
+    }
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let request: MarketplaceKit.FetchPublicDataRequest.Request
+  @_spi(Internal) public init(request: MarketplaceKit.FetchPublicDataRequest.Request)
+  @_spi(Internal) public func run() async throws -> MarketplaceKit.FetchDataResponse
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct SetPrivateDataRequest : Swift.Codable {
+  @_spi(Internal) public enum Request : Swift.Codable {
+    @_spi(Internal) case approveDeveloper(Swift.String, Swift.String, Swift.String?)
+    @_spi(Internal) case distributorPriorityList([Swift.String])
+    @_spi(Internal) case revokeDeveloperApproval(Swift.String, Swift.Bool)
+    @_spi(Internal) case showInstallSheet(Swift.String, Swift.Bool)
+    @_spi(Internal) case searchTerritoryForDistributor(Swift.String?, Swift.String)
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let request: MarketplaceKit.SetPrivateDataRequest.Request
+  @_spi(Internal) public var stringValue: Swift.String {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public func run() async throws
+  @_spi(Internal) public func runSynchronously() throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct SetPublicDataRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public enum Request : Swift.Codable, Swift.Sendable {
+    @_spi(Internal) case searchTerritory(Swift.String?)
+    @_spi(Internal) case cancelPendingInstall(installID: Foundation.UUID)
+    @_spi(Internal) case confirmPendingInstall(Foundation.UUID, Swift.String, Foundation.Data?)
+    @_spi(Internal) case cancelPendingInstallBatch(batchID: Foundation.UUID)
+    @_spi(Internal) case confirmPendingInstallBatch(Foundation.UUID, [Swift.UInt64 : Swift.String], Foundation.Data?)
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let request: MarketplaceKit.SetPublicDataRequest.Request
+  @_spi(Internal) public init(request: MarketplaceKit.SetPublicDataRequest.Request)
+  @_spi(Internal) public func run() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct CodableAuditToken : Swift.Codable {
+  @_spi(Internal) public let auditToken: Darwin.audit_token_t
+  @_spi(Internal) public init(auditToken: Darwin.audit_token_t)
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+}
+@_spi(Passbook) public enum FairPlayPassbookProvisioning {
+  @_spi(Passbook) public static func getProvisioningInfo(auditToken: Darwin.audit_token_t, nonce: Foundation.Data) async throws -> Foundation.Data
+}
+@_spi(Internal) public enum AppInstallRequestType : Swift.String, Swift.Sendable, Swift.Codable {
+  @_spi(Internal) case automaticInstall
+  @_spi(Internal) case install
+  @_spi(Internal) case automaticUpdate
+  @_spi(Internal) case update
+  @_spi(Internal) case promotion
+  @_spi(Internal) case restore
+  @_spi(Internal) case deviceVPP
+  @_spi(Internal) case userVPP
+  @_spi(Internal) case upp
+  @_spi(Internal) case restoreUpdate
+  @_spi(Internal) public var isUserInitiated: Swift.Bool {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public var isUpdate: Swift.Bool {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public var isRestore: Swift.Bool {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public var requiresInstallSheet: Swift.Bool {
+    @_spi(Internal) get
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init?(rawValue: Swift.String)
+  #else
+  @_spi(Internal) public init?(rawValue: Swift.String)
+  #endif
+  @_spi(Internal) public typealias RawValue = Swift.String
+  @_spi(Internal) public var rawValue: Swift.String {
+    @_spi(Internal) get
+  }
+}
+@_spi(Internal) public struct AppInstallRequest : Swift.Sendable, Swift.Codable {
+  @_spi(Internal) public let id: Foundation.UUID
+  @_spi(Internal) public let adp: Foundation.URL
+  @_spi(Internal) public let oAuthToken: Swift.String?
+  @_spi(Internal) public let installVerificationToken: Swift.String?
+  @_spi(Internal) public let accountID: Swift.String
+  @_spi(Internal) public let type: MarketplaceKit.AppInstallRequestType
+  @_spi(Internal) public let isMarketplaceInstall: Swift.Bool
+  @_spi(Internal) public let referrer: Foundation.URL?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init(adp: Foundation.URL, type: MarketplaceKit.AppInstallRequestType, oAuthToken: Swift.String? = nil, installVerificationToken: Swift.String? = nil, accountID: Swift.String)
+  #else
+  @_spi(Internal) public init(adp: Foundation.URL, type: MarketplaceKit.AppInstallRequestType, oAuthToken: Swift.String? = nil, installVerificationToken: Swift.String? = nil, accountID: Swift.String)
+  #endif
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(FollowUp) @available(iOS 17.4, *)
+public struct DeveloperApprovalSheetContext : Swift.Codable {
+  @_spi(FollowUp) public let title: Swift.String
+  @_spi(FollowUp) public let body: Swift.String
+  @_spi(FollowUp) public let firstBulletTitle: Swift.String
+  @_spi(FollowUp) public let firstBulletBody: Swift.String
+  @_spi(FollowUp) public let secondBulletTitle: Swift.String
+  @_spi(FollowUp) public let secondBulletBody: Swift.String
+  @_spi(FollowUp) public let thirdBulletTitle: Swift.String
+  @_spi(FollowUp) public let thirdBulletBody: Swift.String
+  @_spi(FollowUp) public let allowButtonText: Swift.String
+  @_spi(FollowUp) public let ignoreButtonText: Swift.String
+  @_spi(FollowUp) public let developerID: Swift.String
+  @_spi(FollowUp) public let developerName: Swift.String
+  @_spi(FollowUp) public let supportURL: Swift.String?
+  @_spi(FollowUp) public let passcodeTitle: Swift.String
+  @_spi(FollowUp) public let passcodeReason: Swift.String
+  @_spi(FollowUp) public let touchIDTitle: Swift.String
+  @_spi(FollowUp) public let touchIDReason: Swift.String
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(FollowUp) public init(title: Swift.String, body: Swift.String, firstBulletTitle: Swift.String, firstBulletBody: Swift.String, secondBulletTitle: Swift.String, secondBulletBody: Swift.String, thirdBulletTitle: Swift.String, thirdBulletBody: Swift.String, allowButtonText: Swift.String, ignoreButtonText: Swift.String, developerID: Swift.String, developerName: Swift.String, supportURL: Swift.String?, passcodeTitle: Swift.String, passcodeReason: Swift.String, touchIDTitle: Swift.String, touchIDReason: Swift.String)
+  #else
+  @_spi(FollowUp) public init(title: Swift.String, body: Swift.String, firstBulletTitle: Swift.String, firstBulletBody: Swift.String, secondBulletTitle: Swift.String, secondBulletBody: Swift.String, thirdBulletTitle: Swift.String, thirdBulletBody: Swift.String, allowButtonText: Swift.String, ignoreButtonText: Swift.String, developerID: Swift.String, developerName: Swift.String, supportURL: Swift.String?, passcodeTitle: Swift.String, passcodeReason: Swift.String, touchIDTitle: Swift.String, touchIDReason: Swift.String)
+  #endif
+  @_spi(FollowUp) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(FollowUp) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Updates) public struct UpdateMetadata : Swift.Codable {
+  @_spi(Updates) public let bundleID: Swift.String
+  @_spi(Updates) public let bundleVersion: Swift.String
+  @_spi(Updates) public let itemID: Swift.String
+  @_spi(Updates) public let shortVersionString: Swift.String
+  @_spi(Updates) public init(bundleID: Swift.String, bundleVersion: Swift.String, itemID: Swift.String, shortVersionString: Swift.String)
+  @_spi(Updates) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Updates) public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.4, *)
+public enum MarketplaceKitError : Swift.Error, Swift.CustomStringConvertible, Swift.Sendable, Swift.Codable {
+  case unknown
+  case missingCapabilities([Swift.String])
+  case unsupportedPlatform
+  case minimumPlatformVersionNotSatisfied(Swift.String)
+  case installationRestricted
+  case installationOfMarketplaceDenied
+  case ratingRestricted
+  case insufficientStorageSpace(Foundation.Measurement<Foundation.UnitInformationStorage>)
+  case noSupportedVariant
+  case appNotInstalled
+  case invalidManifest
+  case networkError
+  case invalidAlternativeDistributionPackageURL
+  case invalidAlternativeDistributionPackageSignature
+  case featureUnavailable
+  case cancelled
+  case mismatchedInstallType
+  case oauthTokenError
+  case invalidLicense
+  case invalidURL
+  case missingInstallVerificationToken
+  public var description: Swift.String {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct PerformPrivateActionRequest : Swift.Codable {
+  @_spi(Internal) public enum Request : Swift.Codable {
+    @_spi(Internal) case repairLicense(Swift.String, Darwin.OSStatus)
+    @_spi(Internal) case repairLicenseByBundleID(Swift.String, Swift.Bool, Darwin.OSStatus)
+    @_spi(Internal) case renewLicenses([MarketplaceKit.AppleItemID])
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let request: MarketplaceKit.PerformPrivateActionRequest.Request
+  @_spi(Internal) public init(request: MarketplaceKit.PerformPrivateActionRequest.Request)
+  @_spi(Internal) public func run() async throws -> MarketplaceKit.PerformPrivateActionResponse
+  @_spi(Internal) public var stringValue: Swift.String {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct PerformPrivateActionResponse : Swift.Codable {
+  @_spi(Internal) public enum Response : Swift.Codable {
+    @_spi(Internal) case ignored
+    @_spi(Internal) public static func == (a: MarketplaceKit.PerformPrivateActionResponse.Response, b: MarketplaceKit.PerformPrivateActionResponse.Response) -> Swift.Bool
+    @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public var hashValue: Swift.Int {
+      @_spi(Internal) get
+    }
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let response: MarketplaceKit.PerformPrivateActionResponse.Response
+  @_spi(Internal) public init(response: MarketplaceKit.PerformPrivateActionResponse.Response)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+public typealias AppleItemID = Swift.UInt64
+@_hasMissingDesignatedInitializers @available(iOS 17.4, *)
+@_Concurrency.MainActor final public class AppLibrary {
+  nonisolated public static let current: MarketplaceKit.AppLibrary
+  @_Concurrency.MainActor final public var installedApps: Swift.Set<MarketplaceKit.AppLibrary.App> {
+    get
+    set
+    _modify
+  }
+  @_Concurrency.MainActor final public var installingApps: Swift.Set<MarketplaceKit.AppLibrary.App> {
+    get
+    set
+    _modify
+  }
+  @_Concurrency.MainActor final public var isLoading: Swift.Bool {
+    get
+    set
+    _modify
+  }
+  @_Concurrency.MainActor final public func app(forAppleItemID appleItemID: MarketplaceKit.AppleItemID) -> MarketplaceKit.AppLibrary.App
+  @_spi(SecureButton) @_Concurrency.MainActor final public func updateInstallState(forUpdated app: MarketplaceKit.AppLibrary.App)
+  nonisolated final public func requestAppInstallation(for url: Foundation.URL, account: Swift.String, installVerificationToken: Swift.String) async throws
+  nonisolated final public func requestAppInstallationFromBrowser(for url: Foundation.URL, referrer: Foundation.URL) async throws
+  nonisolated final public func requestAppUpdate(for url: Foundation.URL, account: Swift.String, installVerificationToken: Swift.String) async throws
+  @available(iOS 17.5, *)
+  nonisolated final public func didAuthenticate(account: Swift.String) async
+  @_spi(BodegaDeprecated) @available(iOS 17.5, *)
+  nonisolated final public func signalAccountHasAuthenticated(_ account: Swift.String) async
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  nonisolated final public var searchTerritory: Swift.String? {
+    get async
+  }
+  #else
+  nonisolated final public var searchTerritory: Swift.String? {
+    get async
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  nonisolated final public func setSearchTerritory(_ territory: Swift.String?) async
+  #else
+  nonisolated final public func setSearchTerritory(_ territory: Swift.String?) async
+  #endif
+  nonisolated final public func requestLicenseRenewal(appleItemIDs: [Swift.UInt64]) async throws
+  @_spi(UI) nonisolated final public func requestAppUninstallation(for id: MarketplaceKit.AppLibrary.App.ID) throws
+  package enum InstallError : Swift.Error {
+    case appAlreadyInstalled
+    case appNotFound
+    case networkError(Swift.String)
+    case alreadyInProgress
+    case notEnoughStorageSpace
+    case restricted
+  }
+  @_spi(UI) public enum UninstallError : Swift.Error {
+    @_spi(UI) case appNotInstalled
+    @_spi(UI) public static func == (a: MarketplaceKit.AppLibrary.UninstallError, b: MarketplaceKit.AppLibrary.UninstallError) -> Swift.Bool
+    @_spi(UI) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(UI) public var hashValue: Swift.Int {
+      @_spi(UI) get
+    }
+  }
+  @objc deinit
+}
+@available(iOS 17.4, *)
+extension MarketplaceKit.AppLibrary : Observation.Observable {
+}
+public typealias AppleVersionID = Swift.UInt64
+extension MarketplaceKit.AppLibrary {
+  @_hasMissingDesignatedInitializers @available(iOS 17.4, *)
+  @_Concurrency.MainActor final public class App : Swift.Identifiable, Swift.Hashable {
+    nonisolated final public let id: MarketplaceKit.AppleItemID
+    public struct Metadata : Swift.Sendable, Swift.Equatable {
+      public let appleVersionID: MarketplaceKit.AppleVersionID
+      public let version: Swift.String
+      public let shortVersion: Swift.String
+      public let account: Swift.String?
+      #if compiler(>=5.3) && $NoncopyableGenerics
+      package init(appleVersionID: MarketplaceKit.AppleVersionID, version: Swift.String, shortVersion: Swift.String, account: Swift.String?)
+      #else
+      package init(appleVersionID: MarketplaceKit.AppleVersionID, version: Swift.String, shortVersion: Swift.String, account: Swift.String?)
+      #endif
+      public static func == (a: MarketplaceKit.AppLibrary.App.Metadata, b: MarketplaceKit.AppLibrary.App.Metadata) -> Swift.Bool
+    }
+    public struct Installation : Swift.Sendable {
+      public var progress: Foundation.Progress {
+        get
+      }
+    }
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_Concurrency.MainActor final public var installedMetadata: MarketplaceKit.AppLibrary.App.Metadata? {
+      get
+    }
+    #else
+    @_Concurrency.MainActor final public var installedMetadata: MarketplaceKit.AppLibrary.App.Metadata? {
+      get
+    }
+    #endif
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_Concurrency.MainActor final public var installation: MarketplaceKit.AppLibrary.App.Installation? {
+      get
+    }
+    #else
+    @_Concurrency.MainActor final public var installation: MarketplaceKit.AppLibrary.App.Installation? {
+      get
+    }
+    #endif
+    @_Concurrency.MainActor final public var isInstalled: Swift.Bool {
+      get
+    }
+    @_Concurrency.MainActor final public var isInstalling: Swift.Bool {
+      get
+    }
+    @_Concurrency.MainActor final public var isUpdating: Swift.Bool {
+      get
+    }
+    nonisolated public static func == (lhs: MarketplaceKit.AppLibrary.App, rhs: MarketplaceKit.AppLibrary.App) -> Swift.Bool
+    nonisolated final public func hash(into hasher: inout Swift.Hasher)
+    @available(iOS 17.4, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    public typealias ID = MarketplaceKit.AppleItemID
+    @objc deinit
+    nonisolated final public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(iOS 17.4, *)
+extension MarketplaceKit.AppLibrary.App : Observation.Observable {
+}
+@_spi(Internal) @objc public protocol MarketplaceExtensionXPCProtocol {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @objc func additionalHeaders(for request: Foundation.URLRequest, accountID: Swift.String, reply: @escaping ([Swift.String : Swift.String]?) -> Swift.Void)
+  #else
+  @_spi(Internal) @objc func additionalHeaders(for request: Foundation.URLRequest, accountID: Swift.String, reply: @escaping ([Swift.String : Swift.String]?) -> Swift.Void)
+  #endif
+  @_spi(Internal) @objc func requestFailed(_ response: Foundation.HTTPURLResponse, reply: @escaping (Swift.Bool) -> Swift.Void)
+  @_spi(Internal) typealias AvailableAppsResponse = [MarketplaceKit.AppVersion]?
+  @_spi(Internal) @objc func availableApps(forAppleItemIDs ids: [MarketplaceKit.AppleItemID], reply: @escaping (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) typealias AutomaticUpdatesRequest = [MarketplaceKit.AppVersion]
+  @_spi(Internal) @objc func automaticUpdates(for installedAppVersions: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+}
+@_spi(Internal) extension MarketplaceKit.MarketplaceExtensionXPCProtocol {
+  @_spi(Internal) public typealias AutomaticUpdatesResponse = MarketplaceKit.MarketplaceKitServiceResult<[MarketplaceKit.AutomaticUpdate]>
+}
+@_spi(Updates) public struct PollForUpdatesRequest : Swift.Codable {
+  @_spi(Updates) public let domain: Swift.String?
+  @_spi(Updates) public let shouldStartUpdates: Swift.Bool
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Updates) public init(domain: Swift.String?, shouldStartUpdates: Swift.Bool = false)
+  #else
+  @_spi(Updates) public init(domain: Swift.String?, shouldStartUpdates: Swift.Bool = false)
+  #endif
+  @_spi(Updates) public func run() async throws
+  @_spi(Updates) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Updates) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct SecureButtonActionRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public enum Action : Swift.Codable, Swift.Sendable {
+    @_spi(Internal) case delete(Swift.UInt64)
+    @_spi(Internal) case launch(Swift.UInt64)
+    @_spi(Internal) case preflight(Foundation.Data)
+    @_spi(Internal) case preflightBatch(Foundation.Data)
+    @_spi(Internal) public var stringValue: Swift.String {
+      @_spi(Internal) get
+    }
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let action: MarketplaceKit.SecureButtonActionRequest.Action
+  @_spi(Internal) public let authenticationMessage: BackBoardServices.BKSHIDEventAuthenticationMessage
+  @_spi(Internal) public init(action: MarketplaceKit.SecureButtonActionRequest.Action, authenticationMessage: BackBoardServices.BKSHIDEventAuthenticationMessage)
+  @_spi(Internal) public func run() async throws -> MarketplaceKit.SecureButtonActionResponse
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct SecureButtonActionResponse : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public enum ResponseType : Swift.Codable, Swift.Sendable {
+    @_spi(Internal) case none
+    @_spi(Internal) case confirmInstall(Foundation.UUID)
+    @_spi(Internal) case confirmInstallBatch(Foundation.UUID)
+    @_spi(Internal) public var stringValue: Swift.String {
+      @_spi(Internal) get
+    }
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let type: MarketplaceKit.SecureButtonActionResponse.ResponseType
+  @_spi(Internal) public init(type: MarketplaceKit.SecureButtonActionResponse.ResponseType)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct LicenseRepair {
+  @_spi(Internal) public static func requestLicenseRepair(_ appPath: Swift.String, status: Darwin.OSStatus)
+}
+@_spi(Internal) public struct PerformActionRequest : Swift.Codable {
+  @_spi(Internal) public enum Request : Swift.Codable {
+    @_spi(Internal) case handleSuccessfulAuth(Swift.String)
+    @_spi(Internal) case renewLicenses([MarketplaceKit.AppleItemID])
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let request: MarketplaceKit.PerformActionRequest.Request
+  @_spi(Internal) public init(request: MarketplaceKit.PerformActionRequest.Request)
+  @_spi(Internal) public func run() async throws -> MarketplaceKit.PerformActionResponse
+  @_spi(Internal) public var stringValue: Swift.String {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct PerformActionResponse : Swift.Codable {
+  @_spi(Internal) public enum Response : Swift.Codable {
+    @_spi(Internal) case ignored
+    @_spi(Internal) public static func == (a: MarketplaceKit.PerformActionResponse.Response, b: MarketplaceKit.PerformActionResponse.Response) -> Swift.Bool
+    @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public var hashValue: Swift.Int {
+      @_spi(Internal) get
+    }
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let response: MarketplaceKit.PerformActionResponse.Response
+  @_spi(Internal) public init(response: MarketplaceKit.PerformActionResponse.Response)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(LaunchAngel) public struct OAuthAuthorizationContext : Swift.Codable, Swift.Sendable {
+  @_spi(LaunchAngel) public let logKey: Swift.String
+  @_spi(LaunchAngel) public let requestURL: Foundation.URL
+  @_spi(LaunchAngel) public init(logKey: Swift.String, requestURL: Foundation.URL)
+  @_spi(LaunchAngel) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(LaunchAngel) public init(from decoder: any Swift.Decoder) throws
+}
+package enum LaunchAngelConnectionUtilities {
+  package enum Error : Swift.Error {
+    case serviceUnavailable
+    case deviceLocked
+    package static func == (a: MarketplaceKit.LaunchAngelConnectionUtilities.Error, b: MarketplaceKit.LaunchAngelConnectionUtilities.Error) -> Swift.Bool
+    package func hash(into hasher: inout Swift.Hasher)
+    package var hashValue: Swift.Int {
+      get
+    }
+  }
+  package static func handleLaunchAngelRequest(_ request: MarketplaceKit.LaunchAngelXPCRequest) async throws -> MarketplaceKit.LaunchAngelXPCResponse
+}
+@_spi(Internal) public struct AppDistributorResult : Swift.Codable {
+  @_spi(Internal) public init(distributorID: Swift.String, requestingBundleID: Swift.String)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.4, *)
+public enum AppDistributor {
+  public static var current: MarketplaceKit.AppDistributor {
+    get async throws
+  }
+  case appStore
+  case testFlight
+  case marketplace(Swift.String)
+  @available(iOS 17.5, *)
+  case web
+  case other
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init(result: MarketplaceKit.AppDistributorResult?)
+  #else
+  @_spi(Internal) public init(result: MarketplaceKit.AppDistributorResult?)
+  #endif
+  @_spi(AppReview) public static func setDistributorIDOverridableForStoreSignedApps(_ overridable: Swift.Bool) async throws
+}
+@_spi(LaunchAngel) extension MarketplaceKit.InstallSheetContext.InstallType : Swift.Equatable {}
+@_spi(LaunchAngel) extension MarketplaceKit.InstallSheetContext.InstallType : Swift.Hashable {}
+@_spi(SecureButton) @available(iOS 17.4, *)
+extension MarketplaceKit.SecureButtonTag.ButtonImagePlacement : Swift.Equatable {}
+@_spi(SecureButton) @available(iOS 17.4, *)
+extension MarketplaceKit.SecureButtonTag.ButtonImagePlacement : Swift.Hashable {}
+@_spi(SecureButton) @available(iOS 17.4, *)
+extension MarketplaceKit.SecureButtonTag.ButtonImagePlacement : Swift.RawRepresentable {}
+@available(iOS 17.4, *)
+extension MarketplaceKit.AppLibrary : Swift.Sendable {}
+@_spi(Internal) extension MarketplaceKit.FetchPublicDataRequest.Request : Swift.Equatable {}
+@_spi(Internal) extension MarketplaceKit.FetchPublicDataRequest.Request : Swift.Hashable {}
+@_spi(Internal) extension MarketplaceKit.AppInstallRequestType : Swift.Equatable {}
+@_spi(Internal) extension MarketplaceKit.AppInstallRequestType : Swift.Hashable {}
+@_spi(Internal) extension MarketplaceKit.AppInstallRequestType : Swift.RawRepresentable {}
+@_spi(Internal) extension MarketplaceKit.PerformPrivateActionResponse.Response : Swift.Equatable {}
+@_spi(Internal) extension MarketplaceKit.PerformPrivateActionResponse.Response : Swift.Hashable {}
+@_spi(UI) @available(iOS 17.4, *)
+extension MarketplaceKit.AppLibrary.UninstallError : Swift.Equatable {}
+@_spi(UI) @available(iOS 17.4, *)
+extension MarketplaceKit.AppLibrary.UninstallError : Swift.Hashable {}
+@available(iOS 17.4, *)
+extension MarketplaceKit.AppLibrary.App : Swift.Sendable {}
+@_spi(Internal) extension MarketplaceKit.PerformActionResponse.Response : Swift.Equatable {}
+@_spi(Internal) extension MarketplaceKit.PerformActionResponse.Response : Swift.Hashable {}

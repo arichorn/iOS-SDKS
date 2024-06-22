@@ -1,0 +1,1342 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.3.38 clang-1600.0.20.6)
+// swift-module-flags: -target arm64e-apple-ios18.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature ConciseMagicFile -enable-upcoming-feature ForwardTrailingClosures -enable-bare-slash-regex -user-module-version 2.0.23 -module-name ManagedAppDistribution -package-name ManagedAppDistributionFrameworks
+@_spiOnly import CoreTelephony_Private.CoreTelephonyClient
+@_spiOnly import CoreTelephony_Private.CoreTelephonyClient_Data
+@_spiOnly import CoreTelephony_Private.CoreTelephonyClient_Subscriber
+@_spiOnly import CoreTelephony_Private
+import Foundation
+import Swift
+@_spiOnly import UIKitServices
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_spiOnly import os
+@_spi(Internal) @available(iOS 17.4, macOS 14.4, *)
+public struct CellularSettings {
+  @_spi(Internal) @frozen public enum Prompt : Swift.String {
+    @_spi(Internal) case always
+    @_spi(Internal) case overLimit
+    @_spi(Internal) case never
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Internal) public init?(rawValue: Swift.String)
+    #else
+    @_spi(Internal) public init?(rawValue: Swift.String)
+    #endif
+    @_spi(Internal) @available(iOS 17.4, macOS 14.4, *)
+    public typealias RawValue = Swift.String
+    @_spi(Internal) public var rawValue: Swift.String {
+      @_spi(Internal) get
+    }
+  }
+  @_spi(Internal) public init(for identity: ManagedAppDistribution.CellularIdentity)
+  @_spi(Internal) public var allowAutomaticDownloads: Swift.Bool {
+    @_spi(Internal) get
+    @_spi(Internal) set(newValue)
+  }
+  @_spi(Internal) public var cellularData: ManagedAppDistribution.CellularSettings.Prompt {
+    @_spi(Internal) get
+    @_spi(Internal) set(newValue)
+  }
+}
+@available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+public struct ManagedApp : Swift.Sendable {
+  @_spi(Private) public let declarationIdentifier: Swift.String
+  @_spi(Private) @_spi(ViewService) public let bundleID: Swift.String
+  @_spi(Internal) public let itemID: Swift.UInt64?
+  @_spi(Internal) public let externalVersionID: Swift.UInt64?
+  public let platform: ManagedAppDistribution.Platform
+  public let fileSize: Foundation.Measurement<Foundation.UnitInformationStorage>?
+  public let metadataLanguage: Foundation.Locale.Language?
+  public let name: Swift.String
+  public let subtitle: Swift.String?
+  public let seller: Swift.String?
+  public let genres: [Swift.String]
+  public let description: Swift.String?
+  public let languages: [Foundation.Locale.Language]
+  public let requirements: Swift.String?
+  public let version: Swift.String?
+  public let releaseDate: Foundation.Date?
+  public let releaseNotes: Swift.String?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func iconURL(fitting size: CoreFoundation.CGSize) -> Foundation.URL?
+  #else
+  public func iconURL(fitting size: CoreFoundation.CGSize) -> Foundation.URL?
+  #endif
+  public func screenshotURLs(fitting size: CoreFoundation.CGSize) -> [Foundation.URL]
+  public let contentRating: Swift.String?
+  public let developerWebsite: Foundation.URL?
+  public let privacyPolicy: Foundation.URL?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var licenseAgreement: Foundation.URL? {
+    get
+  }
+  #else
+  public var licenseAgreement: Foundation.URL? {
+    get
+  }
+  #endif
+  public let copyright: Swift.String?
+  @_spi(Internal) public let buyParams: Swift.String?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init(declarationIdentifier: Swift.String, bundleID: Swift.String, itemID: Swift.UInt64?, externalVersionID: Swift.UInt64?, platform: ManagedAppDistribution.Platform, fileSize: Foundation.Measurement<Foundation.UnitInformationStorage>?, metadataLanguage: Foundation.Locale.Language?, name: Swift.String, subtitle: Swift.String?, seller: Swift.String?, genres: [Swift.String], description: Swift.String?, languages: [Foundation.Locale.Language], requirements: Swift.String?, version: Swift.String?, releaseDate: Foundation.Date?, releaseNotes: Swift.String?, icon: ManagedAppDistribution.ManagedApp.Artwork?, iconURL: Foundation.URL?, screenshots: [ManagedAppDistribution.ManagedApp.Artwork], contentRating: Swift.String?, developerWebsite: Foundation.URL?, privacyPolicy: Foundation.URL?, hasLicenseAgreement: Swift.Bool, copyright: Swift.String?, buyParams: Swift.String?)
+  #else
+  @_spi(Internal) public init(declarationIdentifier: Swift.String, bundleID: Swift.String, itemID: Swift.UInt64?, externalVersionID: Swift.UInt64?, platform: ManagedAppDistribution.Platform, fileSize: Foundation.Measurement<Foundation.UnitInformationStorage>?, metadataLanguage: Foundation.Locale.Language?, name: Swift.String, subtitle: Swift.String?, seller: Swift.String?, genres: [Swift.String], description: Swift.String?, languages: [Foundation.Locale.Language], requirements: Swift.String?, version: Swift.String?, releaseDate: Foundation.Date?, releaseNotes: Swift.String?, icon: ManagedAppDistribution.ManagedApp.Artwork?, iconURL: Foundation.URL?, screenshots: [ManagedAppDistribution.ManagedApp.Artwork], contentRating: Swift.String?, developerWebsite: Foundation.URL?, privacyPolicy: Foundation.URL?, hasLicenseAgreement: Swift.Bool, copyright: Swift.String?, buyParams: Swift.String?)
+  #endif
+  @_spi(Internal) public struct Artwork : Swift.Sendable, Swift.Codable {
+    @_spi(Internal) public init(urlTemplate: Swift.String, maxWidth: Swift.Int, maxHeight: Swift.Int)
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+}
+@available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension ManagedAppDistribution.ManagedApp : Swift.Identifiable {
+  public var id: Swift.String {
+    get
+  }
+  @available(iOS 17.2, *)
+  @available(tvOS, unavailable, introduced: 13.0)
+  @available(watchOS, unavailable, introduced: 6.0)
+  @_spi_available(macOS, introduced: 14.2)
+  @available(macCatalyst, unavailable)
+  @available(visionOS, unavailable)
+  public typealias ID = Swift.String
+}
+@_spi(Private) @available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension ManagedAppDistribution.ManagedApp : Swift.Codable {
+  @_spi(Private) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Private) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct ManagedAppInstallRequest : Swift.Sendable, Swift.Codable {
+  @_spi(Internal) public let declarationIdentifier: Swift.String?
+  @_spi(Internal) public let buyParams: Swift.String?
+  @_spi(Internal) public var userInitiated: Swift.Bool
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init(declarationIdentifier: Swift.String?, buyParams: Swift.String?) throws
+  #else
+  @_spi(Internal) public init(declarationIdentifier: Swift.String?, buyParams: Swift.String?) throws
+  #endif
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+public struct Platform : Swift.Hashable, Swift.Sendable, Swift.CustomStringConvertible {
+  public static var macOS: ManagedAppDistribution.Platform {
+    get
+  }
+  public static var iOS: ManagedAppDistribution.Platform {
+    get
+  }
+  @_spi(Internal) public static var tvOS: ManagedAppDistribution.Platform {
+    get
+  }
+  @_spi(Internal) public static var watchOS: ManagedAppDistribution.Platform {
+    get
+  }
+  @_spi(Internal) public static var visionOS: ManagedAppDistribution.Platform {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: ManagedAppDistribution.Platform, b: ManagedAppDistribution.Platform) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_spi(Private) @available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension ManagedAppDistribution.Platform : Swift.Codable {
+  @_spi(Private) public init(from decoder: any Swift.Decoder) throws
+  @_spi(Private) public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.Platform {
+  @_spi(Internal) public static var current: ManagedAppDistribution.Platform {
+    get
+  }
+}
+@available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension ManagedAppDistribution.ManagedApp {
+  public struct Platform : Swift.Hashable, Swift.Sendable, Swift.CustomStringConvertible {
+    public static var macOS: ManagedAppDistribution.ManagedApp.Platform {
+      get
+    }
+    public static var iOS: ManagedAppDistribution.ManagedApp.Platform {
+      get
+    }
+    package static var tvOS: ManagedAppDistribution.ManagedApp.Platform {
+      get
+    }
+    package static var watchOS: ManagedAppDistribution.ManagedApp.Platform {
+      get
+    }
+    package static var visionOS: ManagedAppDistribution.ManagedApp.Platform {
+      get
+    }
+    public var description: Swift.String {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: ManagedAppDistribution.ManagedApp.Platform, b: ManagedAppDistribution.ManagedApp.Platform) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedApp.Platform {
+  package static var current: ManagedAppDistribution.ManagedApp.Platform {
+    get
+  }
+}
+@_spi(Private) @available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension ManagedAppDistribution.ManagedApp.Platform : Swift.Codable {
+  @_spi(Private) public init(from decoder: any Swift.Decoder) throws
+  @_spi(Private) public func encode(to encoder: any Swift.Encoder) throws
+}
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+final package class SyncXPCResult<Success, Failure> : @unchecked Swift.Sendable where Failure : Swift.Error {
+  package init()
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  final package func setResult(_ result: Swift.Result<Success, Failure>)
+  #else
+  final package func setResult(_ result: Swift.Result<Success, Failure>)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  final package var result: Swift.Result<Success, Failure> {
+    get throws
+  }
+  #else
+  final package var result: Swift.Result<Success, Failure> {
+    get throws
+  }
+  #endif
+  @objc deinit
+}
+@_spi(Internal) @available(iOS 17.4, macOS 14.4, *)
+public struct CellularIdentity : Swift.Sendable {
+  @_spi(Internal) public let isRoaming: Swift.Bool
+  @_spi(Internal) public static let null: ManagedAppDistribution.CellularIdentity
+  @_spi(Internal) public static func current() async -> ManagedAppDistribution.CellularIdentity
+  @_spi(Internal) @available(*, noasync)
+  public static func current() -> ManagedAppDistribution.CellularIdentity
+  @_spi(Internal) public init(for context: CoreTelephony_Private.CTXPCServiceSubscriptionContext, using client: CoreTelephony_Private.CoreTelephonyClient) async
+  @_spi(Internal) @available(*, noasync)
+  public init(for context: CoreTelephony_Private.CTXPCServiceSubscriptionContext, using client: CoreTelephony_Private.CoreTelephonyClient)
+  @_spi(Internal) public init(simIdentity: Swift.String, isRoaming: Swift.Bool) throws
+  @_spi(Internal) public func copy(withRoaming isRoaming: Swift.Bool) throws -> ManagedAppDistribution.CellularIdentity
+}
+@_spi(Internal) extension ManagedAppDistribution.CellularIdentity : Swift.CustomStringConvertible {
+  @_spi(Internal) public var description: Swift.String {
+    @_spi(Internal) get
+  }
+}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+public struct ManagedAppStatus : Swift.Sendable {
+  @_spi(DDM) public var bundleID: Swift.String
+  @_spi(DDM) public var declarationIdentifier: Swift.String
+  @_spi(DDM) public var declarationKey: Swift.String
+  @_spi(DDM) public var state: ManagedAppDistribution.ManagedAppStatus.State
+  @_spi(DDM) public var updateState: ManagedAppDistribution.ManagedAppStatus.UpdateState?
+  @_spi(DDM) public var reasons: [ManagedAppDistribution.ManagedAppStatus.Reason]
+  @_spi(DDM) public var name: Swift.String
+  @_spi(DDM) public var installedVersionInfo: ManagedAppDistribution.ManagedAppStatus.InstalledVersionInfo?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(DDM) public init(bundleID: Swift.String, declarationIdentifier: Swift.String, declarationKey: Swift.String, state: ManagedAppDistribution.ManagedAppStatus.State, updateState: ManagedAppDistribution.ManagedAppStatus.UpdateState? = nil, reasons: [ManagedAppDistribution.ManagedAppStatus.Reason], name: Swift.String, installedVersionInfo: ManagedAppDistribution.ManagedAppStatus.InstalledVersionInfo? = nil)
+  #else
+  @_spi(DDM) public init(bundleID: Swift.String, declarationIdentifier: Swift.String, declarationKey: Swift.String, state: ManagedAppDistribution.ManagedAppStatus.State, updateState: ManagedAppDistribution.ManagedAppStatus.UpdateState? = nil, reasons: [ManagedAppDistribution.ManagedAppStatus.Reason], name: Swift.String, installedVersionInfo: ManagedAppDistribution.ManagedAppStatus.InstalledVersionInfo? = nil)
+  #endif
+  @_spi(DDM) public struct InstalledVersionInfo : Swift.Sendable {
+    @_spi(DDM) public var appleVersionID: Swift.UInt64?
+    @_spi(DDM) public var bundleVersion: Swift.String
+    @_spi(DDM) public var bundleShortVersion: Swift.String
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(DDM) public init(appleVersionID: Swift.UInt64? = nil, bundleVersion: Swift.String, bundleShortVersion: Swift.String)
+    #else
+    @_spi(DDM) public init(appleVersionID: Swift.UInt64? = nil, bundleVersion: Swift.String, bundleShortVersion: Swift.String)
+    #endif
+  }
+  @_spi(DDM) public enum State : Swift.String, Swift.Sendable {
+    @_spi(DDM) case optional
+    @_spi(DDM) case queued
+    @_spi(DDM) case promptingForConsent
+    @_spi(DDM) case promptingForLogin
+    @_spi(DDM) case promptingForManagement
+    @_spi(DDM) case downloading
+    @_spi(DDM) case installing
+    @_spi(DDM) case managed
+    @_spi(DDM) case managedButUninstalled
+    @_spi(DDM) case failed
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(DDM) public init?(rawValue: Swift.String)
+    #else
+    @_spi(DDM) public init?(rawValue: Swift.String)
+    #endif
+    @_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+    public typealias RawValue = Swift.String
+    @_spi(DDM) public var rawValue: Swift.String {
+      @_spi(DDM) get
+    }
+  }
+  @_spi(DDM) public enum Reason : Swift.String, Swift.Sendable {
+    @_spi(DDM) case unmanagedAppAlreadyInstalled
+    @_spi(DDM) case duplicateConfiguredApp
+    @_spi(DDM) case appStoreDisabled
+    @_spi(DDM) case couldNotVerifyAppID
+    @_spi(DDM) case notAnApp
+    @_spi(DDM) case notSupported
+    @_spi(DDM) case licenseNotFound
+    @_spi(DDM) case downloadFailed
+    @_spi(DDM) case installFailed
+    @_spi(DDM) case userRejected
+    @_spi(DDM) case updateAvailable
+    @_spi(DDM) case updateFailed
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(DDM) public init?(rawValue: Swift.String)
+    #else
+    @_spi(DDM) public init?(rawValue: Swift.String)
+    #endif
+    @_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+    public typealias RawValue = Swift.String
+    @_spi(DDM) public var rawValue: Swift.String {
+      @_spi(DDM) get
+    }
+  }
+  @_spi(DDM) public enum UpdateState : Swift.String, Swift.Sendable {
+    @_spi(DDM) case available
+    @_spi(DDM) case promptingForUpdate
+    @_spi(DDM) case promptingForUpdateLogin
+    @_spi(DDM) case updating
+    @_spi(DDM) case failed
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(DDM) public init?(rawValue: Swift.String)
+    #else
+    @_spi(DDM) public init?(rawValue: Swift.String)
+    #endif
+    @_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+    public typealias RawValue = Swift.String
+    @_spi(DDM) public var rawValue: Swift.String {
+      @_spi(DDM) get
+    }
+  }
+}
+@_spi(Private) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus : Swift.Codable {
+  @_spi(Private) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Private) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Private) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.State : Swift.Codable {
+}
+@_spi(Private) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.Reason : Swift.Codable {
+}
+@_spi(Private) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.UpdateState : Swift.Codable {
+}
+@_spi(Private) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.InstalledVersionInfo : Swift.Codable {
+  @_spi(Private) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Private) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(MarketplaceKit) @_spi(ViewService) @available(iOS 17.2, macOS 14.2, *)
+indirect public enum AppState : Swift.Sendable, Swift.CustomStringConvertible {
+  @_spi(MarketplaceKit) @_spi(ViewService) case available(ManagedAppDistribution.AppState.Availability)
+  @_spi(MarketplaceKit) @_spi(ViewService) @available(iOS, deprecated: 17.2)
+  case downloading(Swift.Double)
+  @_spi(MarketplaceKit) @_spi(ViewService) case installing(Swift.Double)
+  @_spi(MarketplaceKit) @_spi(ViewService) case paused(ManagedAppDistribution.AppState)
+  @_spi(MarketplaceKit) @_spi(ViewService) case installed
+  @_spi(MarketplaceKit) @_spi(ViewService) case managed
+  @_spi(MarketplaceKit) @_spi(ViewService) case waiting
+  @_spi(MarketplaceKit) @_spi(ViewService) public enum Availability : Swift.Sendable {
+    @_spi(MarketplaceKit) @_spi(ViewService) case available
+    @_spi(MarketplaceKit) @_spi(ViewService) case redownload
+    @_spi(MarketplaceKit) @_spi(ViewService) case update
+    @_spi(MarketplaceKit) @_spi(ViewService) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(MarketplaceKit) @_spi(ViewService) public var hashValue: Swift.Int {
+      @_spi(MarketplaceKit) @_spi(ViewService) get
+    }
+  }
+  @_spi(MarketplaceKit) @_spi(ViewService) public var isComplete: Swift.Bool {
+    @_spi(MarketplaceKit) @_spi(ViewService) get
+  }
+  @_spi(MarketplaceKit) @_spi(ViewService) public var description: Swift.String {
+    @_spi(MarketplaceKit) @_spi(ViewService) get
+  }
+}
+@_spi(ViewService) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.AppState : Swift.Codable, Swift.Equatable {
+  @_spi(ViewService) public static func == (a: ManagedAppDistribution.AppState, b: ManagedAppDistribution.AppState) -> Swift.Bool
+  @_spi(ViewService) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(ViewService) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(ViewService) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.AppState.Availability : Swift.Codable, Swift.Equatable {
+  @_spi(ViewService) public static func == (a: ManagedAppDistribution.AppState.Availability, b: ManagedAppDistribution.AppState.Availability) -> Swift.Bool
+  @_spi(ViewService) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(ViewService) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @objc public protocol ServiceProtocol {
+  @_spi(Internal) @objc func handleLaunchAppRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func handleVPPInstallRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func addOrUpdateManagedApp(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func removeManagedApp(declarationIdentifier: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func currentDeclarationKeys(reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func getDeclarationStatus(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func resetManagedAppInstallHistory(reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func pollForMediaAPIUpdates(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func installManagedApp(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func cancelManagedApp(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func installEnterpriseManifest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func daemonInstanceIdentifier(reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func addMessageRegistrations(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func removeMessageRegistrations(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func setDistributorIDOverridableForStoreSignedApps(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func discoverRestores(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func prioritizeApp(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func promoteApps(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func distributorIDForCaller(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) typealias PauseResumeCancelRequest = Swift.UInt64
+  @_spi(Internal) typealias PauseResumeCancelResponse = ManagedAppDistribution.CodableVoid
+  @_spi(Internal) @objc func pauseInstall(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func resumeInstall(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func cancelInstall(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func handleSecureButtonActionRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func fetchPrivateDataRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func setPrivateDataRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func performActionRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func performPrivateActionRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func fetchPublicDataRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func setPublicDataRequest(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func handleEmergencyResetRequest(reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func fetchAvailableAppMetadata(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func runManifestValidation(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func oauthAuthorize(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func oauthInvalidate(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func requestEDPInstallation(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func checkDeviceCabilityForADPInstallation(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func requestUpdatesPoll(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func requestAppLaunch(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func requestUpdateMetadata(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func requestUpdate(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @objc func getRemoteContentForLayerContext(withId layerContextId: Swift.UInt, style: UIKitServices.UISSlotStyle, tag: UIKitServices.UISSlotTag, reply: @escaping @Sendable (UIKitServices.UISSlotRemoteContent?, (any Swift.Error)?) -> Swift.Void)
+  #else
+  @_spi(Internal) @objc func getRemoteContentForLayerContext(withId layerContextId: Swift.UInt, style: UIKitServices.UISSlotStyle, tag: UIKitServices.UISSlotTag, reply: @escaping @Sendable (UIKitServices.UISSlotRemoteContent?, (any Swift.Error)?) -> Swift.Void)
+  #endif
+  @_spi(Internal) @objc func handleRestore(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+  @_spi(Internal) @objc func handleDiagnostics(_ data: Foundation.Data, reply: @escaping @Sendable (Foundation.Data) -> Swift.Void)
+}
+@_spi(Internal) public let ServiceMachName: Swift.String
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct ManagedAppCancelRequest : Swift.Sendable, Swift.Codable {
+  @_spi(Internal) public let declarationIdentifier: Swift.String?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init(declarationIdentifier: Swift.String?) throws
+  #else
+  @_spi(Internal) public init(declarationIdentifier: Swift.String?) throws
+  #endif
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @available(macCatalyst, unavailable)
+public struct AppLaunchRequest : Swift.Sendable {
+  @_spi(Internal) public let bundleID: Swift.String
+  @_spi(Internal) public init(bundleID: Swift.String)
+  @_spi(Internal) public func launch() async throws
+}
+@objc final package class BundleID : ObjectiveC.NSObject, Swift.Sendable {
+  final package let rawValue: Swift.String
+  package init(_ rawValue: Swift.String)
+  @objc override final package var description: Swift.String {
+    @objc get
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @objc override final package func isEqual(_ object: Any?) -> Swift.Bool
+  #else
+  @objc override final package func isEqual(_ object: Any?) -> Swift.Bool
+  #endif
+  package static func == (lhs: ManagedAppDistribution.BundleID, rhs: ManagedAppDistribution.BundleID) -> Swift.Bool
+  @objc override final package var hash: Swift.Int {
+    @objc get
+  }
+  @objc deinit
+}
+extension ManagedAppDistribution.BundleID : Swift.Codable {
+  convenience package init(from decoder: any Swift.Decoder) throws
+  final package func encode(to encoder: any Swift.Encoder) throws
+}
+@_spi(Internal) @objc final public class LogKey : ObjectiveC.NSObject, Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public enum Prefix : Swift.String {
+    @_spi(Internal) case general
+    @_spi(Internal) case vpp
+    @_spi(Internal) case manifest
+    @_spi(Internal) case ddm
+    @_spi(Internal) case automaticUpdate
+    @_spi(Internal) case update
+    @_spi(Internal) case adp
+    @_spi(Internal) case license
+    @_spi(Internal) case promotionDiscovery
+    @_spi(Internal) case bootstrap
+    @_spi(Internal) case promotion
+    @_spi(Internal) case restore
+    @_spi(Internal) case undefined
+    @_spi(Internal) case appReview
+    @_spi(Internal) case madctl
+    @_spi(Internal) case `internal`
+    @_spi(Internal) case migrator
+    @_spi(Internal) case none
+    @_spi(Internal) public var fallbackActivityName: Swift.StaticString {
+      @_spi(Internal) get
+    }
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Internal) public init?(rawValue: Swift.String)
+    #else
+    @_spi(Internal) public init?(rawValue: Swift.String)
+    #endif
+    @_spi(Internal) public typealias RawValue = Swift.String
+    @_spi(Internal) public var rawValue: Swift.String {
+      @_spi(Internal) get
+    }
+  }
+  @_spi(Internal) public enum Representation : Swift.CustomStringConvertible, Swift.Codable {
+    @_spi(Internal) case parts(ManagedAppDistribution.LogKey.Prefix, base: Swift.UInt32)
+    @_spi(Internal) case string(Swift.String)
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public var description: Swift.String {
+      @_spi(Internal) get
+    }
+  }
+  @_spi(Internal) final public var representation: ManagedAppDistribution.LogKey.Representation {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) final public var stringValue: Swift.String {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) final public func append(_ value: Swift.String)
+  @_spi(Internal) final public func append(_ value: Swift.String, separator: Swift.String)
+  @_spi(Internal) final public func prepend(_ value: Swift.String)
+  @_spi(Internal) final public func prepend(_ value: Swift.String, separator: Swift.String)
+  @_spi(Internal) public init(prefix: ManagedAppDistribution.LogKey.Prefix)
+  @_spi(Internal) public init(string: Swift.String)
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  @_spi(Internal) final public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) @objc override final public var description: Swift.String {
+    @_spi(Internal) @objc get
+  }
+  @_spi(Internal) @objc deinit
+}
+@_spi(ViewService) @available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedApp {
+  @_spi(ViewService) public func open() async throws
+  @_spi(ViewService) public var state: _Concurrency.AsyncStream<ManagedAppDistribution.AppState> {
+    @_spi(ViewService) get
+  }
+}
+#if compiler(>=5.3) && $ParameterPacks
+@_spi(Internal) public func encodeXPCValues<each Value>(_ value: repeat each Value) throws -> Foundation.Data where repeat each Value : Swift.Encodable
+#endif
+#if compiler(>=5.3) && $ParameterPacks
+@_spi(Internal) public func decodeXPCValues<each Data, each Result>(from data: repeat each Data) throws -> (repeat each Result) where repeat each Data : Foundation.DataProtocol, repeat each Result : Swift.Decodable
+#endif
+@_spi(DDM) @available(iOS 17.0, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct DDMDeclarationStatusRequest : Swift.Codable, Swift.Sendable {
+  @_spi(DDM) public let declarationKey: Swift.String?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(DDM) public init(declarationKey: Swift.String? = nil)
+  #else
+  @_spi(DDM) public init(declarationKey: Swift.String? = nil)
+  #endif
+  @_spi(DDM) public func request() async throws -> [ManagedAppDistribution.ManagedAppStatus]
+  @_spi(DDM) @_unavailableFromAsync public func request() throws -> [ManagedAppDistribution.ManagedAppStatus]
+  @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(DDM) @available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct DDMRemoveManagedAppRequest : Swift.Sendable {
+  @_spi(DDM) public var declarationIdentifier: Swift.String
+  @_spi(DDM) public init(declarationIdentifier: Swift.String)
+  @_spi(DDM) public func request() async throws
+  @_spi(DDM) @_unavailableFromAsync public func request() throws
+}
+@_spi(Internal) public enum RestoreRequestType : Swift.Codable {
+  @_spi(Internal) case bootstrap
+  @_spi(Internal) case reset
+  @_spi(Internal) public static func == (a: ManagedAppDistribution.RestoreRequestType, b: ManagedAppDistribution.RestoreRequestType) -> Swift.Bool
+  @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public var hashValue: Swift.Int {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct RestoreRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public let requestType: ManagedAppDistribution.RestoreRequestType
+  @_spi(Internal) public init(_ requestType: ManagedAppDistribution.RestoreRequestType)
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct VPPInstallRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public enum RequestType : Swift.Int, Swift.Codable, Swift.Sendable {
+    @_spi(Internal) case perUser
+    @_spi(Internal) case perDevice
+    @_spi(Internal) case purchasedOrFree
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Internal) public init?(rawValue: Swift.Int)
+    #else
+    @_spi(Internal) public init?(rawValue: Swift.Int)
+    #endif
+    @_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+    @available(macCatalyst, unavailable)
+    public typealias RawValue = Swift.Int
+    @_spi(Internal) public var rawValue: Swift.Int {
+      @_spi(Internal) get
+    }
+  }
+  @_spi(Internal) public let id: Foundation.UUID
+  @_spi(Internal) public let accountIdentifier: Swift.Int?
+  @_spi(Internal) public let appIdentifier: ManagedAppDistribution.StoreAppIdentifier
+  @_spi(Internal) public let requestType: ManagedAppDistribution.VPPInstallRequest.RequestType
+  @_spi(Internal) public let evid: Swift.UInt64?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init(appIdentifier: ManagedAppDistribution.StoreAppIdentifier, requestType: ManagedAppDistribution.VPPInstallRequest.RequestType, accountIdentifier: Swift.Int?, evid: Swift.UInt64? = nil)
+  #else
+  @_spi(Internal) public init(appIdentifier: ManagedAppDistribution.StoreAppIdentifier, requestType: ManagedAppDistribution.VPPInstallRequest.RequestType, accountIdentifier: Swift.Int?, evid: Swift.UInt64? = nil)
+  #endif
+  @_spi(Internal) public func requestInstall() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct DDMResetManagedAppInstallHistoryRequest {
+  @_spi(Internal) public static func request() async throws
+}
+@_spi(Internal) public struct OAuthInvalidateRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public let accountID: Swift.String
+  @_spi(Internal) public let server: Swift.String
+  @_spi(Internal) public init(accountID: Swift.String, server: Swift.String)
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct XPCApp : Swift.Sendable, Swift.Codable {
+  @_spi(Internal) public let appleItemID: Swift.UInt64
+  @_spi(Internal) public let bundleID: Swift.String
+  @_spi(Internal) public var installedMetadata: ManagedAppDistribution.XPCApp.Metadata?
+  @_spi(Internal) public var installingMetadata: ManagedAppDistribution.XPCApp.Metadata?
+  @_spi(Internal) public struct Metadata : Swift.Sendable, Swift.Codable {
+    @_spi(Internal) public var appleVersionID: Swift.UInt64
+    @_spi(Internal) public var version: Swift.String
+    @_spi(Internal) public var shortVersion: Swift.String
+    @_spi(Internal) public var account: Swift.String?
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Internal) public init(appleVersionID: Swift.UInt64, version: Swift.String, shortVersion: Swift.String, account: Swift.String?)
+    #else
+    @_spi(Internal) public init(appleVersionID: Swift.UInt64, version: Swift.String, shortVersion: Swift.String, account: Swift.String?)
+    #endif
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public init(appleItemID: Swift.UInt64, bundleID: Swift.String, installedMetadata: ManagedAppDistribution.XPCApp.Metadata? = nil, installingMetadata: ManagedAppDistribution.XPCApp.Metadata? = nil)
+  #else
+  @_spi(Internal) public init(appleItemID: Swift.UInt64, bundleID: Swift.String, installedMetadata: ManagedAppDistribution.XPCApp.Metadata? = nil, installingMetadata: ManagedAppDistribution.XPCApp.Metadata? = nil)
+  #endif
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct DDMPollForUpdatesRequest : Swift.Codable {
+  @_spi(Internal) public var shouldInitiateUpdates: Swift.Bool
+  @_spi(Internal) public init(shouldInitiateUpdates: Swift.Bool)
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public enum DiagnosticRequestType : Swift.Codable {
+  @_spi(Internal) case migrate
+  @_spi(Internal) case reset
+  @_spi(Internal) public static func == (a: ManagedAppDistribution.DiagnosticRequestType, b: ManagedAppDistribution.DiagnosticRequestType) -> Swift.Bool
+  @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public var hashValue: Swift.Int {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct DiagnosticRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public let requestType: ManagedAppDistribution.DiagnosticRequestType
+  @_spi(Internal) public init(_ requestType: ManagedAppDistribution.DiagnosticRequestType)
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedAppLibrary {
+  @available(iOS 17.2, *)
+  @_spi_available(macOS, introduced: 14.2)
+  @available(macCatalyst, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  public struct ManagedApps : _Concurrency.AsyncSequence {
+    public typealias Element = ManagedAppDistribution.ManagedAppLibrary.ManagedApps.AsyncIterator.Element
+    public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+      public typealias Element = Swift.Result<[ManagedAppDistribution.ManagedApp], ManagedAppDistribution.ManagedAppDistributionError>
+      #if compiler(>=5.3) && $NoncopyableGenerics
+      public mutating func next() async throws -> ManagedAppDistribution.ManagedAppLibrary.ManagedApps.AsyncIterator.Element?
+      #else
+      public mutating func next() async throws -> ManagedAppDistribution.ManagedAppLibrary.ManagedApps.AsyncIterator.Element?
+      #endif
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, macOS 15.0, *)
+      @available(tvOS, unavailable, introduced: 18.0)
+      @available(watchOS, unavailable, introduced: 11.0)
+      @available(macCatalyst, unavailable)
+      @available(visionOS, unavailable, introduced: 2.0)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+      #else
+      @available(iOS 18.0, macOS 15.0, *)
+      @available(tvOS, unavailable, introduced: 18.0)
+      @available(watchOS, unavailable, introduced: 11.0)
+      @available(macCatalyst, unavailable)
+      @available(visionOS, unavailable, introduced: 2.0)
+      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+      #endif
+    }
+    public func makeAsyncIterator() -> ManagedAppDistribution.ManagedAppLibrary.ManagedApps.AsyncIterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, macOS 15.0, *)
+    @available(tvOS, unavailable, introduced: 18.0)
+    @available(watchOS, unavailable, introduced: 11.0)
+    @available(macCatalyst, unavailable)
+    @available(visionOS, unavailable, introduced: 2.0)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
+    #else
+    @available(iOS 18.0, macOS 15.0, *)
+    @available(tvOS, unavailable, introduced: 18.0)
+    @available(watchOS, unavailable, introduced: 11.0)
+    @available(macCatalyst, unavailable)
+    @available(visionOS, unavailable, introduced: 2.0)
+    public typealias __AsyncSequence_Failure = any Swift.Error
+    #endif
+  }
+}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct InstallEnterpriseManifestRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public var manifestURL: Foundation.URL
+  @_spi(Internal) public init(manifestURL: Foundation.URL)
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+final package class ServiceConnection : @unchecked Swift.Sendable {
+  package static let shared: ManagedAppDistribution.ServiceConnection
+  final package let connection: Foundation.NSXPCConnection
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  package init?()
+  #else
+  package init?()
+  #endif
+  @objc deinit
+  #if compiler(>=5.3) && $ParameterPacks
+  final package func withAsyncService<each Argument, Result>(arguments argument: repeat each Argument, body: @Sendable (_ service: any ManagedAppDistribution.ServiceProtocol, _ argumentData: Foundation.Data, _ reply: @escaping @Sendable (Foundation.Data) -> Swift.Void) -> Swift.Void) async throws -> Result where repeat each Argument : Swift.Decodable, repeat each Argument : Swift.Encodable, Result : Swift.Decodable, Result : Swift.Encodable
+  #endif
+  #if compiler(>=5.3) && $ParameterPacks
+  final package func withAsyncService<each Argument>(arguments argument: repeat each Argument, body: @Sendable (_ service: any ManagedAppDistribution.ServiceProtocol, _ argumentData: Foundation.Data, _ reply: @escaping @Sendable (Foundation.Data) -> Swift.Void) -> Swift.Void) async throws where repeat each Argument : Swift.Decodable, repeat each Argument : Swift.Encodable
+  #endif
+  #if compiler(>=5.3) && $ParameterPacks
+  @_unavailableFromAsync final package func withSyncService<each Argument, Result>(arguments argument: repeat each Argument, body: (_ service: any ManagedAppDistribution.ServiceProtocol, _ argumentData: Foundation.Data, _ reply: @escaping @Sendable (Foundation.Data) -> Swift.Void) -> Swift.Void) throws -> Result where repeat each Argument : Swift.Decodable, repeat each Argument : Swift.Encodable, Result : Swift.Decodable, Result : Swift.Encodable
+  #endif
+  #if compiler(>=5.3) && $ParameterPacks
+  @_unavailableFromAsync final package func withSyncService<each Argument>(arguments argument: repeat each Argument, body: (_ service: any ManagedAppDistribution.ServiceProtocol, _ argumentData: Foundation.Data, _ reply: @escaping @Sendable (Foundation.Data) -> Swift.Void) -> Swift.Void) throws where repeat each Argument : Swift.Decodable, repeat each Argument : Swift.Encodable
+  #endif
+}
+@_hasMissingDesignatedInitializers @available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+final public class ManagedAppLibrary : Swift.Sendable {
+  public static let currentDistributor: ManagedAppDistribution.ManagedAppLibrary
+  final public var availableApps: ManagedAppDistribution.ManagedAppLibrary.ManagedApps {
+    get
+  }
+  @_spi(ViewService) final public func validateHostApp() async throws
+  @_spi(ViewService) final public func install(_ app: ManagedAppDistribution.ManagedApp) async throws
+  @_spi(ViewService) final public func cancel(_ app: ManagedAppDistribution.ManagedApp) async throws
+  @_spi(Internal) public static var appProgress: _Concurrency.AsyncStream<ManagedAppDistribution.AppProgress> {
+    get
+  }
+  @objc deinit
+}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public enum ServiceResult<Success> : Swift.Codable where Success : Swift.Decodable, Success : Swift.Encodable {
+  @_spi(Internal) case success(Success)
+  @_spi(Internal) case failure(ManagedAppDistribution.ManagedAppDistributionError)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public typealias CodableVoid = Swift.Never?
+#if compiler(>=5.3) && $NoncopyableGenerics
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension Swift.Result {
+  @_spi(Internal) public init(_ serviceResult: ManagedAppDistribution.ServiceResult<Success>) where Success : Swift.Decodable, Success : Swift.Encodable, Failure == ManagedAppDistribution.ManagedAppDistributionError
+}
+#else
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension Swift.Result {
+  @_spi(Internal) public init(_ serviceResult: ManagedAppDistribution.ServiceResult<Success>) where Success : Swift.Decodable, Success : Swift.Encodable, Failure == ManagedAppDistribution.ManagedAppDistributionError
+}
+#endif
+@available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+public enum ManagedAppDistributionError : Foundation.LocalizedError, Foundation.RecoverableError, Foundation.CustomLocalizedStringResourceConvertible, Swift.CustomStringConvertible, Swift.Codable, Swift.Sendable {
+  case unrecoverableError
+  case networkError
+  case deviceNotManaged
+  case unsupportedPlatform
+  @available(iOS 18.0, *)
+  case licenseNotFound
+  public var localizedStringResource: Foundation.LocalizedStringResource {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var errorDescription: Swift.String? {
+    get
+  }
+  #else
+  public var errorDescription: Swift.String? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var failureReason: Swift.String? {
+    get
+  }
+  #else
+  public var failureReason: Swift.String? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var recoverySuggestion: Swift.String? {
+    get
+  }
+  #else
+  public var recoverySuggestion: Swift.String? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var helpAnchor: Swift.String? {
+    get
+  }
+  #else
+  public var helpAnchor: Swift.String? {
+    get
+  }
+  #endif
+  public var recoveryOptions: [Swift.String] {
+    get
+  }
+  public func attemptRecovery(optionIndex recoveryOptionIndex: Swift.Int) -> Swift.Bool
+  public func attemptRecovery(optionIndex recoveryOptionIndex: Swift.Int, resultHandler handler: @escaping (Swift.Bool) -> Swift.Void)
+  public static func == (a: ManagedAppDistribution.ManagedAppDistributionError, b: ManagedAppDistribution.ManagedAppDistributionError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+@available(macCatalyst, unavailable)
+public struct ManagedAppDeclaration : Swift.Codable, Swift.Sendable {
+  @_spi(DDM) public var declarationKey: Swift.String
+  @_spi(DDM) public var declarationIdentifier: Swift.String
+  @_spi(DDM) public var managementScope: ManagedAppDistribution.ManagedAppDeclaration.ManagementScope
+  @_spi(DDM) public var personaIdentifier: Swift.String?
+  @_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+  @available(macCatalyst, unavailable)
+  public var attributes: ManagedAppDistribution.ManagedAppDeclaration.Attributes?
+  @_spi(Internal) public var installBehavior: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior
+  @_spi(Internal) public var backupBehavior: ManagedAppDistribution.ManagedAppDeclaration.BackupBehavior
+  @_spi(Internal) public var updateBehavior: ManagedAppDistribution.ManagedAppDeclaration.UpdateBehaviorEnum
+  @_spi(Internal) public var platform: ManagedAppDistribution.Platform
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(DDM) public init(declarationKey: Swift.String, declarationIdentifier: Swift.String, managementScope: ManagedAppDistribution.ManagedAppDeclaration.ManagementScope, personaIdentifier: Swift.String?, installBehavior: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior, backupBehavior: ManagedAppDistribution.ManagedAppDeclaration.BackupBehavior, updateBehavior: ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior, platform: ManagedAppDistribution.Platform)
+  #else
+  @_spi(DDM) public init(declarationKey: Swift.String, declarationIdentifier: Swift.String, managementScope: ManagedAppDistribution.ManagedAppDeclaration.ManagementScope, personaIdentifier: Swift.String?, installBehavior: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior, backupBehavior: ManagedAppDistribution.ManagedAppDeclaration.BackupBehavior, updateBehavior: ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior, platform: ManagedAppDistribution.Platform)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(DDM) @available(*, deprecated)
+  public init(declarationKey: Swift.String, declarationIdentifier: Swift.String, personaIdentifier: Swift.String?, installBehavior: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior, backupBehavior: ManagedAppDistribution.ManagedAppDeclaration.BackupBehavior, updateBehavior: ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior, platform: ManagedAppDistribution.Platform)
+  #else
+  @_spi(DDM) @available(*, deprecated)
+  public init(declarationKey: Swift.String, declarationIdentifier: Swift.String, personaIdentifier: Swift.String?, installBehavior: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior, backupBehavior: ManagedAppDistribution.ManagedAppDeclaration.BackupBehavior, updateBehavior: ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior, platform: ManagedAppDistribution.Platform)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(DDM) @available(*, deprecated)
+  public init(declarationKey: Swift.String, declarationIdentifier: Swift.String, personaIdentifier: Swift.String?, installBehavior: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior, backupBehavior: ManagedAppDistribution.ManagedAppDeclaration.BackupBehavior, updateBehavior: ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior, removalBehavior: ManagedAppDistribution.ManagedAppDeclaration.RemovalBehavior, platform: ManagedAppDistribution.Platform)
+  #else
+  @_spi(DDM) @available(*, deprecated)
+  public init(declarationKey: Swift.String, declarationIdentifier: Swift.String, personaIdentifier: Swift.String?, installBehavior: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior, backupBehavior: ManagedAppDistribution.ManagedAppDeclaration.BackupBehavior, updateBehavior: ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior, removalBehavior: ManagedAppDistribution.ManagedAppDeclaration.RemovalBehavior, platform: ManagedAppDistribution.Platform)
+  #endif
+  @_spi(DDM) @available(*, deprecated, message: "Explicitly pass personaIdentifier")
+  public init(declarationKey: Swift.String, declarationIdentifier: Swift.String, installBehavior: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior, backupBehavior: ManagedAppDistribution.ManagedAppDeclaration.BackupBehavior, updateBehavior: ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior, removalBehavior: ManagedAppDistribution.ManagedAppDeclaration.RemovalBehavior, platform: ManagedAppDistribution.Platform)
+  @_spi(DDM) @frozen public enum ManagementScope : Swift.Codable, Swift.Sendable {
+    @_spi(DDM) case system
+    @_spi(DDM) case user
+    @_spi(DDM) public static func == (a: ManagedAppDistribution.ManagedAppDeclaration.ManagementScope, b: ManagedAppDistribution.ManagedAppDeclaration.ManagementScope) -> Swift.Bool
+    @_spi(DDM) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(DDM) public var hashValue: Swift.Int {
+      @_spi(DDM) get
+    }
+    @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+  @available(macCatalyst, unavailable)
+  public struct Attributes : Swift.Codable, Swift.Sendable {
+    @_spi(Internal) public let rawValue: Foundation.Data
+    @_spi(Internal) public init(rawValue: Foundation.Data)
+    @_spi(DDM) public init(_ dictionary: [Swift.String : Any]) throws
+    @_spi(DDM) public func dictionaryRepresentation() throws -> [Swift.String : Any]
+    @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(DDM) public struct InstallBehavior : Swift.Codable, Swift.Sendable {
+    @_spi(Internal) public var installTiming: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.InstallTimingEnum
+    @_spi(DDM) public var isAccountPromptAllowed: Swift.Bool
+    @_spi(Internal) public var purchaseMethod: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.PurchaseMethodEnum
+    @_spi(DDM) public init(installTiming: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.InstallTiming, isAccountPromptAllowed: Swift.Bool, purchaseMethod: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.PurchaseMethod)
+    @_spi(DDM) public struct InstallTiming {
+      @_spi(DDM) public static var immediately: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.InstallTiming {
+        @_spi(DDM) get
+      }
+      @_spi(DDM) public static var onDemand: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.InstallTiming {
+        @_spi(DDM) get
+      }
+    }
+    @_spi(Internal) public enum InstallTimingEnum : Swift.Codable, Swift.Sendable {
+      @_spi(Internal) case immediately
+      @_spi(Internal) case onDemand
+      @_spi(Internal) public static func == (a: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.InstallTimingEnum, b: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.InstallTimingEnum) -> Swift.Bool
+      @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+      @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+      @_spi(Internal) public var hashValue: Swift.Int {
+        @_spi(Internal) get
+      }
+      @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+    }
+    @_spi(DDM) public struct PurchaseMethod {
+      @_spi(DDM) @available(*, deprecated, message: "Explicitly pass license")
+      public static func volumePurchaseProgram(_ id: ManagedAppDistribution.StoreAppIdentifier) -> ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.PurchaseMethod
+      @_spi(DDM) public static func volumePurchaseProgram(_ id: ManagedAppDistribution.StoreAppIdentifier, license: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.License) -> ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.PurchaseMethod
+      @_spi(DDM) public static func manifest(_ url: Foundation.URL) -> ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.PurchaseMethod
+    }
+    @_spi(Internal) public enum PurchaseMethodEnum : Swift.Codable, Swift.Sendable {
+      @_spi(Internal) case volumePurchaseProgram(ManagedAppDistribution.StoreAppIdentifier, license: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.LicenseEnum)
+      @_spi(Internal) case manifest(Foundation.URL)
+      @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+      @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+    }
+    @_spi(DDM) public struct License {
+      @_spi(DDM) public static func user() -> ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.License
+      @_spi(DDM) public static func device() -> ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.License
+    }
+    @_spi(Internal) public enum LicenseEnum : Swift.Codable, Swift.Sendable {
+      @_spi(Internal) case user
+      @_spi(Internal) case device
+      @_spi(Internal) public static func == (a: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.LicenseEnum, b: ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.LicenseEnum) -> Swift.Bool
+      @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+      @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+      @_spi(Internal) public var hashValue: Swift.Int {
+        @_spi(Internal) get
+      }
+      @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+    }
+    @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(DDM) public struct BackupBehavior : Swift.Codable, Swift.Sendable {
+    @_spi(DDM) public var backupAppData: Swift.Bool
+    @_spi(DDM) public init(backupAppData: Swift.Bool = true)
+    @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(DDM) public struct UpdateBehavior : Swift.Codable, Swift.Sendable {
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(DDM) public static func automaticallyUpdate(evid: Swift.UInt64? = nil) -> ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior
+    #else
+    @_spi(DDM) public static func automaticallyUpdate(evid: Swift.UInt64? = nil) -> ManagedAppDistribution.ManagedAppDeclaration.UpdateBehavior
+    #endif
+    @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public enum UpdateBehaviorEnum : Swift.Codable, Swift.Sendable {
+    @_spi(Internal) case automaticallyUpdate(evid: Swift.UInt64? = nil)
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(DDM) @available(*, deprecated)
+  public struct RemovalBehavior : Swift.Codable, Swift.Sendable {
+    @_spi(DDM) public var removable: Swift.Bool
+    @_spi(DDM) public init(removable: Swift.Bool = true)
+    @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+    @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+  }
+  @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+@frozen public enum StoreAppIdentifier : Swift.Hashable, Swift.Codable, Swift.Sendable {
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) case itemID(Swift.UInt64)
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) case bundleID(Swift.String)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public var bundleID: Swift.String? {
+    @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) get
+  }
+  #else
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public var bundleID: Swift.String? {
+    @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public var itemID: Swift.UInt64? {
+    @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) get
+  }
+  #else
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public var itemID: Swift.UInt64? {
+    @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) get
+  }
+  #endif
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public func hash(into hasher: inout Swift.Hasher)
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public static func == (a: ManagedAppDistribution.StoreAppIdentifier, b: ManagedAppDistribution.StoreAppIdentifier) -> Swift.Bool
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public var hashValue: Swift.Int {
+    @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) get
+  }
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.StoreAppIdentifier : Swift.CustomStringConvertible {
+  @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) public var description: Swift.String {
+    @_spi(Internal) @_spi(MarketplaceKit) @_spi(DDM) get
+  }
+}
+@_spi(Internal) final public class AsyncStreamListener<T> : Swift.Hashable, Swift.Sendable {
+  @_spi(Internal) public typealias Continuation = _Concurrency.AsyncStream<T>.Continuation
+  @_spi(Internal) public init(_ continuation: ManagedAppDistribution.AsyncStreamListener<T>.Continuation)
+  @_spi(Internal) public static func == (lhs: ManagedAppDistribution.AsyncStreamListener<T>, rhs: ManagedAppDistribution.AsyncStreamListener<T>) -> Swift.Bool
+  @_spi(Internal) final public func hash(into hasher: inout Swift.Hasher)
+  @_spi(Internal) @objc deinit
+  @_spi(Internal) final public var hashValue: Swift.Int {
+    @_spi(Internal) get
+  }
+}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension Foundation.LocalizedStringResource.BundleDescription {
+  @_spi(Internal) public static var madFramework: Foundation.LocalizedStringResource.BundleDescription {
+    @_spi(Internal) get
+  }
+}
+@_spi(Internal) extension Foundation.Bundle {
+  @_spi(Internal) public var preferredLocalization: Swift.String {
+    @_spi(Internal) get
+  }
+}
+@_spi(DDM) @available(iOS 17.0, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct DDMDeclarationKeysRequest : Swift.Codable, Swift.Sendable {
+  @_spi(DDM) public init()
+  @_spi(DDM) public func request() async throws -> [Swift.String]
+  @_spi(DDM) @_unavailableFromAsync public func request() throws -> [Swift.String]
+  @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public func isManagedAppDistributionEnabled() -> Swift.Bool
+@_spi(Internal) extension os.Logger {
+  @_spi(Internal) public static let madSubsystem: Swift.String
+  @_spi(Internal) nonisolated(unsafe) public static let appActions: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let daemon: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let ddm: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let download: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let eligibility: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let general: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let install: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let library: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let metrics: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let oauth: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let progress: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let restore: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let scheduler: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let sql: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let storage: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let updates: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let vpp: os.Logger
+  @_spi(Internal) nonisolated(unsafe) public static let xpc: os.Logger
+}
+@_spi(Internal) @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+final public class XPCClient : ObjectiveC.NSObject, ManagedAppDistribution.XPCClientProtocol, Swift.Sendable {
+  @_spi(Internal) public typealias AppStateChangeBlock = @Sendable (ManagedAppDistribution.AppState) -> Swift.Void
+  @_spi(Internal) public static let shared: ManagedAppDistribution.XPCClient
+  @_spi(Internal) public static func interface() -> Foundation.NSXPCInterface
+  @_spi(Internal) public static var daemonLaunchNotificationName: Swift.String {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public typealias DaemonInstanceIdentifier = Swift.UInt64
+  @_spi(Internal) final public func registerAppCatalogHandler(_ handler: @escaping @Sendable ([ManagedAppDistribution.XPCApp]) -> Swift.Void)
+  @_spi(Internal) final public func registerAppInstallStateListener(_ listener: ManagedAppDistribution.AsyncStreamListener<ManagedAppDistribution.AppState>, for identifier: ManagedAppDistribution.AppStateIdentifier)
+  @_spi(Internal) final public func unregisterAppInstallStateListener(_ listener: ManagedAppDistribution.AsyncStreamListener<ManagedAppDistribution.AppState>, for identifier: ManagedAppDistribution.AppStateIdentifier)
+  @_spi(Internal) @objc final public func handleMessages(_ messageData: Foundation.Data)
+  @_spi(Internal) @objc deinit
+}
+@_spi(Internal) @objc public protocol XPCClientProtocol : Swift.Sendable {
+  @_spi(Internal) @objc func handleMessages(_ messageData: Foundation.Data)
+}
+@_spi(Internal) public enum MessageRegistration : Swift.Codable, Swift.Hashable, Swift.Sendable, Swift.CustomStringConvertible {
+  @_spi(Internal) case appCatalog
+  @_spi(Internal) case appStateChange(ManagedAppDistribution.AppStateIdentifier)
+  @_spi(Internal) case globalAppProgress
+  @_spi(Internal) case logging
+  @_spi(Internal) public var description: Swift.String {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+  @_spi(Internal) public static func == (a: ManagedAppDistribution.MessageRegistration, b: ManagedAppDistribution.MessageRegistration) -> Swift.Bool
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public var hashValue: Swift.Int {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public struct AppProgress : Swift.Codable {
+  @_spi(Internal) public let state: ManagedAppDistribution.AppState
+  @_spi(Internal) public let identifier: ManagedAppDistribution.AppStateUpdateIdentifier
+  @_spi(Internal) public init(state: ManagedAppDistribution.AppState, identifier: ManagedAppDistribution.AppStateUpdateIdentifier)
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct XPCClientMessage : Swift.Codable {
+  @_spi(Internal) public enum MessageType : Swift.Codable {
+    @_spi(Internal) case appProgress(progress: ManagedAppDistribution.AppProgress)
+    @_spi(Internal) case connectionEstablished
+    @_spi(Internal) case log(log: Swift.String)
+    @_spi(Internal) case managedAppCatalog([ManagedAppDistribution.ManagedApp]?, ManagedAppDistribution.ManagedAppDistributionError?)
+    @_spi(Internal) case appCatalog([ManagedAppDistribution.XPCApp])
+    @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+    @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+  }
+  @_spi(Internal) public let type: ManagedAppDistribution.XPCClientMessage.MessageType
+  @_spi(Internal) public static let connectionEstablished: ManagedAppDistribution.XPCClientMessage
+  @_spi(Internal) public static func appCatalog(_ appCatalog: [ManagedAppDistribution.XPCApp]) -> ManagedAppDistribution.XPCClientMessage
+  @_spi(Internal) public static func appProgress(_ progress: ManagedAppDistribution.AppProgress) -> ManagedAppDistribution.XPCClientMessage
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) public static func managedAppCatalog(apps: [ManagedAppDistribution.ManagedApp]?, error: ManagedAppDistribution.ManagedAppDistributionError?) -> ManagedAppDistribution.XPCClientMessage
+  #else
+  @_spi(Internal) public static func managedAppCatalog(apps: [ManagedAppDistribution.ManagedApp]?, error: ManagedAppDistribution.ManagedAppDistributionError?) -> ManagedAppDistribution.XPCClientMessage
+  #endif
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.XPCClientProtocol {
+  @_spi(Internal) public func handleMessage(_ message: ManagedAppDistribution.XPCClientMessage)
+  @_spi(Internal) public func handleMessages(_ messages: [ManagedAppDistribution.XPCClientMessage])
+  @_spi(Internal) public func logMessage(_ message: Swift.String)
+}
+@_spi(Internal) public struct OAuthAuthorizeRequest : Swift.Codable, Swift.Sendable {
+  @_spi(Internal) public let endpointURL: Foundation.URL
+  @_spi(Internal) public let isUpdate: Swift.Bool
+  @_spi(Internal) public let isMarketplace: Swift.Bool
+  @_spi(Internal) public init(endpointURL: Foundation.URL, isUpdate: Swift.Bool, isMarketplace: Swift.Bool)
+  @_spi(Internal) public func request() async throws
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(DDM) @available(iOS 17.0, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+public struct DDMAppOrUpdateManagedAppRequest : Swift.Codable, Swift.Sendable {
+  @_spi(DDM) public var app: ManagedAppDistribution.ManagedAppDeclaration
+  @_spi(DDM) public init(app: ManagedAppDistribution.ManagedAppDeclaration)
+  @_spi(DDM) public func request() async throws
+  @_spi(DDM) @_unavailableFromAsync public func request() throws
+  @_spi(DDM) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(DDM) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) public typealias AppStateIdentifier = ManagedAppDistribution.StoreAppIdentifier
+@_spi(Internal) public enum AppStateUpdateIdentifier : Swift.CustomStringConvertible, Swift.Hashable, Swift.Codable, Swift.Sendable {
+  @_spi(Internal) case managedAppDistribution(bundleID: Swift.String, itemID: Swift.UInt64?)
+  @_spi(Internal) case marketplaceKit(appleItemID: Swift.UInt64)
+  @_spi(Internal) public var description: Swift.String {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public var appStateIdentifiers: [ManagedAppDistribution.AppStateIdentifier] {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public init(_ identifier: ManagedAppDistribution.AppStateIdentifier)
+  @_spi(Internal) public func hash(into hasher: inout Swift.Hasher)
+  @_spi(Internal) public static func == (a: ManagedAppDistribution.AppStateUpdateIdentifier, b: ManagedAppDistribution.AppStateUpdateIdentifier) -> Swift.Bool
+  @_spi(Internal) public func encode(to encoder: any Swift.Encoder) throws
+  @_spi(Internal) public var hashValue: Swift.Int {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Internal) @available(iOS 17.4, macOS 14.4, *)
+extension ManagedAppDistribution.CellularSettings.Prompt : Swift.Equatable {}
+@_spi(Internal) @available(iOS 17.4, macOS 14.4, *)
+extension ManagedAppDistribution.CellularSettings.Prompt : Swift.Hashable {}
+@_spi(Internal) @available(iOS 17.4, macOS 14.4, *)
+extension ManagedAppDistribution.CellularSettings.Prompt : Swift.RawRepresentable {}
+@_spi(Internal) @available(iOS 17.4, macOS 14.4, *)
+extension ManagedAppDistribution.CellularSettings.Prompt : Swift.Sendable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.State : Swift.Equatable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.State : Swift.Hashable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.State : Swift.RawRepresentable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.Reason : Swift.Equatable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.Reason : Swift.Hashable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.Reason : Swift.RawRepresentable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.UpdateState : Swift.Equatable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.UpdateState : Swift.Hashable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.ManagedAppStatus.UpdateState : Swift.RawRepresentable {}
+@_spi(MarketplaceKit) @_spi(ViewService) @available(iOS 17.2, macOS 14.2, *)
+extension ManagedAppDistribution.AppState.Availability : Swift.Hashable {}
+@_spi(Internal) extension ManagedAppDistribution.LogKey.Prefix : Swift.Equatable {}
+@_spi(Internal) extension ManagedAppDistribution.LogKey.Prefix : Swift.Hashable {}
+@_spi(Internal) extension ManagedAppDistribution.LogKey.Prefix : Swift.RawRepresentable {}
+@_spi(Internal) extension ManagedAppDistribution.RestoreRequestType : Swift.Equatable {}
+@_spi(Internal) extension ManagedAppDistribution.RestoreRequestType : Swift.Hashable {}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.VPPInstallRequest.RequestType : Swift.Equatable {}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.VPPInstallRequest.RequestType : Swift.Hashable {}
+@_spi(Internal) @_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.VPPInstallRequest.RequestType : Swift.RawRepresentable {}
+@_spi(Internal) extension ManagedAppDistribution.DiagnosticRequestType : Swift.Equatable {}
+@_spi(Internal) extension ManagedAppDistribution.DiagnosticRequestType : Swift.Hashable {}
+@available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension ManagedAppDistribution.ManagedAppDistributionError : Swift.Equatable {}
+@available(iOS 17.2, *)
+@_spi_available(macOS, introduced: 14.2)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension ManagedAppDistribution.ManagedAppDistributionError : Swift.Hashable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedAppDeclaration.ManagementScope : Swift.Equatable {}
+@_spi(DDM) @available(iOS 17.2, macOS 14.2, *)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedAppDeclaration.ManagementScope : Swift.Hashable {}
+@_spi(Internal) @available(iOS 17.2, macOS 14.2, *)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.InstallTimingEnum : Swift.Equatable {}
+@_spi(Internal) @available(iOS 17.2, macOS 14.2, *)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.InstallTimingEnum : Swift.Hashable {}
+@_spi(Internal) @available(iOS 17.2, macOS 14.2, *)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.LicenseEnum : Swift.Equatable {}
+@_spi(Internal) @available(iOS 17.2, macOS 14.2, *)
+@available(macCatalyst, unavailable)
+extension ManagedAppDistribution.ManagedAppDeclaration.InstallBehavior.LicenseEnum : Swift.Hashable {}

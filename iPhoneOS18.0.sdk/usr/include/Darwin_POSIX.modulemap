@@ -1,0 +1,688 @@
+module Darwin.POSIX {
+  module aio {
+    header "aio.h"
+    header "sys/aio.h"
+    export *
+  }
+
+  module arpa {
+    module inet {
+      header "arpa/inet.h"
+      export *
+    }
+    export *
+  }
+
+  module cpio {
+    header "cpio.h"
+    export *
+  }
+
+  module dirent {
+    header "dirent.h"
+    header "sys/dir.h"
+    header "sys/dirent.h"
+    export *
+  }
+
+  module dlfcn {
+    header "dlfcn.h"
+    export *
+  }
+
+  module fcntl {
+    header "fcntl.h"
+    header "sys/fcntl.h"
+    export *
+  }
+
+  module fmtmsg {
+    header "fmtmsg.h"
+    export *
+  }
+
+  module fnmatch {
+    header "fnmatch.h"
+    export *
+  }
+
+  module ftw {
+    header "ftw.h"
+    export *
+  }
+
+  module glob {
+    header "glob.h"
+    export *
+  }
+
+  module grp {
+    header "grp.h"
+    export *
+  }
+
+  module iconv {
+    header "iconv.h"
+    export *
+  }
+
+  module ifaddrs {
+    header "ifaddrs.h"
+    export *
+  }
+
+  module ioctl {
+    header "sys/ioctl.h"
+    export *
+  }
+
+  module langinfo {
+    header "langinfo.h"
+    export *
+  }
+
+  module _langinfo {
+    header "_langinfo.h"
+    export *
+  }
+
+  module libgen {
+    header "libgen.h"
+    export *
+  }
+
+  module monetary {
+    header "monetary.h"
+    export *
+  }
+
+  module _monetary {
+    header "_monetary.h"
+    export *
+  }
+
+  module ndbm {
+    header "ndbm.h"
+    export *
+  }
+
+  module netdb {
+    header "netdb.h"
+    export *
+  }
+
+  extern module net "net.modulemap"
+
+  extern module netinet "netinet.modulemap"
+
+  module nl_types {
+    header "nl_types.h"
+    export *
+  }
+
+  module poll {
+    header "poll.h"
+    header "sys/poll.h"
+    export *
+  }
+
+  module pthread {
+    module impl {
+      header "pthread_impl.h"
+      export *
+    }
+
+    module pthread {
+      header "pthread.h"
+      export *
+    }
+
+    module qos {
+      header "pthread/qos.h"
+      export *
+    }
+
+    module spawn {
+      header "pthread/spawn.h"
+      export *
+    }
+
+    module spis {
+      header "pthread_spis.h"
+      export *
+    }
+  }
+
+  module pwd {
+    header "pwd.h"
+    export *
+  }
+
+  module regex {
+    header "regex.h"
+    export *
+  }
+
+  module _regex {
+    header "_regex.h"
+    export *
+  }
+
+  module sched {
+    header "sched.h"
+    export *
+  }
+
+  module search {
+    header "search.h"
+    export *
+  }
+
+  module semaphore {
+    header "semaphore.h"
+    export *
+  }
+
+  module spawn {
+    header "spawn.h"
+    header "sys/spawn.h"
+    export *
+  }
+
+  module strings {
+    header "strings.h"
+    exclude header "secure/_strings.h"
+    export *
+  }
+
+  module _strings {
+    header "_strings.h"
+    export *
+  }
+
+  module _types {
+    umbrella "_types"
+
+    module * { export * }
+  }
+
+  module sys {
+    module ipc {
+      header "sys/ipc.h"
+      export *
+    }
+
+    module mman {
+      header "sys/mman.h"
+      export *
+    }
+
+    module msg {
+      header "sys/msg.h"
+      export *
+    }
+
+    module resource {
+      header "sys/resource.h"
+      export *
+    }
+
+    module select {
+      header "sys/select.h"
+      export *
+    }
+
+    module _select {
+      header "sys/_select.h"
+      export *
+    }
+
+    module sem {
+      header "sys/sem.h"
+      export *
+    }
+
+    module shm {
+      header "sys/shm.h"
+      export *
+    }
+
+    module socket {
+      header "sys/socket.h"
+      export *
+    }
+
+    module stat {
+      header "sys/stat.h"
+      export *
+    }
+
+    module statvfs {
+      header "sys/statvfs.h"
+      export *
+    }
+
+    module time {
+      header "sys/time.h"
+      export *
+    }
+
+    module times {
+      header "sys/times.h"
+      export *
+    }
+
+    module types {
+      header "sys/types.h"
+      export *
+
+      module _blkcnt_t {
+        header "sys/_types/_blkcnt_t.h"
+        export *
+      }
+
+      module _blksize_t {
+        header "sys/_types/_blksize_t.h"
+        export *
+      }
+
+      module _caddr_t {
+        header "sys/_types/_caddr_t.h"
+        export *
+      }
+
+      module _clock_t {
+        header "sys/_types/_clock_t.h"
+        export *
+      }
+
+      module _ct_rune_t {
+        header "sys/_types/_ct_rune_t.h"
+        export *
+      }
+
+      module _dev_t {
+        header "sys/_types/_dev_t.h"
+        export *
+      }
+
+      module _errno_t {
+        header "sys/_types/_errno_t.h"
+        export *
+      }
+
+      module _fd_clr {
+        header "sys/_types/_fd_clr.h"
+        export *
+      }
+
+      module _fd_copy {
+        header "sys/_types/_fd_copy.h"
+        export *
+      }
+
+      module _fd_def {
+        header "sys/_types/_fd_def.h"
+        export *
+      }
+
+      module _fd_isset {
+        header "sys/_types/_fd_isset.h"
+        export *
+      }
+
+      module _fd_set {
+        header "sys/_types/_fd_set.h"
+        export *
+      }
+
+      module _fd_setsize {
+        header "sys/_types/_fd_setsize.h"
+        export *
+      }
+
+      module _fd_zero {
+        header "sys/_types/_fd_zero.h"
+        export *
+      }
+
+      module _filesec_t {
+        header "sys/_types/_filesec_t.h"
+        export *
+      }
+
+      module _fsblkcnt_t {
+        header "sys/_types/_fsblkcnt_t.h"
+        export *
+      }
+
+      module _fsfilcnt_t {
+        header "sys/_types/_fsfilcnt_t.h"
+        export *
+      }
+
+      module _fsid_t {
+        header "sys/_types/_fsid_t.h"
+        export *
+      }
+
+      module _fsobj_id_t {
+        header "sys/_types/_fsobj_id_t.h"
+        export *
+      }
+
+      module _gid_t {
+        header "sys/_types/_gid_t.h"
+        export *
+      }
+
+      module _graftdmg_un {
+        header "sys/_types/_graftdmg_un.h"
+        export *
+      }
+
+      module _guid_t {
+        header "sys/_types/_guid_t.h"
+        export *
+      }
+
+      module _id_t {
+        header "sys/_types/_id_t.h"
+        export *
+      }
+
+      module _in_addr_t {
+        header "sys/_types/_in_addr_t.h"
+        export *
+      }
+
+      module _in_port_t {
+        header "sys/_types/_in_port_t.h"
+        export *
+      }
+
+      module _ino64_t {
+        header "sys/_types/_ino64_t.h"
+        export *
+      }
+
+      module _ino_t {
+        header "sys/_types/_ino_t.h"
+        export *
+      }
+
+      module _iovec_t {
+        header "sys/_types/_iovec_t.h"
+        export *
+      }
+
+      module _key_t {
+        header "sys/_types/_key_t.h"
+        export *
+      }
+
+      module _mach_port_t {
+        header "sys/_types/_mach_port_t.h"
+        export *
+      }
+
+      module _mbstate_t {
+        header "sys/_types/_mbstate_t.h"
+        export *
+      }
+
+      module _mode_t {
+        header "sys/_types/_mode_t.h"
+        export *
+      }
+
+      module _mount_t {
+        header "sys/_types/_mount_t.h"
+        export *
+      }
+
+      module _nlink_t {
+        header "sys/_types/_nlink_t.h"
+        export *
+      }
+
+      module _null {
+        header "sys/_types/_null.h"
+        export *
+      }
+
+      module _o_dsync {
+        header "sys/_types/_o_dsync.h"
+        export *
+      }
+
+      module _o_sync {
+        header "sys/_types/_o_sync.h"
+        export *
+      }
+
+      module _off_t {
+        header "sys/_types/_off_t.h"
+        export *
+      }
+
+      module _offsetof {
+        header "sys/_types/_offsetof.h"
+        export *
+      }
+
+      module _os_inline {
+        header "sys/_types/_os_inline.h"
+        export *
+      }
+
+      module _pid_t {
+        header "sys/_types/_pid_t.h"
+        export *
+      }
+
+      module _posix_vdisable {
+        header "sys/_types/_posix_vdisable.h"
+        export *
+      }
+
+      module _ptrdiff_t {
+        header "sys/_types/_ptrdiff_t.h"
+        export *
+      }
+
+      module _rsize_t {
+        header "sys/_types/_rsize_t.h"
+        export *
+      }
+
+      module _rune_t {
+        header "sys/_types/_rune_t.h"
+        export *
+      }
+
+      module _s_ifmt {
+        header "sys/_types/_s_ifmt.h"
+        export *
+      }
+
+      module _sa_family_t {
+        header "sys/_types/_sa_family_t.h"
+        export *
+      }
+
+      module _seek_set {
+        header "sys/_types/_seek_set.h"
+        export *
+      }
+
+      module _sigaltstack {
+        header "sys/_types/_sigaltstack.h"
+        export *
+      }
+
+      module _sigset_t {
+        header "sys/_types/_sigset_t.h"
+        export *
+      }
+
+      module _size_t {
+        header "sys/_types/_size_t.h"
+        export *
+      }
+
+      module _ssize_t {
+        header "sys/_types/_ssize_t.h"
+        export *
+      }
+
+      module _socklen_t {
+        header "sys/_types/_socklen_t.h"
+        export *
+      }
+
+      module _suseconds_t {
+        header "sys/_types/_suseconds_t.h"
+        export *
+      }
+
+      module _time_t {
+        header "sys/_types/_time_t.h"
+        export *
+      }
+
+      module _timespec {
+        header "sys/_types/_timespec.h"
+        export *
+      }
+
+      module _timeval {
+        header "sys/_types/_timeval.h"
+        export *
+      }
+
+      module _timeval32 {
+        header "sys/_types/_timeval32.h"
+        export *
+      }
+
+      module _timeval64 {
+        header "sys/_types/_timeval64.h"
+        export *
+      }
+
+      module _ucontext {
+        header "sys/_types/_ucontext.h"
+        export *
+      }
+
+      module _ucontext64 {
+        header "sys/_types/_ucontext64.h"
+        export *
+      }
+
+      module _uid_t {
+        header "sys/_types/_uid_t.h"
+        export *
+      }
+
+      module _useconds_t {
+        header "sys/_types/_useconds_t.h"
+        export *
+      }
+
+      module _uuid_t {
+        header "sys/_types/_uuid_t.h"
+        export *
+      }
+
+      module _va_list {
+        header "sys/_types/_va_list.h"
+        export *
+      }
+
+      module _vnode_t {
+        header "sys/_types/_vnode_t.h"
+        export *
+      }
+
+      module _wchar_t {
+        header "sys/_types/_wchar_t.h"
+        export *
+      }
+    }
+
+    module uio {
+      header "sys/uio.h"
+      export *
+    }
+
+    module un {
+      header "sys/un.h"
+      export *
+    }
+
+    module utsname {
+      header "sys/utsname.h"
+      export *
+    }
+
+    module vsock {
+      header "sys/vsock.h"
+      export *
+    }
+
+    module wait {
+      header "sys/wait.h"
+      export *
+    }
+
+    module xattr {
+      header "sys/xattr.h"
+      export *
+    }
+  }
+
+  module syslog {
+    header "syslog.h"
+    header "sys/syslog.h"
+    export *
+  }
+
+  module tar {
+    header "tar.h"
+    export *
+  }
+
+  module termios {
+    header "termios.h"
+    header "sys/termios.h"
+    export *
+  }
+
+  module ulimit {
+    header "ulimit.h"
+    export *
+  }
+
+  module unistd {
+    header "unistd.h"
+    header "sys/unistd.h"
+    export *
+  }
+
+  module utime {
+    header "utime.h"
+    export *
+  }
+
+  module utmpx {
+    header "utmpx.h"
+    export *
+  }
+
+  module wordexp {
+    header "wordexp.h"
+    export *
+  }
+}

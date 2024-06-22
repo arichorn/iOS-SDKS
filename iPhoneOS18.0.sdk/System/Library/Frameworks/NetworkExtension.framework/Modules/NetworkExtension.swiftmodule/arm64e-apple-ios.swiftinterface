@@ -1,0 +1,177 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.3.38 clang-1600.0.20.6)
+// swift-module-flags: -target arm64e-apple-ios18.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2009.0.0.0.5 -module-name NetworkExtension
+import Foundation
+import Network
+@_exported import NetworkExtension
+import Security
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@available(macOS 15.0, *)
+@available(iOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension NetworkExtension.NENetworkRule {
+  convenience public init(destinationNetworkEndpoint networkEndpoint: Network.NWEndpoint, prefix destinationPrefix: Swift.Int, protocol: NetworkExtension.NENetworkRule.`Protocol`)
+  convenience public init(destinationHostEndpoint hostEndpoint: Network.NWEndpoint, protocol: NetworkExtension.NENetworkRule.`Protocol`)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  convenience public init(remoteNetworkEndpoint: Network.NWEndpoint?, remotePrefix: Swift.Int, localNetworkEndpoint: Network.NWEndpoint?, localPrefix: Swift.Int, protocol: NetworkExtension.NENetworkRule.`Protocol`, direction: NetworkExtension.NETrafficDirection)
+  #else
+  convenience public init(remoteNetworkEndpoint: Network.NWEndpoint?, remotePrefix: Swift.Int, localNetworkEndpoint: Network.NWEndpoint?, localPrefix: Swift.Int, protocol: NetworkExtension.NENetworkRule.`Protocol`, direction: NetworkExtension.NETrafficDirection)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var matchRemoteHostOrNetworkEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #else
+  public var matchRemoteHostOrNetworkEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var matchLocalNetworkEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #else
+  public var matchLocalNetworkEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #endif
+}
+@available(iOS 18.0, visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension NetworkExtension.NEHotspotHelperCommand {
+  public var interface: Network.NWInterface {
+    get
+  }
+}
+@available(macOS 15.0, *)
+@available(iOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension NetworkExtension.NEFilterPacketProvider {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var handler: ((NetworkExtension.NEFilterPacketContext, Network.NWInterface, NetworkExtension.NETrafficDirection, Swift.UnsafeRawBufferPointer) -> NetworkExtension.NEFilterPacketProvider.Verdict)? {
+    get
+    set
+  }
+  #else
+  public var handler: ((NetworkExtension.NEFilterPacketContext, Network.NWInterface, NetworkExtension.NETrafficDirection, Swift.UnsafeRawBufferPointer) -> NetworkExtension.NEFilterPacketProvider.Verdict)? {
+    get
+    set
+  }
+  #endif
+}
+@available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension NetworkExtension.NEAppProxyTCPFlow {
+  public var remoteFlowEndpoint: Network.NWEndpoint {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension NetworkExtension.NEFilterSocketFlow {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var remoteFlowEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #else
+  public var remoteFlowEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var localFlowEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #else
+  public var localFlowEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #endif
+}
+@available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension NetworkExtension.NEAppProxyUDPFlow {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func readDatagrams(completionHandler: @escaping ([(Foundation.Data, Network.NWEndpoint)]?, (any Swift.Error)?) -> Swift.Void)
+  #else
+  public func readDatagrams(completionHandler: @escaping ([(Foundation.Data, Network.NWEndpoint)]?, (any Swift.Error)?) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func readDatagrams() async -> ([(Foundation.Data, Network.NWEndpoint)]?, (any Swift.Error)?)
+  #else
+  public func readDatagrams() async -> ([(Foundation.Data, Network.NWEndpoint)]?, (any Swift.Error)?)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func writeDatagrams(_ array: [(Foundation.Data, Network.NWEndpoint)], completionHandler: @escaping ((any Swift.Error)?) -> Swift.Void)
+  #else
+  public func writeDatagrams(_ array: [(Foundation.Data, Network.NWEndpoint)], completionHandler: @escaping ((any Swift.Error)?) -> Swift.Void)
+  #endif
+  public func writeDatagrams(_ array: [(Foundation.Data, Network.NWEndpoint)]) async throws
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var localFlowEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #else
+  public var localFlowEndpoint: Network.NWEndpoint? {
+    get
+  }
+  #endif
+}
+@available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public protocol NEAppProxyUDPFlowHandling {
+  func handleNewUDPFlow(_ flow: NetworkExtension.NEAppProxyUDPFlow, initialRemoteFlowEndpoint remoteEndpoint: Network.NWEndpoint) -> Swift.Bool
+}
+@available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension NetworkExtension.NEAppProxyFlow {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func open(withLocalFlowEndpoint localEndpoint: Network.NWEndpoint?, completionHandler: @escaping ((any Swift.Error)?) -> Swift.Void)
+  #else
+  public func open(withLocalFlowEndpoint localEndpoint: Network.NWEndpoint?, completionHandler: @escaping ((any Swift.Error)?) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func open(withLocalFlowEndpoint localEndpoint: Network.NWEndpoint?) async throws
+  #else
+  public func open(withLocalFlowEndpoint localEndpoint: Network.NWEndpoint?) async throws
+  #endif
+  public func setMetadata(on parameters: Network.NWParameters)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var interface: Network.NWInterface? {
+    get
+    set
+  }
+  #else
+  public var interface: Network.NWInterface? {
+    get
+    set
+  }
+  #endif
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
+@available(watchOS, unavailable)
+extension NetworkExtension.NEPacketTunnelProvider {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var virtualInterface: Network.NWInterface? {
+    get
+  }
+  #else
+  public var virtualInterface: Network.NWInterface? {
+    get
+  }
+  #endif
+}

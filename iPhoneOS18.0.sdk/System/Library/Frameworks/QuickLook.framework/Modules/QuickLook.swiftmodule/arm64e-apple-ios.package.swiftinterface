@@ -1,0 +1,527 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.3.38 clang-1600.0.20.6)
+// swift-module-flags: -target arm64e-apple-ios18.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 962.3 -module-name QuickLook -package-name com.apple.quicklook-package
+import Combine
+import DeveloperToolsSupport
+@_spi(Private) import ExtensionFoundation
+@_spi(Private) import ExtensionKit
+import Foundation
+import OSLog
+@_exported import QuickLook
+@_spiOnly import QuickLookUICore_Private
+@_spiOnly import QuickLook_Private
+import Swift
+import SwiftUI
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os
+@_Concurrency.MainActor @preconcurrency package struct QLAccessoryViewWrapper : SwiftUI.UIViewControllerRepresentable {
+  package typealias UIViewControllerType = UIKitCore.UIViewController
+  @SwiftUI.Bindable @_projectedValueProperty($hostProxy) @_Concurrency.MainActor @preconcurrency package var hostProxy: QuickLook.QLAccessoryAppExtensionSceneProxy {
+    get
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
+    set
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency package var $hostProxy: SwiftUI.Bindable<QuickLook.QLAccessoryAppExtensionSceneProxy> {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency package init(hostProxy: QuickLook.QLAccessoryAppExtensionSceneProxy)
+  @_Concurrency.MainActor @preconcurrency package func makeUIViewController(context: QuickLook.QLAccessoryViewWrapper.Context) -> UIKitCore.UIViewController
+  @_Concurrency.MainActor @preconcurrency package func updateUIViewController(_ uiViewController: QuickLook.QLAccessoryViewWrapper.UIViewControllerType, context: QuickLook.QLAccessoryViewWrapper.Context)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  package typealias Body = Swift.Never
+  @available(iOS 13.0, tvOS 13.0, *)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
+  package typealias Coordinator = Swift.Void
+}
+@objc package protocol QLRemoteUISceneXPCProtocol : QuickLookUICore_Private.QLPreviewCollectionProtocol {
+  @objc func setAllowInteractiveTransitions(_ allowInteractiveTransitions: Swift.Bool) async
+  @objc func crash(reply: @escaping () -> Swift.Void)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @objc func getPreviewCollectionUUIDWithCompletionHandler(completionHandler: @escaping (Foundation.NSUUID?) -> Swift.Void)
+  #else
+  @objc func getPreviewCollectionUUIDWithCompletionHandler(completionHandler: @escaping (Foundation.NSUUID?) -> Swift.Void)
+  #endif
+  @objc func setNotificationCenter(_ notificationCenter: any QuickLook_Private.QLNotificationCenterProtocol)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @objc func getNetworkObserverWithCompletionBlock(_ completionBlock: @escaping ((any QuickLookUICore_Private.QLNetworkStateListener)?) -> Swift.Void)
+  #else
+  @objc func getNetworkObserverWithCompletionBlock(_ completionBlock: @escaping ((any QuickLookUICore_Private.QLNetworkStateListener)?) -> Swift.Void)
+  #endif
+  @objc func preparePreviewCollectionForInvalidationWithCompletionHandler(completionHandler: @escaping () -> Swift.Void)
+}
+@objc package protocol QLRemoteAccessorySceneXPCProtocol {
+  @objc func configureAsAccessoryViewContainerForPreviewCollection(previewCollectionUUID: Foundation.NSUUID)
+}
+package class QLAppExtensionSceneProxy : QuickLook.QLRemoteUISceneXPCProtocol {
+  package init()
+  @objc package func crash(reply: @escaping () -> Swift.Void)
+  @objc package func setAllowInteractiveTransitions(_ allowInteractiveTransitions: Swift.Bool) async
+  @objc package func setHostApplicationBundleIdentifier(_ hostApplicationBundleIdentifier: Swift.String)
+  @objc package func configure(withNumberOfItems numberOfItems: Swift.Int, currentPreviewItemIndex currentIndex: Swift.UInt, itemProvider: any QuickLookUICore_Private.QLPreviewItemProvider, stateManager: any QuickLookUICore_Private.QLPreviewControllerStateProtocol, fullScreen: Swift.Bool)
+  @objc package func configure(withNumberOfItems numberOfItems: Swift.Int, currentPreviewItemIndex currentIndex: Swift.UInt, itemProvider: any QuickLookUICore_Private.QLPreviewItemProvider, stateManager: any QuickLookUICore_Private.QLPreviewControllerStateProtocol)
+  @objc package func setCurrentPreviewItemIndex(_ index: Swift.Int, animated: Swift.Bool)
+  @objc package func hostApplicationDidEnterBackground(_ suspendedUnderLock: Swift.Bool)
+  @objc package func hostApplicationDidBecomeActive()
+  @objc package func toolbarButtons(for traitCollection: UIKitCore.UITraitCollection) async -> ([QuickLookUICore_Private.QLToolbarButton], [Swift.String])
+  @objc package func toolbarButtonPressed(withIdentifier identifier: Swift.String) async
+  @objc package func shouldDisplayLockActivity() async -> Swift.Bool
+  @objc package func requestLockForCurrentItem()
+  @objc package func keyCommands() async -> [QuickLookUICore_Private.QLKeyCommand]
+  @objc package func keyCommandWasPerformed(_ keyCommand: QuickLookUICore_Private.QLKeyCommand)
+  @objc package func setAppearance(_ appearance: QuickLookUICore_Private.QLAppearance, animated: Swift.Bool)
+  @objc package func notifyFirstTimeAppearance(with actions: QuickLookUICore_Private.QLPreviewControllerFirstTimeAppearanceActions)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @objc package func notifyStateRestorationUserInfo(_ userInfo: [Swift.AnyHashable : Any]? = nil)
+  #else
+  @objc package func notifyStateRestorationUserInfo(_ userInfo: [Swift.AnyHashable : Any]? = nil)
+  #endif
+  @objc package func previewItemDisplayState(_ previewItemDisplayState: Any, wasAppliedToItemAt index: Swift.UInt)
+  @objc package func startTransition(withSourceViewProvider provider: QuickLook_Private.QLTransitionContext, transitionController: any QuickLook_Private.QLTransitionControllerProtocol, presenting: Swift.Bool, useInteractiveTransition: Swift.Bool) async
+  @objc package func tearDownTransition(_ didComplete: Swift.Bool)
+  @objc package func setLoading(_ loadingString: Swift.String)
+  @objc package func overrideParentApplicationDisplayIdentifier(withIdentifier overrideParentApplicationDisplayIdentifier: Swift.String)
+  @objc package func preparePreviewCollectionForInvalidation() async
+  @objc package func invalidateService() async
+  @objc package func hostViewControlerTransition(to state: QuickLookUICore_Private.QLVisibilityState, animated: Swift.Bool)
+  @objc package func setPreviewItemDisplayState(_ previewDisplayState: Any, onItemAt index: Swift.UInt)
+  @objc package func prepareForActionSheetPresentation() async
+  @objc package func actionSheetDidDismiss()
+  @objc package func documentMenuActionWillBegin()
+  @objc package func hostViewControllerBackgroundColorChanged(_ hostViewControllerBackgroundColor: UIKitCore.UIColor)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @objc package func saveIntoPhotoLibraryMedia(with urlWrapper: FileProvider_Private.FPSandboxingURLWrapper, previewItemType: QuickLookUICore_Private.QLPreviewItemType, completionHandler: ((Swift.Bool, (any Swift.Error)?) -> Swift.Void)? = nil)
+  #else
+  @objc package func saveIntoPhotoLibraryMedia(with urlWrapper: FileProvider_Private.FPSandboxingURLWrapper, previewItemType: QuickLookUICore_Private.QLPreviewItemType, completionHandler: ((Swift.Bool, (any Swift.Error)?) -> Swift.Void)? = nil)
+  #endif
+  @objc package func setIsContentManaged(_ isContentManaged: Swift.Bool)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @objc package func saveCurrentPreviewEditsSynchronously(_ synchronously: Swift.Bool) async -> (Swift.UInt, QuickLookUICore_Private.QLPreviewItemEditedCopy?)
+  #else
+  @objc package func saveCurrentPreviewEditsSynchronously(_ synchronously: Swift.Bool) async -> (Swift.UInt, QuickLookUICore_Private.QLPreviewItemEditedCopy?)
+  #endif
+  @objc deinit
+}
+extension QuickLook.QLAppExtensionSceneProxy {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @objc dynamic package func getPreviewCollectionUUIDWithCompletionHandler(completionHandler: @escaping (Foundation.NSUUID?) -> Swift.Void)
+  #else
+  @objc dynamic package func getPreviewCollectionUUIDWithCompletionHandler(completionHandler: @escaping (Foundation.NSUUID?) -> Swift.Void)
+  #endif
+  @objc dynamic package func setNotificationCenter(_ notificationCenter: any QuickLook_Private.QLNotificationCenterProtocol)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @objc dynamic package func getNetworkObserverWithCompletionBlock(_ completionBlock: @escaping ((any QuickLookUICore_Private.QLNetworkStateListener)?) -> Swift.Void)
+  #else
+  @objc dynamic package func getNetworkObserverWithCompletionBlock(_ completionBlock: @escaping ((any QuickLookUICore_Private.QLNetworkStateListener)?) -> Swift.Void)
+  #endif
+  @objc dynamic package func preparePreviewCollectionForInvalidationWithCompletionHandler(completionHandler: @escaping () -> Swift.Void)
+}
+package class QLAccessoryAppExtensionSceneProxy : QuickLook.QLRemoteAccessorySceneXPCProtocol {
+  package init()
+  @objc package func configureAsAccessoryViewContainerForPreviewCollection(previewCollectionUUID: Foundation.NSUUID)
+  @objc deinit
+}
+extension QuickLook.QLAccessoryAppExtensionSceneProxy : Observation.Observable {
+}
+extension QuickLook.QLAppExtensionSceneProxy : Observation.Observable {
+}
+@available(iOS 15.0, *)
+extension QuickLookSupport.QLPreviewReply {
+  public var stringEncoding: Swift.String.Encoding {
+    get
+    set(newEncoding)
+  }
+  convenience public init(contextSize: CoreFoundation.CGSize, isBitmap: Swift.Bool, drawUsing closure: @escaping (CoreGraphics.CGContext, QuickLookSupport.QLPreviewReply) throws -> Swift.Void)
+  convenience public init(forPDFWithPageSize defaultPageSize: CoreFoundation.CGSize, createDocumentUsing closure: @escaping (QuickLookSupport.QLPreviewReply) throws -> PDFKit.PDFDocument)
+  convenience public init(dataOfContentType contentType: UniformTypeIdentifiers.UTType, contentSize: CoreFoundation.CGSize, createDataUsing closure: @escaping (QuickLookSupport.QLPreviewReply) throws -> Foundation.Data)
+}
+@_Concurrency.MainActor @preconcurrency package struct QLPrimaryAppExtensionScene<Content> : QuickLook.QLAppExtensionScene where Content : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency package init(content: @escaping (QuickLook.QLAppExtensionSceneProxy) -> Content)
+  @_Concurrency.MainActor @preconcurrency package var body: some ExtensionKit.AppExtensionScene {
+    get
+  }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  package typealias Body = @_opaqueReturnTypeOf("$s9QuickLook26QLPrimaryAppExtensionSceneV4bodyQrvp", 0) __<Content>
+}
+@_spi(Internal) @_inheritsConvenienceInitializers @objc public class QLWebLocationBarViewInterface : ObjectiveC.NSObject {
+  @_spi(Internal) @objc public static func makeLocationBarUI(_ url: Foundation.URL) -> UIKitCore.UIViewController
+  @_spi(Internal) @objc override dynamic public init()
+  @_spi(Internal) @objc deinit
+}
+@_spi(Internal) @_Concurrency.MainActor @preconcurrency public struct QLHostRemoteView : SwiftUICore.View {
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    @_spi(Internal) get
+  }
+  @_spi(Internal) @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s9QuickLook16QLHostRemoteViewV4bodyQrvp", 0) __
+}
+@_spi(Internal) @_hasMissingDesignatedInitializers @objc @_Concurrency.MainActor @preconcurrency public class QLGradientView : UIKitCore.UIView {
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency public var reversed: Swift.Bool {
+    @_spi(Internal) @objc get
+    @_spi(Internal) @objc set
+  }
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public init()
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_spi(Internal) @objc deinit
+}
+package typealias QLPreviewCollectionController = UIKitCore.UIViewController & QuickLook.QLPreviewCollectionRemoteProtocol & QuickLookUICore_Private.QLPreviewCollectionProtocol
+@_Concurrency.MainActor @preconcurrency package struct QLPreviewCollectionWrapper : SwiftUI.UIViewControllerRepresentable {
+  package typealias UIViewControllerType = QuickLook.QLPreviewCollectionController
+  @SwiftUI.Bindable @_projectedValueProperty($hostProxy) @_Concurrency.MainActor @preconcurrency package var hostProxy: QuickLook.QLAppExtensionSceneProxy {
+    get
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
+    set
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency package var $hostProxy: SwiftUI.Bindable<QuickLook.QLAppExtensionSceneProxy> {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency package init(hostProxy: QuickLook.QLAppExtensionSceneProxy)
+  @_Concurrency.MainActor @preconcurrency package func makeUIViewController(context: QuickLook.QLPreviewCollectionWrapper.Context) -> any UIKitCore.UIViewController & QuickLook.QLPreviewCollectionRemoteProtocol & QuickLookUICore_Private.QLPreviewCollectionProtocol
+  @_Concurrency.MainActor @preconcurrency package func updateUIViewController(_ uiViewController: any UIKitCore.UIViewController & QuickLook.QLPreviewCollectionRemoteProtocol & QuickLookUICore_Private.QLPreviewCollectionProtocol, context: QuickLook.QLPreviewCollectionWrapper.Context)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  package typealias Body = Swift.Never
+  @available(iOS 13.0, tvOS 13.0, *)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
+  package typealias Coordinator = Swift.Void
+}
+
+@objc package protocol RemoteGlobalXPCProtocol {
+}
+@_Concurrency.MainActor @preconcurrency package struct QLGlobalAppExtensionConfiguration<E> : ExtensionFoundation.AppExtensionConfiguration where E : QuickLook.QLAppExtension {
+  nonisolated public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
+}
+package class QLNonUIProxy {
+  @objc deinit
+}
+@available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public typealias EditingMode = QuickLook.QLPreviewItemEditingMode
+@_hasMissingDesignatedInitializers @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+final public class PreviewApplication {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  final public class func open(urls: [Foundation.URL], selectedURL: Foundation.URL? = nil) -> QuickLook.PreviewSession
+  #else
+  final public class func open(urls: [Foundation.URL], selectedURL: Foundation.URL? = nil) -> QuickLook.PreviewSession
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  final public class func open(items: [QuickLook.PreviewItem], selectedItem: QuickLook.PreviewItem? = nil) -> QuickLook.PreviewSession
+  #else
+  final public class func open(items: [QuickLook.PreviewItem], selectedItem: QuickLook.PreviewItem? = nil) -> QuickLook.PreviewSession
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(PreviewApplication) final public class func open(items: [QuickLook.PreviewItem], selectedItem: QuickLook.PreviewItem? = nil, configuration: QuickLook.PreviewApplication.PreviewConfiguration?) -> QuickLook.PreviewSession
+  #else
+  @_spi(PreviewApplication) final public class func open(items: [QuickLook.PreviewItem], selectedItem: QuickLook.PreviewItem? = nil, configuration: QuickLook.PreviewApplication.PreviewConfiguration?) -> QuickLook.PreviewSession
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(PreviewApplication) final public class func open(items: [any QuickLookUICore.QLPreviewItem], selectedItemIndex: Swift.Int? = nil) -> QuickLook.PreviewSession
+  #else
+  @_spi(PreviewApplication) final public class func open(items: [any QuickLookUICore.QLPreviewItem], selectedItemIndex: Swift.Int? = nil) -> QuickLook.PreviewSession
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(PreviewApplication) final public class func open(items: [any QuickLookUICore.QLPreviewItem], selectedItemIndex: Swift.Int? = nil, configuration: QuickLook.PreviewApplication.PreviewConfiguration?) -> QuickLook.PreviewSession
+  #else
+  @_spi(PreviewApplication) final public class func open(items: [any QuickLookUICore.QLPreviewItem], selectedItemIndex: Swift.Int? = nil, configuration: QuickLook.PreviewApplication.PreviewConfiguration?) -> QuickLook.PreviewSession
+  #endif
+  @_spi(PreviewApplication) public struct PreviewConfiguration : Swift.Sendable {
+    @_spi(PreviewApplication) public static let hideDocumentMenuKey: Swift.String
+    @_spi(PreviewApplication) public static let showCloseButtonKey: Swift.String
+    @_spi(PreviewApplication) public static let matchScenePlacementIDKey: Swift.String
+    @_spi(PreviewApplication) public var hideDocumentMenu: Swift.Bool
+    @_spi(PreviewApplication) public var showCloseButton: Swift.Bool
+    @_spi(PreviewApplication) public var matchScenePlacementID: Swift.String?
+    @_spi(PreviewApplication) public init()
+  }
+  @objc deinit
+}
+@available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct PreviewItem : Swift.Equatable, Swift.Identifiable, Swift.Sendable, Swift.Hashable {
+  public let displayName: Swift.String?
+  public let editingMode: QuickLook.EditingMode
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public init(url: Foundation.URL, displayName: Swift.String? = nil, editingMode: QuickLook.EditingMode = .updateContents)
+  #else
+  public init(url: Foundation.URL, displayName: Swift.String? = nil, editingMode: QuickLook.EditingMode = .updateContents)
+  #endif
+  public let id: Foundation.UUID
+  public static func == (lhs: QuickLook.PreviewItem, rhs: QuickLook.PreviewItem) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  @available(visionOS 2.0, *)
+  @available(iOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable, introduced: 13.0)
+  @available(watchOS, unavailable, introduced: 6.0)
+  @available(macOS, unavailable, introduced: 10.15)
+  public typealias ID = Foundation.UUID
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct PreviewSession : Swift.Sendable {
+  public enum Event : Swift.Sendable {
+    case didOpen
+    case didFail(any Swift.Error)
+    case didClose
+  }
+  public var events: some _Concurrency.AsyncSequence<QuickLook.PreviewSession.Event, Swift.Never> {
+    get
+  }
+  public func close() async throws
+  @_spi(PreviewApplication) @objc public enum Action : Swift.Int, Swift.Sendable, Swift.Codable {
+    @_spi(PreviewApplication) case beginPlayback
+    @_spi(PreviewApplication) case endPlayback
+    @_spi(PreviewApplication) case beginEditing
+    @_spi(PreviewApplication) case endEditing
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(PreviewApplication) public init?(rawValue: Swift.Int)
+    #else
+    @_spi(PreviewApplication) public init?(rawValue: Swift.Int)
+    #endif
+    @_spi(PreviewApplication) @available(visionOS 2.0, *)
+    @available(iOS, unavailable)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
+    public typealias RawValue = Swift.Int
+    @_spi(PreviewApplication) public var rawValue: Swift.Int {
+      @_spi(PreviewApplication) get
+    }
+  }
+  @_spi(PreviewApplication) public func perform(action: QuickLook.PreviewSession.Action) async throws
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(PreviewApplication) public func update(items: [QuickLook.PreviewItem], selectedItem: QuickLook.PreviewItem? = nil) async throws
+  #else
+  @_spi(PreviewApplication) public func update(items: [QuickLook.PreviewItem], selectedItem: QuickLook.PreviewItem? = nil) async throws
+  #endif
+  @_spi(PreviewApplication) public func bringToFront() async throws
+}
+@_spi(Internal) @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class QLTextDocument : UIKitCore.UIDocument {
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency public var hasRichContent: Swift.Bool {
+    @_spi(Internal) @objc get
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency public var textContent: Swift.String? {
+    @_spi(Internal) @objc get
+  }
+  #else
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency public var textContent: Swift.String? {
+    @_spi(Internal) @objc get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency public var attributedTextContent: Foundation.NSAttributedString? {
+    @_spi(Internal) @objc get
+  }
+  #else
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency public var attributedTextContent: Foundation.NSAttributedString? {
+    @_spi(Internal) @objc get
+  }
+  #endif
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency public func save(textContent: Foundation.NSAttributedString)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc override dynamic public func contents(forType typeName: Swift.String) throws -> Any
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc override dynamic public func load(fromContents contents: Any, ofType typeName: Swift.String?) throws
+  #else
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc override dynamic public func load(fromContents contents: Any, ofType typeName: Swift.String?) throws
+  #endif
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(fileURL url: Foundation.URL)
+  @_spi(Internal) @objc deinit
+}
+@_spi(Internal) @objc public protocol QLPreviewCollectionRemoteProtocol {
+  @_spi(Internal) @objc var isAvailable: Swift.Bool { get }
+  @_spi(Internal) @objc var uuid: Foundation.UUID { get }
+  @_spi(Internal) @objc func setAllowInteractiveTransitions(_ allowInteractiveTransitions: Swift.Bool)
+  @_spi(Internal) @objc func accessoryView() -> UIKitCore.UIView
+  @_spi(Internal) @objc func isRemote() -> Swift.Bool
+}
+@_Concurrency.MainActor @preconcurrency package struct QLAccessoryAppExtensionScene<Content> : QuickLook.QLAppExtensionScene where Content : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency package init(content: @escaping (QuickLook.QLAccessoryAppExtensionSceneProxy) -> Content)
+  @_Concurrency.MainActor @preconcurrency package var body: some ExtensionKit.AppExtensionScene {
+    get
+  }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  package typealias Body = @_opaqueReturnTypeOf("$s9QuickLook28QLAccessoryAppExtensionSceneV4bodyQrvp", 0) __<Content>
+}
+@_spi(Internal) @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc @_Concurrency.MainActor @preconcurrency public class QLRemoteUIHostViewController : UIKitCore.UIViewController {
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc public var isAvailable: Swift.Bool {
+    @_spi(Internal) @objc get
+  }
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc public var uuid: Foundation.UUID {
+    @_spi(Internal) @objc get
+    @_spi(Internal) @objc set
+  }
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_spi(Internal) @objc deinit
+}
+@_spi(Internal) extension QuickLook.QLRemoteUIHostViewController {
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency dynamic public class func remotePreviewCollection() async -> QuickLook.QLRemoteUIHostViewController
+  @_spi(Internal) @objc @_Concurrency.MainActor @preconcurrency dynamic public func toggleDebugView()
+}
+@_spi(Internal) extension QuickLook.QLRemoteUIHostViewController : QuickLook.QLPreviewCollectionRemoteProtocol {
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func isRemote() -> Swift.Bool
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func setAllowInteractiveTransitions(_ allowInteractiveTransitions: Swift.Bool)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func accessoryView() -> UIKitCore.UIView
+}
+@_spi(Internal) extension QuickLook.QLRemoteUIHostViewController : QuickLookUICore_Private.QLPreviewCollectionProtocol {
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func setHostApplicationBundleIdentifier(_ hostApplicationBundleIdentifier: Swift.String)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func configure(withNumberOfItems numberOfItems: Swift.Int, currentPreviewItemIndex currentIndex: Swift.UInt, itemProvider: any QuickLookUICore_Private.QLPreviewItemProvider, stateManager: any QuickLookUICore_Private.QLPreviewControllerStateProtocol, fullScreen: Swift.Bool)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func configure(withNumberOfItems numberOfItems: Swift.Int, currentPreviewItemIndex currentIndex: Swift.UInt, itemProvider: any QuickLookUICore_Private.QLPreviewItemProvider, stateManager: any QuickLookUICore_Private.QLPreviewControllerStateProtocol)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func setCurrentPreviewItemIndex(_ index: Swift.Int, animated: Swift.Bool)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func hostApplicationDidEnterBackground(_ suspendedUnderLock: Swift.Bool)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func hostApplicationDidBecomeActive()
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func toolbarButtons(for traitCollection: UIKitCore.UITraitCollection) async -> ([QuickLookUICore_Private.QLToolbarButton], [Swift.String])
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func toolbarButtonPressed(withIdentifier identifier: Swift.String) async
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func shouldDisplayLockActivity() async -> Swift.Bool
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func requestLockForCurrentItem()
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func keyCommands() async -> [QuickLookUICore_Private.QLKeyCommand]
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func keyCommandWasPerformed(_ keyCommand: QuickLookUICore_Private.QLKeyCommand)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func setAppearance(_ appearance: QuickLookUICore_Private.QLAppearance, animated: Swift.Bool)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func notifyFirstTimeAppearance(with actions: QuickLookUICore_Private.QLPreviewControllerFirstTimeAppearanceActions)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func notifyStateRestorationUserInfo(_ userInfo: [Swift.AnyHashable : Any]? = nil)
+  #else
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func notifyStateRestorationUserInfo(_ userInfo: [Swift.AnyHashable : Any]? = nil)
+  #endif
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func previewItemDisplayState(_ previewItemDisplayState: Any, wasAppliedToItemAt index: Swift.UInt)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func startTransition(withSourceViewProvider provider: QuickLook_Private.QLTransitionContext, transitionController: any QuickLook_Private.QLTransitionControllerProtocol, presenting: Swift.Bool, useInteractiveTransition: Swift.Bool) async
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func tearDownTransition(_ didComplete: Swift.Bool)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func setLoading(_ loadingString: Swift.String)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func overrideParentApplicationDisplayIdentifier(withIdentifier overrideParentApplicationDisplayIdentifier: Swift.String)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func preparePreviewCollectionForInvalidation() async
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func invalidateService() async
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func hostViewControlerTransition(to state: QuickLookUICore_Private.QLVisibilityState, animated: Swift.Bool)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func setPreviewItemDisplayState(_ previewDisplayState: Any, onItemAt index: Swift.UInt)
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func prepareForActionSheetPresentation() async
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func actionSheetDidDismiss()
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func documentMenuActionWillBegin()
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func hostViewControllerBackgroundColorChanged(_ hostViewControllerBackgroundColor: UIKitCore.UIColor)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func saveIntoPhotoLibraryMedia(with urlWrapper: FileProvider_Private.FPSandboxingURLWrapper, previewItemType: QuickLookUICore_Private.QLPreviewItemType, completionHandler: ((Swift.Bool, (any Swift.Error)?) -> Swift.Void)? = nil)
+  #else
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func saveIntoPhotoLibraryMedia(with urlWrapper: FileProvider_Private.FPSandboxingURLWrapper, previewItemType: QuickLookUICore_Private.QLPreviewItemType, completionHandler: ((Swift.Bool, (any Swift.Error)?) -> Swift.Void)? = nil)
+  #endif
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func setIsContentManaged(_ isContentManaged: Swift.Bool)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func saveCurrentPreviewEditsSynchronously(_ synchronously: Swift.Bool) async -> (Swift.UInt, QuickLookUICore_Private.QLPreviewItemEditedCopy?)
+  #else
+  @_spi(Internal) @_Concurrency.MainActor @preconcurrency @objc dynamic public func saveCurrentPreviewEditsSynchronously(_ synchronously: Swift.Bool) async -> (Swift.UInt, QuickLookUICore_Private.QLPreviewItemEditedCopy?)
+  #endif
+}
+package protocol QLAppExtensionScene : ExtensionKit.AppExtensionScene {
+}
+package protocol QLAppExtension : ExtensionFoundation.AppExtension {
+  associatedtype Body : QuickLook.QLAppExtensionScene
+  @QuickLook.QLAppExtensionSceneBuilder var body: Self.Body { get }
+}
+@_functionBuilder package struct QLAppExtensionSceneBuilder {
+  package static func buildBlock<C0>(_ c0: C0) -> some QuickLook.QLAppExtensionScene where C0 : QuickLook.QLAppExtensionScene
+  
+  package static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some QuickLook.QLAppExtensionScene where C0 : QuickLook.QLAppExtensionScene, C1 : QuickLook.QLAppExtensionScene
+  
+}
+extension QuickLook.QLAppExtension {
+  package var configuration: ExtensionKit.AppExtensionSceneConfiguration {
+    get
+  }
+}
+@_spi(PreviewApplication) @_hasMissingDesignatedInitializers @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@_Concurrency.MainActor @preconcurrency public class QuickLookPreviewConfiguration<E> : ExtensionFoundation.AppExtensionConfiguration where E : QuickLook.QuickLookPreviewAppExtension {
+  @_spi(PreviewApplication) nonisolated public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
+  @_spi(PreviewApplication) @objc deinit
+}
+@_spi(PreviewApplication) @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public protocol QuickLookPreviewAppExtension : ExtensionFoundation.AppExtension {
+  @_spi(PreviewApplication) var protocolHandler: any QuickLook.QLRemotePreviewApplicationXPCProtocol { get }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(PreviewApplication) var hostProxy: (any QuickLook.QLHostPreviewApplicationXPCProtocol)? { get set }
+  #else
+  @_spi(PreviewApplication) var hostProxy: (any QuickLook.QLHostPreviewApplicationXPCProtocol)? { get set }
+  #endif
+}
+@_spi(PreviewApplication) @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension QuickLook.QuickLookPreviewAppExtension {
+  @_spi(PreviewApplication) public var configuration: QuickLook.QuickLookPreviewConfiguration<some QuickLook.QuickLookPreviewAppExtension> {
+    @_spi(PreviewApplication) get
+  }
+}
+@_spi(PreviewApplication) @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@objc public protocol QLRemotePreviewApplicationXPCProtocol {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(PreviewApplication) @objc func open(sessionUUID: Foundation.UUID, items: [QuickLookUICore_Private.QLItem], selectedIndex: Swift.Int, bundleID: Swift.String?, configuration: [Swift.String : Any]) async throws
+  #else
+  @_spi(PreviewApplication) @objc func open(sessionUUID: Foundation.UUID, items: [QuickLookUICore_Private.QLItem], selectedIndex: Swift.Int, bundleID: Swift.String?, configuration: [Swift.String : Any]) async throws
+  #endif
+  @_spi(PreviewApplication) @objc func close(sessionUUID: Foundation.UUID) async throws
+  @_spi(PreviewApplication) @objc func performAction(sessionUUID: Foundation.UUID, action: QuickLook.PreviewSession.Action, itemIndex: Swift.Int) async throws
+  @_spi(PreviewApplication) @objc func updateContents(sessionUUID: Foundation.UUID, items: [QuickLookUICore_Private.QLItem], selectedIndex: Swift.Int) async throws
+  @_spi(PreviewApplication) @objc func bringToFront(sessionUUID: Foundation.UUID) async throws
+}
+@_spi(PreviewApplication) @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@objc public protocol QLHostPreviewApplicationXPCProtocol {
+  @_spi(PreviewApplication) @objc func launchSucceeded(sessionUUID: Foundation.UUID)
+  @_spi(PreviewApplication) @objc func launchFailed(sessionUUID: Foundation.UUID, error: any Swift.Error)
+  @_spi(PreviewApplication) @objc func previewClosed(sessionUUID: Foundation.UUID)
+  @_spi(PreviewApplication) @objc func previewSceneMoved(sessionUUID: Foundation.UUID, sceneIdentifier: Swift.String)
+  @_spi(PreviewApplication) @objc func previewTerminated(sessionUUID: Foundation.UUID)
+}
+@_spi(PreviewApplication) @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension QuickLook.PreviewSession.Action : Swift.Equatable {}
+@_spi(PreviewApplication) @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension QuickLook.PreviewSession.Action : Swift.Hashable {}
+@_spi(PreviewApplication) @available(visionOS 2.0, *)
+@available(macOS, unavailable)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension QuickLook.PreviewSession.Action : Swift.RawRepresentable {}

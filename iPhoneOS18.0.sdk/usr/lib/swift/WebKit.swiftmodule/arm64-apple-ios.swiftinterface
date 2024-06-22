@@ -1,0 +1,69 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.3.38 clang-1600.0.20.6)
+// swift-module-flags: -target arm64-apple-ios18.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftWebKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 7619.1.15.10.1 -module-name WebKit
+import Network
+import Swift
+@_exported import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@available(iOS 14.0, macOS 11.0, *)
+extension WebKit.WKPDFConfiguration {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var rect: CoreFoundation.CGRect? {
+    get
+    set
+  }
+  #else
+  public var rect: CoreFoundation.CGRect? {
+    get
+    set
+  }
+  #endif
+}
+@available(iOS 14.0, macOS 11.0, *)
+extension WebKit.WKWebView {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_Concurrency.MainActor @preconcurrency public func callAsyncJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WKFrameInfo? = nil, in contentWorld: WebKit.WKContentWorld, completionHandler: ((Swift.Result<Any, any Swift.Error>) -> Swift.Void)? = nil)
+  #else
+  @_Concurrency.MainActor @preconcurrency public func callAsyncJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WKFrameInfo? = nil, in contentWorld: WebKit.WKContentWorld, completionHandler: ((Swift.Result<Any, any Swift.Error>) -> Swift.Void)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_Concurrency.MainActor @preconcurrency public func createPDF(configuration: WebKit.WKPDFConfiguration = .init(), completionHandler: @escaping (Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void)
+  #else
+  @_Concurrency.MainActor @preconcurrency public func createPDF(configuration: WebKit.WKPDFConfiguration = .init(), completionHandler: @escaping (Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_Concurrency.MainActor @preconcurrency public func createWebArchiveData(completionHandler: @escaping (Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void)
+  #else
+  @_Concurrency.MainActor @preconcurrency public func createWebArchiveData(completionHandler: @escaping (Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_Concurrency.MainActor @preconcurrency public func evaluateJavaScript(_ javaScript: Swift.String, in frame: WebKit.WKFrameInfo? = nil, in contentWorld: WebKit.WKContentWorld, completionHandler: ((Swift.Result<Any, any Swift.Error>) -> Swift.Void)? = nil)
+  #else
+  @_Concurrency.MainActor @preconcurrency public func evaluateJavaScript(_ javaScript: Swift.String, in frame: WebKit.WKFrameInfo? = nil, in contentWorld: WebKit.WKContentWorld, completionHandler: ((Swift.Result<Any, any Swift.Error>) -> Swift.Void)? = nil)
+  #endif
+  @_Concurrency.MainActor @preconcurrency public func find(_ string: Swift.String, configuration: WebKit.WKFindConfiguration = .init(), completionHandler: @escaping (WebKit.WKFindResult) -> Swift.Void)
+}
+@available(iOS 15.0, macOS 12.0, *)
+extension WebKit.WKWebView {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_Concurrency.MainActor @preconcurrency public func callAsyncJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WKFrameInfo? = nil, contentWorld: WebKit.WKContentWorld) async throws -> Any?
+  #else
+  @_Concurrency.MainActor @preconcurrency public func callAsyncJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WKFrameInfo? = nil, contentWorld: WebKit.WKContentWorld) async throws -> Any?
+  #endif
+  @_Concurrency.MainActor @preconcurrency public func pdf(configuration: WebKit.WKPDFConfiguration = .init()) async throws -> Foundation.Data
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_Concurrency.MainActor @preconcurrency public func evaluateJavaScript(_ javaScript: Swift.String, in frame: WebKit.WKFrameInfo? = nil, contentWorld: WebKit.WKContentWorld) async throws -> Any?
+  #else
+  @_Concurrency.MainActor @preconcurrency public func evaluateJavaScript(_ javaScript: Swift.String, in frame: WebKit.WKFrameInfo? = nil, contentWorld: WebKit.WKContentWorld) async throws -> Any?
+  #endif
+  @_Concurrency.MainActor @preconcurrency public func find(_ string: Swift.String, configuration: WebKit.WKFindConfiguration = .init()) async throws -> WebKit.WKFindResult
+}
+@available(iOS 17.0, macOS 14.0, *)
+extension WebKit.WKWebsiteDataStore {
+  public var proxyConfigurations: [Network.ProxyConfiguration] {
+    get
+    set
+  }
+}

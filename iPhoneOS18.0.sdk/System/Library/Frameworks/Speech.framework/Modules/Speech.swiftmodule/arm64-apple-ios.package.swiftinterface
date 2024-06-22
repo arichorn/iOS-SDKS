@@ -1,0 +1,1636 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.3.38 clang-1600.0.20.6)
+// swift-module-flags: -target arm64-apple-ios18.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 3400.113.3 -module-name Speech -package-name com.apple.Speech
+import AVFAudio
+import AVFoundation
+import CoreMedia
+import Darwin
+import Distributed
+import Foundation
+import OSLog
+@_exported import Speech
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+import os.signpost
+@_spi(Speech) public struct Assets : Swift.Sendable {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint`")
+  @_disfavoredOverload public init(locale: Foundation.Locale, clientID: Swift.String, modelOverridePath: Foundation.URL? = nil)
+  #else
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint`")
+  @_disfavoredOverload public init(locale: Foundation.Locale, clientID: Swift.String, modelOverridePath: Foundation.URL? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(locale: Foundation.Locale, taskHint: Speech.TaskHint, clientID: Swift.String, modelOverridePath: Foundation.URL? = nil)
+  #else
+  @_spi(Speech) public init(locale: Foundation.Locale, taskHint: Speech.TaskHint, clientID: Swift.String, modelOverridePath: Foundation.URL? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint`")
+  @_disfavoredOverload public init(locale: Foundation.Locale, clientID: Swift.String, modelOverridePath: Foundation.URL? = nil, isSpelling: Swift.Bool)
+  #else
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint`")
+  @_disfavoredOverload public init(locale: Foundation.Locale, clientID: Swift.String, modelOverridePath: Foundation.URL? = nil, isSpelling: Swift.Bool)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(locale: Foundation.Locale, taskHint: Speech.TaskHint, clientID: Swift.String, modelOverridePath: Foundation.URL? = nil, isSpelling: Swift.Bool)
+  #else
+  @_spi(Speech) public init(locale: Foundation.Locale, taskHint: Speech.TaskHint, clientID: Swift.String, modelOverridePath: Foundation.URL? = nil, isSpelling: Swift.Bool)
+  #endif
+  @_spi(Speech) public let locale: Foundation.Locale
+  @_spi(Speech) public let clientID: Swift.String
+  @_spi(Speech) public let modelOverridePath: Foundation.URL?
+  @_spi(Speech) public let isSpelling: Swift.Bool
+  @_spi(Speech) public var modelRoot: Foundation.URL {
+    @_spi(Speech) get async throws
+  }
+  @_spi(Speech) public var modelVersion: Swift.String {
+    @_spi(Speech) get async throws
+  }
+  @_spi(Speech) public var modelTaskNames: [Swift.String] {
+    @_spi(Speech) get async throws
+  }
+  @_spi(Speech) public var modelSamplingRates: Swift.Set<Swift.Int> {
+    @_spi(Speech) get async throws
+  }
+  @_spi(Speech) public var modelQualityType: Swift.String {
+    @_spi(Speech) get async throws
+  }
+  @_spi(Speech) public func contextualNamedEntitySources(forApplication: Swift.String, taskName: Swift.String) async throws -> [Speech.ContextualNamedEntitySource]
+  @_spi(Speech) public func contextualRankedContactSources(forApplication: Swift.String, taskName: Swift.String) async throws -> [Speech.ContextualRankedContactSource]
+  @_spi(Speech) public func geoLMRegionID(forLatitude latitude: Swift.Double, longitude: Swift.Double) async throws -> Swift.String
+}
+@_spi(Speech) public struct ContextualNamedEntitySource : Swift.Sendable {
+  @_spi(Speech) public let sourceApplications: Swift.Set<Swift.String>
+  @_spi(Speech) public let fromDate: Foundation.Date
+  @_spi(Speech) public let toDate: Foundation.Date
+  @_spi(Speech) public let limit: Swift.Int
+  @_spi(Speech) public init(sourceApplications: Swift.Set<Swift.String>, fromDate: Foundation.Date, toDate: Foundation.Date, limit: Swift.Int)
+}
+@_spi(Speech) public struct ContextualRankedContactSource : Swift.Sendable {
+  @_spi(Speech) public let sourceApplication: Swift.String
+  @_spi(Speech) public let rankDate: Foundation.Date
+  @_spi(Speech) public let contactOnly: Swift.Bool
+  @_spi(Speech) public let limit: Swift.Int
+  @_spi(Speech) public init(sourceApplication: Swift.String, rankDate: Foundation.Date, contactOnly: Swift.Bool, limit: Swift.Int)
+}
+@_spi(Speech) @_hasMissingDesignatedInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public class SelfLoggingHelper {
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @_hasMissingDesignatedInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public class SelfLoggingPreheatWithPowerContainer : @unchecked Swift.Sendable {
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+final public class SpeechAnalyzer : Swift.Sendable {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(client: Speech.ClientInfo, modules: [any Speech.ModuleProtocol] = [], options: Speech.AnalysisOptions? = nil, restrictedLogging: Swift.Bool = true, didChangeVolatileRange: (@Sendable (_ range: CoreMedia.CMTimeRange, _ changedStart: Swift.Bool, _ changedEnd: Swift.Bool) -> Swift.Void)? = nil)
+  #else
+  @_spi(Speech) public init(client: Speech.ClientInfo, modules: [any Speech.ModuleProtocol] = [], options: Speech.AnalysisOptions? = nil, restrictedLogging: Swift.Bool = true, didChangeVolatileRange: (@Sendable (_ range: CoreMedia.CMTimeRange, _ changedStart: Swift.Bool, _ changedEnd: Swift.Bool) -> Swift.Void)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init<InputSequence>(client: Speech.ClientInfo, inputSequence: InputSequence, audioFormat: AVFAudio.AVAudioFormat, modules: [any Speech.ModuleProtocol] = [], options: Speech.AnalysisOptions? = nil, restrictedLogging: Swift.Bool = true, analysisContext: Speech.AnalysisContext = .init(), didChangeVolatileRange: (@Sendable (_ range: CoreMedia.CMTimeRange, _ changedStart: Swift.Bool, _ changedEnd: Swift.Bool) -> Swift.Void)? = nil) where InputSequence : Swift.Sendable, InputSequence : _Concurrency.AsyncSequence, InputSequence.Element == Speech.AnalyzerInput
+  #else
+  @_spi(Speech) public init<InputSequence>(client: Speech.ClientInfo, inputSequence: InputSequence, audioFormat: AVFAudio.AVAudioFormat, modules: [any Speech.ModuleProtocol] = [], options: Speech.AnalysisOptions? = nil, restrictedLogging: Swift.Bool = true, analysisContext: Speech.AnalysisContext = .init(), didChangeVolatileRange: (@Sendable (_ range: CoreMedia.CMTimeRange, _ changedStart: Swift.Bool, _ changedEnd: Swift.Bool) -> Swift.Void)? = nil) where InputSequence : Swift.Sendable, InputSequence : _Concurrency.AsyncSequence, InputSequence.Element == Speech.AnalyzerInput
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public static func bestAudioFormat(compatibleWith modules: [any Speech.ModuleProtocol], considering naturalFormat: AVFAudio.AVAudioFormat? = nil) async throws -> AVFAudio.AVAudioFormat
+  #else
+  @_spi(Speech) public static func bestAudioFormat(compatibleWith modules: [any Speech.ModuleProtocol], considering naturalFormat: AVFAudio.AVAudioFormat? = nil) async throws -> AVFAudio.AVAudioFormat
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public static func bestAvailableAudioFormat(compatibleWith modules: [any Speech.ModuleProtocol], clientInfo: Speech.ClientInfo, considering naturalFormat: AVFAudio.AVAudioFormat? = nil) async -> AVFAudio.AVAudioFormat?
+  #else
+  @_spi(Speech) public static func bestAvailableAudioFormat(compatibleWith modules: [any Speech.ModuleProtocol], clientInfo: Speech.ClientInfo, considering naturalFormat: AVFAudio.AVAudioFormat? = nil) async -> AVFAudio.AVAudioFormat?
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public static func modelDownloadRequest(supporting: [any Speech.ModuleProtocol], clientIdentifier: Swift.String) -> Speech.ModelDownloadRequest?
+  #else
+  @_spi(Speech) public static func modelDownloadRequest(supporting: [any Speech.ModuleProtocol], clientIdentifier: Swift.String) -> Speech.ModelDownloadRequest?
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public var inputSequence: Speech.SpeechAnalyzer.InputSequence? {
+    @_spi(Speech) get async
+  }
+  #else
+  @_spi(Speech) final public var inputSequence: Speech.SpeechAnalyzer.InputSequence? {
+    @_spi(Speech) get async
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public var inputAudioFormat: AVFAudio.AVAudioFormat? {
+    @_spi(Speech) get async
+  }
+  #else
+  @_spi(Speech) final public var inputAudioFormat: AVFAudio.AVAudioFormat? {
+    @_spi(Speech) get async
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public func setInputSequence<InputSequence>(_ inputSequence: InputSequence, withAudioFormat newFormat: AVFAudio.AVAudioFormat? = nil) async throws where InputSequence : Swift.Sendable, InputSequence : _Concurrency.AsyncSequence, InputSequence.Element == Speech.AnalyzerInput
+  #else
+  @_spi(Speech) final public func setInputSequence<InputSequence>(_ inputSequence: InputSequence, withAudioFormat newFormat: AVFAudio.AVAudioFormat? = nil) async throws where InputSequence : Swift.Sendable, InputSequence : _Concurrency.AsyncSequence, InputSequence.Element == Speech.AnalyzerInput
+  #endif
+  @_spi(Speech) final public func clearInputSequence() async
+  @_spi(Speech) public typealias InputSequence = any Swift.Sendable & _Concurrency.AsyncSequence
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public var volatileRange: CoreMedia.CMTimeRange? {
+    @_spi(Speech) get async
+  }
+  #else
+  @_spi(Speech) final public var volatileRange: CoreMedia.CMTimeRange? {
+    @_spi(Speech) get async
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public func setDidChangeVolatileRange(_ handler: (@Sendable (_ range: CoreMedia.CMTimeRange, _ changedStart: Swift.Bool, _ changedEnd: Swift.Bool) -> Swift.Void)?) async
+  #else
+  @_spi(Speech) final public func setDidChangeVolatileRange(_ handler: (@Sendable (_ range: CoreMedia.CMTimeRange, _ changedStart: Swift.Bool, _ changedEnd: Swift.Bool) -> Swift.Void)?) async
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public func finalize(through: CoreMedia.CMTime? = nil) async throws
+  #else
+  @_spi(Speech) final public func finalize(through: CoreMedia.CMTime? = nil) async throws
+  #endif
+  @_spi(Speech) final public func finalizeAndFinishThroughEndOfInput() async throws
+  @_spi(Speech) final public func finish(after: CoreMedia.CMTime) async throws
+  @_spi(Speech) final public func cancelAnalysis(before: CoreMedia.CMTime)
+  @_spi(Speech) final public func cancelAndFinishNow() async
+  @_spi(Speech) final public var modules: [any Speech.ModuleProtocol] {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) final public func setModules(_ newModules: [any Speech.ModuleProtocol]) async throws
+  @_spi(Speech) final public var context: Speech.AnalysisContext {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) final public var contextualStrings: [Speech.AnalysisContext.ContextualStringsTag : [Swift.String]] {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) final public var userData: [Speech.AnalysisContext.UserDataTag : any Swift.Sendable] {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) final public func setContext(_ context: Speech.AnalysisContext) async throws
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public func prepareToAnalyze(reportingInto progress: Foundation.Progress? = nil) async throws
+  #else
+  @_spi(Speech) final public func prepareToAnalyze(reportingInto progress: Foundation.Progress? = nil) async throws
+  #endif
+  @_spi(Speech) final public var clientInfo: Speech.ClientInfo {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) final public func setClientInfo(_ newValue: Speech.ClientInfo) async
+  @_spi(Speech) final public let analysisOptions: Speech.AnalysisOptions?
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public func endModelRetention()
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public func endModelRetention() async
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public struct AnalyzerInput : @unchecked Swift.Sendable {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(buffer: AVFAudio.AVAudioPCMBuffer, bufferStartTime: CoreMedia.CMTime? = nil)
+  #else
+  @_spi(Speech) public init(buffer: AVFAudio.AVAudioPCMBuffer, bufferStartTime: CoreMedia.CMTime? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(buffer: AVFAudio.AVAudioPCMBuffer, bufferStartTime: CoreMedia.CMTime? = nil, recordedTime: Swift.UInt64? = nil, readyUpstreamTime: Swift.UInt64? = nil)
+  #else
+  @_spi(Speech) public init(buffer: AVFAudio.AVAudioPCMBuffer, bufferStartTime: CoreMedia.CMTime? = nil, recordedTime: Swift.UInt64? = nil, readyUpstreamTime: Swift.UInt64? = nil)
+  #endif
+  @_spi(Speech) public let buffer: AVFAudio.AVAudioPCMBuffer
+  @_spi(Speech) public let bufferStartTime: CoreMedia.CMTime?
+  @_spi(Speech) public let recordedTime: Swift.UInt64?
+  @_spi(Speech) public let readyUpstreamTime: Swift.UInt64?
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public protocol ModuleProtocol : AnyObject, Swift.Sendable {
+  @_spi(Speech) var results: Self.ResultSequence { get }
+  associatedtype ResultSequence : _Concurrency.AsyncSequence where Self.ResultSequence.Failure == any Swift.Error
+  associatedtype ModuleOutput : Speech.TimeRanging, Swift.Sendable where Self.ModuleOutput == Self.ResultSequence.Element
+  @_spi(Speech) var compatibleAudioFormats: [AVFAudio.AVAudioFormat] { get async }
+  @_spi(Speech) func availableCompatibleAudioFormats(clientID: Swift.String) async -> [AVFAudio.AVAudioFormat]
+  @_spi(Speech) var availableCompatibleAudioFormats: [AVFAudio.AVAudioFormat] { get async }
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public protocol TimeRanging {
+  @_spi(Speech) var range: CoreMedia.CMTimeRange { get }
+  @_spi(Speech) var resultsFinalToTime: CoreMedia.CMTime { get }
+}
+@_spi(Speech) extension Speech.SpeechAnalyzer {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, renamed: "bestAvailableAudioFormat(compatibleWith:clientInfo:considering:)")
+  public static func bestAvailableAudioFormat(compatibleWith modules: [any Speech.ModuleProtocol], considering naturalFormat: AVFAudio.AVAudioFormat? = nil) async -> AVFAudio.AVAudioFormat?
+  #else
+  @_spi(Speech) @available(*, deprecated, renamed: "bestAvailableAudioFormat(compatibleWith:clientInfo:considering:)")
+  public static func bestAvailableAudioFormat(compatibleWith modules: [any Speech.ModuleProtocol], considering naturalFormat: AVFAudio.AVAudioFormat? = nil) async -> AVFAudio.AVAudioFormat?
+  #endif
+}
+@_spi(CompatibilityPrivate) public enum EARResultType {
+  @_spi(CompatibilityPrivate) case partial
+  @_spi(CompatibilityPrivate) case candidate
+  @_spi(CompatibilityPrivate) case voiceCommandCandidate
+  @_spi(CompatibilityPrivate) case final
+  @_spi(CompatibilityPrivate) case finalAndTerminal
+  @_spi(CompatibilityPrivate) case pauseConfirmation
+  @_spi(CompatibilityPrivate) case loggable
+  @_spi(CompatibilityPrivate) public static func == (a: Speech.EARResultType, b: Speech.EARResultType) -> Swift.Bool
+  @_spi(CompatibilityPrivate) public func hash(into hasher: inout Swift.Hasher)
+  @_spi(CompatibilityPrivate) public var hashValue: Swift.Int {
+    @_spi(CompatibilityPrivate) get
+  }
+}
+@_spi(CompatibilityPrivate) extension Speech.EARResultType {
+  @_spi(CompatibilityPrivate) public var isVolatile: Swift.Bool {
+    @_spi(CompatibilityPrivate) get
+  }
+}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+public struct LanguageDetectorOptions : Swift.Sendable {
+  @_spi(Speech) public let languageConstraints: [Foundation.Locale]?
+  @_spi(Speech) public let alternativeCount: Swift.UInt
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(languageConstraints: [Foundation.Locale]?, alternativeCount: Swift.UInt)
+  #else
+  @_spi(Speech) public init(languageConstraints: [Foundation.Locale]?, alternativeCount: Swift.UInt)
+  #endif
+}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+final public class LanguageDetector {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public var supportedLocales: [Foundation.Locale]? {
+    @_spi(Speech) get async throws
+  }
+  #else
+  @_spi(Speech) final public var supportedLocales: [Foundation.Locale]? {
+    @_spi(Speech) get async throws
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(options: Speech.LanguageDetectorOptions?, clientInfo: Speech.ClientInfo)
+  #else
+  @_spi(Speech) public init(options: Speech.LanguageDetectorOptions?, clientInfo: Speech.ClientInfo)
+  #endif
+  @_spi(Speech) final public var results: some _Concurrency.AsyncSequence<Speech.LanguageDetector.Result, any Swift.Error> {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) final public var compatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) @available(*, deprecated, renamed: "availableCompatibleAudioFormats(clientID:)")
+  final public var availableCompatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) final public func availableCompatibleAudioFormats(clientID: Swift.String) async -> [AVFAudio.AVAudioFormat]
+  @_spi(Speech) public struct LocaleAlternative : Swift.Sendable {
+    @_spi(Speech) public let locale: Foundation.Locale
+    @_spi(Speech) public let confidence: Swift.Double
+    @_spi(Speech) public var description: Swift.String {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public struct Result : Speech.TimeRanging, Swift.Sendable, Swift.CustomStringConvertible {
+    @_spi(Speech) public let range: CoreMedia.CMTimeRange
+    @_spi(Speech) public let resultsFinalToTime: CoreMedia.CMTime
+    @_spi(Speech) public let dominantLocale: Foundation.Locale
+    @_spi(Speech) public let alternatives: [Speech.LanguageDetector.LocaleAlternative]
+    @_spi(Speech) public var detectedLanguageCode: Foundation.Locale.LanguageCode
+    @_spi(Speech) public var description: Swift.String {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) final public let detectorOptions: Speech.LanguageDetectorOptions?
+  @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, *)
+  public typealias ModuleOutput = Speech.LanguageDetector.Result
+  @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, *)
+  public typealias ResultSequence = @_opaqueReturnTypeOf("$s6Speech16LanguageDetectorC7resultsQrvp", 0) __
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @_hasMissingDesignatedInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+final public class SpeechDetector {
+  @_spi(Speech) final public var results: some _Concurrency.AsyncSequence<Speech.SpeechDetector.Result, any Swift.Error> {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public struct Result : Speech.TimeRanging, Swift.Sendable {
+    @_spi(Speech) public let range: CoreMedia.CMTimeRange
+    @_spi(Speech) public let resultsFinalToTime: CoreMedia.CMTime
+    @_spi(Speech) public let detected: Swift.Bool
+    @_spi(Speech) public let probability: Swift.Double
+  }
+  @_spi(Speech) final public var compatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) @available(*, deprecated, renamed: "availableCompatibleAudioFormats(clientID:)")
+  final public var availableCompatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) final public func availableCompatibleAudioFormats(clientID: Swift.String) -> [AVFAudio.AVAudioFormat]
+  @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ModuleOutput = Speech.SpeechDetector.Result
+  @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ResultSequence = @_opaqueReturnTypeOf("$s6Speech0A8DetectorC7resultsQrvp", 0) __
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+public struct VoiceCommandDebugInfoAggregated {
+  @_spi(Speech) public var hasVoiceCommandInExhaustiveParses: Swift.Bool
+  @_spi(Speech) public var hasVoiceCommandParses: Swift.Bool
+  @_spi(Speech) public var hasVoiceCommandEditIntent: Swift.Bool
+  @_spi(Speech) public var hasVoiceCommandAfterReranking: Swift.Bool
+  @_spi(Speech) public var hasNoVoiceCommandAfterRespeakCheck: Swift.Bool
+}
+@_spi(Speech) @available(macOS 14, iOS 17, *)
+public struct ClientInfo : Swift.Equatable, Swift.Sendable {
+  @_spi(Speech) public init(identifier: Swift.String)
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(identifier: Swift.String, source: Swift.String, applicationName: Swift.String?, inputOrigin: Swift.String?, loggingInfo: Speech.ClientInfo.LoggingInfo?)
+  #else
+  @_spi(Speech) public init(identifier: Swift.String, source: Swift.String, applicationName: Swift.String?, inputOrigin: Swift.String?, loggingInfo: Speech.ClientInfo.LoggingInfo?)
+  #endif
+  @_spi(Speech) @available(*, deprecated, message: "Clients other than Core Speech use init(identifier:); Core Speech uses init(identifier:source:applicationName:inputOrigin:loggingInfo:)")
+  public init(identifier: Swift.String, applicationName: Swift.String = "", source: Swift.String = "", inputOrigin: Swift.String = "")
+  @_spi(Speech) @available(*, deprecated, renamed: "init(identifier:source:applicationName:inputOrigin:loggingInfo:)")
+  public init(identifier: Swift.String, applicationName: Swift.String = "", source: Swift.String = "", inputOrigin: Swift.String = "", dictationUIInteractionId _: Swift.String)
+  @_spi(Speech) public let identifier: Swift.String
+  @_spi(Speech) public let source: Swift.String
+  @_spi(Speech) public let applicationName: Swift.String?
+  @_spi(Speech) public let inputOrigin: Swift.String?
+  @_spi(Speech) public let loggingInfo: Speech.ClientInfo.LoggingInfo?
+  @_spi(Speech) public struct LoggingInfo : Swift.Equatable, Swift.Sendable {
+    @_spi(Speech) public let asrID: Foundation.UUID
+    @_spi(Speech) public let requestID: Foundation.UUID
+    @_spi(Speech) public let dictationUIInteractionID: Swift.String
+    @_spi(Speech) public init(asrID: Foundation.UUID, requestID: Foundation.UUID, dictationUIInteractionID: Swift.String)
+    @_spi(Speech) public static func == (a: Speech.ClientInfo.LoggingInfo, b: Speech.ClientInfo.LoggingInfo) -> Swift.Bool
+  }
+  @_spi(Speech) public static func == (a: Speech.ClientInfo, b: Speech.ClientInfo) -> Swift.Bool
+}
+@_spi(SpeechDonation) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+public struct SpeechDonation {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SpeechDonation) public init(donorBundleID: Swift.String, recordingDate: Foundation.Date, audioFormat: AVFAudio.AVAudioFormat, audioData: Foundation.Data, locale: Foundation.Locale, transcription: Swift.String, evaluation: Speech.SpeechDonation.TranscriptionEvaluation? = nil, speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute> = [], taskHint: Speech.TaskHint? = nil, audioSource: Speech.SpeechDonation.AudioSource? = nil)
+  #else
+  @_spi(SpeechDonation) public init(donorBundleID: Swift.String, recordingDate: Foundation.Date, audioFormat: AVFAudio.AVAudioFormat, audioData: Foundation.Data, locale: Foundation.Locale, transcription: Swift.String, evaluation: Speech.SpeechDonation.TranscriptionEvaluation? = nil, speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute> = [], taskHint: Speech.TaskHint? = nil, audioSource: Speech.SpeechDonation.AudioSource? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SpeechDonation) public init(donorBundleID: Swift.String, recordingDate: Foundation.Date, audioBuffers: [AVFAudio.AVAudioPCMBuffer], locale: Foundation.Locale, transcription: Swift.String, evaluation: Speech.SpeechDonation.TranscriptionEvaluation? = nil, speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute> = [], taskHint: Speech.TaskHint? = nil, audioSource: Speech.SpeechDonation.AudioSource? = nil)
+  #else
+  @_spi(SpeechDonation) public init(donorBundleID: Swift.String, recordingDate: Foundation.Date, audioBuffers: [AVFAudio.AVAudioPCMBuffer], locale: Foundation.Locale, transcription: Swift.String, evaluation: Speech.SpeechDonation.TranscriptionEvaluation? = nil, speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute> = [], taskHint: Speech.TaskHint? = nil, audioSource: Speech.SpeechDonation.AudioSource? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SpeechDonation) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint?` parameter")
+  @_disfavoredOverload public init(donorBundleID: Swift.String, recordingDate: Foundation.Date, audioFormat: AVFAudio.AVAudioFormat, audioData: Foundation.Data, locale: Foundation.Locale, transcription: Swift.String, evaluation: Speech.SpeechDonation.TranscriptionEvaluation? = nil, speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute> = [], taskHint sfTaskHint: Speech.SFSpeechRecognitionTaskHint? = nil, audioSource: Speech.SpeechDonation.AudioSource? = nil, donorReferenceID: Swift.String? = nil)
+  #else
+  @_spi(SpeechDonation) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint?` parameter")
+  @_disfavoredOverload public init(donorBundleID: Swift.String, recordingDate: Foundation.Date, audioFormat: AVFAudio.AVAudioFormat, audioData: Foundation.Data, locale: Foundation.Locale, transcription: Swift.String, evaluation: Speech.SpeechDonation.TranscriptionEvaluation? = nil, speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute> = [], taskHint sfTaskHint: Speech.SFSpeechRecognitionTaskHint? = nil, audioSource: Speech.SpeechDonation.AudioSource? = nil, donorReferenceID: Swift.String? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SpeechDonation) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint?` parameter")
+  @_disfavoredOverload public init(donorBundleID: Swift.String, recordingDate: Foundation.Date, audioBuffers: [AVFAudio.AVAudioPCMBuffer], locale: Foundation.Locale, transcription: Swift.String, evaluation: Speech.SpeechDonation.TranscriptionEvaluation? = nil, speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute> = [], taskHint sfTaskHint: Speech.SFSpeechRecognitionTaskHint? = nil, audioSource: Speech.SpeechDonation.AudioSource? = nil, donorReferenceID: Swift.String? = nil)
+  #else
+  @_spi(SpeechDonation) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint?` parameter")
+  @_disfavoredOverload public init(donorBundleID: Swift.String, recordingDate: Foundation.Date, audioBuffers: [AVFAudio.AVAudioPCMBuffer], locale: Foundation.Locale, transcription: Swift.String, evaluation: Speech.SpeechDonation.TranscriptionEvaluation? = nil, speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute> = [], taskHint sfTaskHint: Speech.SFSpeechRecognitionTaskHint? = nil, audioSource: Speech.SpeechDonation.AudioSource? = nil, donorReferenceID: Swift.String? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(SpeechDonation) @discardableResult
+  public func donate() async -> Foundation.UUID?
+  #else
+  @_spi(SpeechDonation) @discardableResult
+  public func donate() async -> Foundation.UUID?
+  #endif
+  @_spi(SpeechDonation) public let donorBundleID: Swift.String
+  @_spi(SpeechDonation) public let recordingDate: Foundation.Date
+  @_spi(SpeechDonation) public let speechAttributes: Swift.Set<Speech.SpeechDonation.SpeechAttribute>
+  @_spi(SpeechDonation) public let audioSource: Speech.SpeechDonation.AudioSource?
+  @_spi(SpeechDonation) public let audioFormat: AVFAudio.AVAudioFormat
+  @_spi(SpeechDonation) public let locale: Foundation.Locale
+  @_spi(SpeechDonation) public let transcription: Swift.String
+  @_spi(SpeechDonation) public let taskHint: Speech.TaskHint?
+  @_spi(SpeechDonation) public let evaluation: Speech.SpeechDonation.TranscriptionEvaluation?
+}
+@_spi(SpeechDonation) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+extension Speech.SpeechDonation {
+  @_spi(SpeechDonation) public struct SpeechAttribute : Swift.Equatable, Swift.Hashable {
+    @_spi(SpeechDonation) public static var atypical: Speech.SpeechDonation.SpeechAttribute {
+      @_spi(SpeechDonation) get
+    }
+    @_spi(SpeechDonation) public static func == (a: Speech.SpeechDonation.SpeechAttribute, b: Speech.SpeechDonation.SpeechAttribute) -> Swift.Bool
+    @_spi(SpeechDonation) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(SpeechDonation) public var hashValue: Swift.Int {
+      @_spi(SpeechDonation) get
+    }
+  }
+  @_spi(SpeechDonation) public struct AudioSource : Swift.Equatable {
+    @_spi(SpeechDonation) @available(watchOS, unavailable)
+    public static func captureDevice(_ device: AVFCapture.AVCaptureDevice) -> Speech.SpeechDonation.AudioSource
+    @_spi(SpeechDonation) public static func == (a: Speech.SpeechDonation.AudioSource, b: Speech.SpeechDonation.AudioSource) -> Swift.Bool
+  }
+  @_spi(SpeechDonation) public struct TranscriptionEvaluation : Swift.Equatable {
+    @_spi(SpeechDonation) public static var accurate: Speech.SpeechDonation.TranscriptionEvaluation {
+      @_spi(SpeechDonation) get
+    }
+    @_spi(SpeechDonation) public static var inaccurate: Speech.SpeechDonation.TranscriptionEvaluation {
+      @_spi(SpeechDonation) get
+    }
+    @_spi(SpeechDonation) public static func expected(_ expected: Swift.String) -> Speech.SpeechDonation.TranscriptionEvaluation
+    @_spi(SpeechDonation) public static func == (a: Speech.SpeechDonation.TranscriptionEvaluation, b: Speech.SpeechDonation.TranscriptionEvaluation) -> Swift.Bool
+  }
+}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+public struct AudioBufferSequence : _Concurrency.AsyncSequence, _Concurrency.AsyncIteratorProtocol {
+  @_spi(Speech) public typealias Element = AVFAudio.AVAudioPCMBuffer
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(url: Foundation.URL, processingFormat: AVFAudio.AVAudioFormat?) throws
+  #else
+  @_spi(Speech) public init(url: Foundation.URL, processingFormat: AVFAudio.AVAudioFormat?) throws
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public func next() async throws -> AVFAudio.AVAudioPCMBuffer?
+  #else
+  @_spi(Speech) public func next() async throws -> AVFAudio.AVAudioPCMBuffer?
+  #endif
+  @_spi(Speech) public func makeAsyncIterator() -> Speech.AudioBufferSequence
+  @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, *)
+  public typealias AsyncIterator = Speech.AudioBufferSequence
+  #if compiler(>=5.3) && $AssociatedTypeImplements
+  @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, visionOS 2.0, *)
+  @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+  #else
+  @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, visionOS 2.0, *)
+  public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+  #endif
+  #if compiler(>=5.3) && $AssociatedTypeImplements
+  @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, visionOS 2.0, *)
+  @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
+  #else
+  @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, visionOS 2.0, *)
+  public typealias __AsyncSequence_Failure = any Swift.Error
+  #endif
+}
+@_spi(Speech) extension Speech.SpeechAnalyzer {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) convenience public init(client: Speech.ClientInfo, inputAudioFile: Foundation.URL, modules: [any Speech.ModuleProtocol], options: Speech.AnalysisOptions? = nil, restrictedLogging: Swift.Bool = true, analysisContext: Speech.AnalysisContext = .init(), didChangeVolatileRange: (@Sendable (_ range: CoreMedia.CMTimeRange, _ changedStart: Swift.Bool, _ changedEnd: Swift.Bool) -> Swift.Void)? = nil) async throws
+  #else
+  @_spi(Speech) convenience public init(client: Speech.ClientInfo, inputAudioFile: Foundation.URL, modules: [any Speech.ModuleProtocol], options: Speech.AnalysisOptions? = nil, restrictedLogging: Swift.Bool = true, analysisContext: Speech.AnalysisContext = .init(), didChangeVolatileRange: (@Sendable (_ range: CoreMedia.CMTimeRange, _ changedStart: Swift.Bool, _ changedEnd: Swift.Bool) -> Swift.Void)? = nil) async throws
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public func setInputAudioFile(_ audioFile: Foundation.URL, withAudioFormat newFormat: AVFAudio.AVAudioFormat? = nil) async throws
+  #else
+  @_spi(Speech) final public func setInputAudioFile(_ audioFile: Foundation.URL, withAudioFormat newFormat: AVFAudio.AVAudioFormat? = nil) async throws
+  #endif
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+final public class Transcriber {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+  public init(locale: Foundation.Locale = Locale.current, taskHint: Speech.TaskHint? = nil, modelOptions: Speech.Transcriber.ModelOptions? = nil, transcriptionOptions: Swift.Set<Speech.Transcriber.TranscriptionOption> = [.contextualizedTranscription, .punctuation, .emoji], reportingOptions: Swift.Set<Speech.Transcriber.ReportingOption> = [], attributeOptions: Swift.Set<Speech.Transcriber.ResultAttributeOption> = [])
+  #else
+  @_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+  public init(locale: Foundation.Locale = Locale.current, taskHint: Speech.TaskHint? = nil, modelOptions: Speech.Transcriber.ModelOptions? = nil, transcriptionOptions: Swift.Set<Speech.Transcriber.TranscriptionOption> = [.contextualizedTranscription, .punctuation, .emoji], reportingOptions: Swift.Set<Speech.Transcriber.ReportingOption> = [], attributeOptions: Swift.Set<Speech.Transcriber.ResultAttributeOption> = [])
+  #endif
+  @_spi(Speech) final public let locale: Foundation.Locale
+  @_spi(Speech) final public let taskHint: Speech.TaskHint
+  @_spi(Speech) final public let modelOptions: Speech.Transcriber.ModelOptions?
+  @_spi(Speech) final public let transcriptionOptions: Swift.Set<Speech.Transcriber.TranscriptionOption>
+  @_spi(Speech) final public let reportingOptions: Swift.Set<Speech.Transcriber.ReportingOption>
+  @_spi(Speech) final public let attributeOptions: Swift.Set<Speech.Transcriber.ResultAttributeOption>
+  @_spi(Speech) public static var allLocales: [Foundation.Locale] {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) public static var availableLocales: [Foundation.Locale] {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) final public var compatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) @available(*, deprecated, renamed: "availableCompatibleAudioFormats(clientID:)")
+  final public var availableCompatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get async
+  }
+  @_spi(Speech) final public func availableCompatibleAudioFormats(clientID: Swift.String) async -> [AVFAudio.AVAudioFormat]
+  @_spi(Speech) final public func requestResultAtEndpoints(_ times: [CoreMedia.CMTime]) async throws
+  @_spi(Speech) final public func cancelPendingResultsAndPause() async throws
+  @_spi(Speech) final public func resume() async throws
+  @_spi(Speech) final public func setLeftContextText(_ leftContextText: Swift.String) async throws
+  @_spi(Speech) final public func setRightContext(_ rightContext: Swift.String) async throws
+  @_spi(Speech) final public func setSelectedText(_ selectedText: Swift.String) async throws
+  @_spi(Speech) final public var results: some _Concurrency.AsyncSequence<Speech.Transcriber.Result, any Swift.Error> {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public struct Result : Speech.TimeRanging, Swift.Sendable, Swift.CustomStringConvertible {
+    @_spi(Speech) public let range: CoreMedia.CMTimeRange
+    @_spi(Speech) public let resultsFinalToTime: CoreMedia.CMTime
+    @_spi(Speech) public let transcription: Speech.TranscriptionSegment?
+    @_spi(Speech) public var description: Swift.String {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(CompatibilityPrivate) final public var multisegmentResults: some _Concurrency.AsyncSequence<Speech.Transcriber.MultisegmentResult, any Swift.Error> {
+    @_spi(Speech) get
+  }
+  @_spi(CompatibilityPrivate) public struct MultisegmentResult : Speech.TimeRanging, @unchecked Swift.Sendable, Swift.CustomStringConvertible, Swift.Equatable {
+    @_spi(CompatibilityPrivate) public let range: CoreMedia.CMTimeRange
+    @_spi(CompatibilityPrivate) public let resultsFinalToTime: CoreMedia.CMTime
+    @_spi(CompatibilityPrivate) public let transcriptions: [Foundation.AttributedString]
+    @_spi(CompatibilityPrivate) public let transcriptionTokens: [[Speech.TranscriptionToken]]
+    @_spi(CompatibilityPrivate) public let segments: [Speech.TranscriptionSegment]
+    @_spi(CompatibilityPrivate) public let nBestChoices: [Foundation.IndexPath]
+    @_spi(CompatibilityPrivate) public let earResultType: Speech.EARResultType
+    @_spi(CompatibilityPrivate) public let recognitionAudioRange: CoreMedia.CMTimeRange
+    @_spi(CompatibilityPrivate) public let audioAnalytics: Speech.AudioAnalytics?
+    @_spi(CompatibilityPrivate) public let eosLikelihood: Swift.Double?
+    @_spi(CompatibilityPrivate) public let latticeMitigatorResult: Speech.TranscriptionLatticeMitigatorResult?
+    @_spi(CompatibilityPrivate) public let numOneBestTokensExcludingTriggerPhrase: Swift.Int
+    @_spi(CompatibilityPrivate) public let resultCandidateId: Swift.Int?
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(TestCase) public init(range: CoreMedia.CMTimeRange, resultsFinalToTime: CoreMedia.CMTime, transcriptions: [Foundation.AttributedString], transcriptionTokens: [[Speech.TranscriptionToken]], segments: [Speech.TranscriptionSegment], nBestChoices: [Foundation.IndexPath], earResultType: Speech.EARResultType, recognitionAudioRange: CoreMedia.CMTimeRange, audioAnalytics: Speech.AudioAnalytics?, eosLikelihood: Swift.Double?, latticeMitigatorResult: Speech.TranscriptionLatticeMitigatorResult? = nil, numOneBestTokensExcludingTriggerPhrase: Swift.Int, resultCandidateId: Swift.Int?)
+    #else
+    @_spi(TestCase) public init(range: CoreMedia.CMTimeRange, resultsFinalToTime: CoreMedia.CMTime, transcriptions: [Foundation.AttributedString], transcriptionTokens: [[Speech.TranscriptionToken]], segments: [Speech.TranscriptionSegment], nBestChoices: [Foundation.IndexPath], earResultType: Speech.EARResultType, recognitionAudioRange: CoreMedia.CMTimeRange, audioAnalytics: Speech.AudioAnalytics?, eosLikelihood: Swift.Double?, latticeMitigatorResult: Speech.TranscriptionLatticeMitigatorResult? = nil, numOneBestTokensExcludingTriggerPhrase: Swift.Int, resultCandidateId: Swift.Int?)
+    #endif
+    @_spi(CompatibilityPrivate) public var description: Swift.String {
+      @_spi(CompatibilityPrivate) get
+    }
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(CompatibilityPrivate) public static func split(result: Speech.Transcriber.MultisegmentResult) -> (Speech.Transcriber.MultisegmentResult?, Speech.Transcriber.MultisegmentResult)
+    #else
+    @_spi(CompatibilityPrivate) public static func split(result: Speech.Transcriber.MultisegmentResult) -> (Speech.Transcriber.MultisegmentResult?, Speech.Transcriber.MultisegmentResult)
+    #endif
+    @_spi(CompatibilityPrivate) public static func == (a: Speech.Transcriber.MultisegmentResult, b: Speech.Transcriber.MultisegmentResult) -> Swift.Bool
+  }
+  @_spi(Speech) final public var isSpeechProfileUsed: Swift.Bool {
+    @_spi(Speech) get async throws
+  }
+  @_spi(Speech) public struct ModelOptions : Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    @_spi(Speech) public let supplementalModelURL: Foundation.URL?
+    @_spi(Speech) public let farField: Swift.Bool
+    @_spi(Speech) public let modelOverrideURL: Foundation.URL?
+    @_spi(Speech) public let taskForMemoryLock: Swift.String?
+    @_spi(Speech) public let speechProfiles: [Foundation.URL]
+    @_spi(Speech) public let atypicalSpeech: Swift.Bool
+    @_spi(Speech) public let enableParallelLoading: Swift.Bool
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Speech) public init(supplementalModelURL: Foundation.URL? = nil, farField: Swift.Bool = false, modelOverrideURL: Foundation.URL? = nil, speechProfiles: [Foundation.URL] = [], taskForMemoryLock: Swift.String? = nil, atypicalSpeech: Swift.Bool = false, enableParallelLoading: Swift.Bool = false)
+    #else
+    @_spi(Speech) public init(supplementalModelURL: Foundation.URL? = nil, farField: Swift.Bool = false, modelOverrideURL: Foundation.URL? = nil, speechProfiles: [Foundation.URL] = [], taskForMemoryLock: Swift.String? = nil, atypicalSpeech: Swift.Bool = false, enableParallelLoading: Swift.Bool = false)
+    #endif
+    @_spi(Speech) public static func == (a: Speech.Transcriber.ModelOptions, b: Speech.Transcriber.ModelOptions) -> Swift.Bool
+    @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Speech) public var hashValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public enum TranscriptionOption : Swift.Sendable {
+    @_spi(Speech) case normalizedTranscription
+    @_spi(Speech) case contextualizedTranscription
+    @_spi(Speech) case longerContextualization
+    @_spi(Speech) case punctuation
+    @_spi(Speech) case emoji
+    @_spi(Speech) case etiquetteReplacements
+    @_spi(Speech) public static func == (a: Speech.Transcriber.TranscriptionOption, b: Speech.Transcriber.TranscriptionOption) -> Swift.Bool
+    @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Speech) public var hashValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public enum ReportingOption : Swift.Sendable {
+    @_spi(Speech) case volatileResults
+    @_spi(Speech) case alternativeTranscriptions
+    @_spi(CompatibilityPrivate) case multisegmentResults
+    @_spi(Speech) public static func == (a: Speech.Transcriber.ReportingOption, b: Speech.Transcriber.ReportingOption) -> Swift.Bool
+    @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Speech) public var hashValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public typealias ResultAttributeOption = Speech.TranscriptionResultAttributeOption
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public var recognitionStatistics: Swift.Dictionary<Swift.String, Foundation.NSNumber>? {
+    @_spi(Speech) get async throws
+  }
+  #else
+  @_spi(Speech) final public var recognitionStatistics: Swift.Dictionary<Swift.String, Foundation.NSNumber>? {
+    @_spi(Speech) get async throws
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public var recognitionUtterenceStatistics: Swift.Dictionary<Swift.String, Swift.String>? {
+    @_spi(Speech) get async throws
+  }
+  #else
+  @_spi(Speech) final public var recognitionUtterenceStatistics: Swift.Dictionary<Swift.String, Swift.String>? {
+    @_spi(Speech) get async throws
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public var modelVersion: Swift.String? {
+    @_spi(Speech) get async throws
+  }
+  #else
+  @_spi(Speech) final public var modelVersion: Swift.String? {
+    @_spi(Speech) get async throws
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public var acousticModelVersion: Swift.String? {
+    @_spi(Speech) get async throws
+  }
+  #else
+  @_spi(Speech) final public var acousticModelVersion: Swift.String? {
+    @_spi(Speech) get async throws
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(TestCases) final public var recognizerObjectIdentifier: Swift.ObjectIdentifier? {
+    @_spi(Speech) get
+  }
+  #else
+  @_spi(TestCases) final public var recognizerObjectIdentifier: Swift.ObjectIdentifier? {
+    @_spi(Speech) get
+  }
+  #endif
+  @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ModuleOutput = Speech.Transcriber.Result
+  @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ResultSequence = @_opaqueReturnTypeOf("$s6Speech11TranscriberC7resultsQrvp", 0) __
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public struct TranscriptionSegment : @unchecked Swift.Sendable {
+  @_spi(Speech) public let text: Foundation.AttributedString
+  @_spi(Speech) public let alternatives: [Foundation.AttributedString]
+  @_spi(Speech) public let tokens: [Speech.TranscriptionToken]
+  @_spi(Speech) public let alternativeTokens: [[Speech.TranscriptionToken]]
+}
+@_spi(TestCase) extension Speech.TranscriptionSegment : Swift.Equatable {
+  @_spi(TestCase) public init(with text: Foundation.AttributedString, alternatives: [Foundation.AttributedString], tokens: [Speech.TranscriptionToken], alternativeTokens: [[Speech.TranscriptionToken]])
+  @_spi(TestCase) public static func == (a: Speech.TranscriptionSegment, b: Speech.TranscriptionSegment) -> Swift.Bool
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public struct TranscriptionToken : @unchecked Swift.Sendable {
+  @_spi(Speech) public let tokenName: Swift.String
+  @_spi(Speech) public let start: CoreMedia.CMTime
+  @_spi(Speech) public let end: CoreMedia.CMTime
+  @_spi(Speech) public let silenceStart: CoreMedia.CMTime
+  @_spi(Speech) public let confidence: Swift.Double
+  @_spi(Speech) public let hasSpaceAfter: Swift.Bool
+  @_spi(Speech) public let hasSpaceBefore: Swift.Bool
+  @_spi(Speech) public let phoneSequence: Swift.String
+  @_spi(Speech) public let ipaPhoneSequence: Swift.String
+  @_spi(Speech) public let appendedAutoPunctuation: Swift.Bool
+  @_spi(Speech) public let prependedAutoPunctuation: Swift.Bool
+  @_spi(Speech) public let isModifiedByAutoPunctuation: Swift.Bool
+  @_spi(Speech) public let graphCost: Swift.Double
+  @_spi(Speech) public let acousticCost: Swift.Double
+}
+@_spi(CompatibilityPrivate) @_spi(Speech) extension Speech.TranscriptionToken : Swift.Equatable {
+  @_spi(TestCase) public init(with tokenName: Swift.String, start: CoreMedia.CMTime, end: CoreMedia.CMTime, silenceStart: CoreMedia.CMTime, confidence: Swift.Double, hasSpaceAfter: Swift.Bool, hasSpaceBefore: Swift.Bool, phoneSequence: Swift.String, ipaPhoneSequence: Swift.String, appendedAutoPunctuation: Swift.Bool, prependedAutoPunctuation: Swift.Bool, isModifiedByAutoPunctuation: Swift.Bool, graphCost: Swift.Double, acousticCost: Swift.Double)
+  @_spi(CompatibilityPrivate) @_spi(Speech) public static func allTokensString(from tokens: [Speech.TranscriptionToken], ipa: Swift.Bool, attributes: Swift.Set<Speech.Transcriber.ResultAttributeOption>) -> Foundation.AttributedString
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(CompatibilityPrivate) @_spi(Speech) public static func tokenString(from thisToken: Speech.TranscriptionToken, ipa: Swift.Bool, after prevToken: Speech.TranscriptionToken?, attributes: Swift.Set<Speech.Transcriber.ResultAttributeOption>) -> Foundation.AttributedString
+  #else
+  @_spi(CompatibilityPrivate) @_spi(Speech) public static func tokenString(from thisToken: Speech.TranscriptionToken, ipa: Swift.Bool, after prevToken: Speech.TranscriptionToken?, attributes: Swift.Set<Speech.Transcriber.ResultAttributeOption>) -> Foundation.AttributedString
+  #endif
+  @_spi(CompatibilityPrivate) @_spi(Speech) public static func == (a: Speech.TranscriptionToken, b: Speech.TranscriptionToken) -> Swift.Bool
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public enum TranscriptionResultAttributeOption : Swift.Sendable {
+  @_spi(Speech) case confidence
+  @_spi(Speech) case timeRange
+  @_spi(Speech) public static func == (a: Speech.TranscriptionResultAttributeOption, b: Speech.TranscriptionResultAttributeOption) -> Swift.Bool
+  @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+  @_spi(Speech) public var hashValue: Swift.Int {
+    @_spi(Speech) get
+  }
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public struct ConfidenceAttribute : Foundation.AttributedStringKey {
+  @_spi(Speech) public static let name: Swift.String
+  @_spi(Speech) public typealias Value = Swift.Double
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public struct TimeRangeAttribute : Foundation.AttributedStringKey {
+  @_spi(Speech) public static let name: Swift.String
+  @_spi(Speech) public typealias Value = CoreMedia.CMTimeRange
+}
+extension Foundation.AttributeScopes {
+  @_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+  public struct SpeechAttributes : Foundation.AttributeScope {
+    @_spi(Speech) public let confidence: Speech.ConfidenceAttribute.Type
+    @_spi(Speech) public let timeRange: Speech.TimeRangeAttribute.Type
+    @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+    public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
+    @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+    public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
+  }
+}
+extension Foundation.AttributeDynamicLookup {
+  @_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+  public subscript<T>(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeScopes.SpeechAttributes, T>) -> T where T : Foundation.AttributedStringKey {
+    get
+  }
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public struct TranscriptionLatticeMitigatorResult : @unchecked Swift.Sendable {
+  @_spi(Speech) public let version: Swift.String
+  @_spi(Speech) public let score: Swift.Float
+  @_spi(Speech) public let threshold: Swift.Float
+  @_spi(Speech) public let calibrationScale: Swift.Float
+  @_spi(Speech) public let calibrationOffset: Swift.Float
+  @_spi(Speech) public let isProcessed: Swift.Bool
+}
+@_spi(TestCase) extension Speech.TranscriptionLatticeMitigatorResult : Swift.Equatable {
+  @_spi(TestCase) public init(with version: Swift.String, score: Swift.Float, threshold: Swift.Float, calibrationScale: Swift.Float, calibrationOffset: Swift.Float, processed: Swift.Bool)
+  @_spi(TestCase) public static func == (a: Speech.TranscriptionLatticeMitigatorResult, b: Speech.TranscriptionLatticeMitigatorResult) -> Swift.Bool
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public struct AudioAnalytics : Swift.Equatable {
+  @_spi(Speech) public struct AcousticFeature : Swift.Equatable {
+    @_spi(Speech) public let acousticFeatureValuePerFrame: [Swift.Double]
+    @_spi(Speech) public let frameDuration: Foundation.TimeInterval
+    @_spi(Speech) public static func == (a: Speech.AudioAnalytics.AcousticFeature, b: Speech.AudioAnalytics.AcousticFeature) -> Swift.Bool
+  }
+  @_spi(Speech) public let speechRecognitionFeatures: [Swift.String : Swift.Double]
+  @_spi(Speech) public let acousticFeatures: [Swift.String : Speech.AudioAnalytics.AcousticFeature]
+  @_spi(Speech) public let snr: Swift.Double
+  @_spi(Speech) public static func == (a: Speech.AudioAnalytics, b: Speech.AudioAnalytics) -> Swift.Bool
+}
+@_spi(Speech) extension Speech.Transcriber {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint?`")
+  @_disfavoredOverload convenience public init(locale: Foundation.Locale = Locale.current, taskHint sfTaskHint: Speech.SFSpeechRecognitionTaskHint = .unspecified, modelOptions: Speech.Transcriber.ModelOptions? = nil, transcriptionOptions: Swift.Set<Speech.Transcriber.TranscriptionOption> = [.contextualizedTranscription, .punctuation, .emoji], reportingOptions: Swift.Set<Speech.Transcriber.ReportingOption> = [], attributeOptions: Swift.Set<Speech.Transcriber.ResultAttributeOption> = [])
+  #else
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint?`")
+  @_disfavoredOverload convenience public init(locale: Foundation.Locale = Locale.current, taskHint sfTaskHint: Speech.SFSpeechRecognitionTaskHint = .unspecified, modelOptions: Speech.Transcriber.ModelOptions? = nil, transcriptionOptions: Swift.Set<Speech.Transcriber.TranscriptionOption> = [.contextualizedTranscription, .punctuation, .emoji], reportingOptions: Swift.Set<Speech.Transcriber.ReportingOption> = [], attributeOptions: Swift.Set<Speech.Transcriber.ResultAttributeOption> = [])
+  #endif
+}
+@_spi(Speech) extension Speech.Transcriber.ModelOptions {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `enableParallelLoading: Bool`")
+  @_disfavoredOverload public init(supplementalModelURL: Foundation.URL? = nil, farField: Swift.Bool = false, modelOverrideURL: Foundation.URL? = nil, speechProfiles: [Foundation.URL] = [], taskForMemoryLock: Swift.String? = nil, atypicalSpeech: Swift.Bool = false)
+  #else
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `enableParallelLoading: Bool`")
+  @_disfavoredOverload public init(supplementalModelURL: Foundation.URL? = nil, farField: Swift.Bool = false, modelOverrideURL: Foundation.URL? = nil, speechProfiles: [Foundation.URL] = [], taskForMemoryLock: Swift.String? = nil, atypicalSpeech: Swift.Bool = false)
+  #endif
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public struct AnalysisOptions : Swift.Equatable, Swift.Sendable {
+  @_spi(Speech) public let priority: _Concurrency.TaskPriority
+  @_spi(Speech) public let modelRetention: Speech.AnalysisOptions.ModelRetention
+  @_spi(Speech) public let powerContext: Speech.AnalysisOptions.PowerContext?
+  @_spi(Speech) public enum ModelRetention : Swift.Equatable, Swift.Sendable {
+    @_spi(Speech) case whileInUse
+    @_spi(Speech) case lingering
+    @_spi(Speech) case lingeringWithKeepANEModelLoaded
+    @_spi(Speech) case processLifetime
+    @_spi(Speech) case processLifetimeWithKeepANEModelLoaded
+    @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Speech) public static func == (a: Speech.AnalysisOptions.ModelRetention, b: Speech.AnalysisOptions.ModelRetention) -> Swift.Bool
+    @_spi(Speech) public var hashValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public struct PowerContext : Swift.Equatable, Swift.Sendable {
+    @_spi(Speech) public let ane: Swift.String
+    @_spi(Speech) public let cpu: Swift.String
+    @_spi(Speech) public let gpu: Swift.String
+    @_spi(Speech) public init(ane: Swift.String, cpu: Swift.String, gpu: Swift.String)
+    @_spi(Speech) public static func == (a: Speech.AnalysisOptions.PowerContext, b: Speech.AnalysisOptions.PowerContext) -> Swift.Bool
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public init(priority: _Concurrency.TaskPriority, modelRetention: Speech.AnalysisOptions.ModelRetention, powerContext: Speech.AnalysisOptions.PowerContext?)
+  #else
+  @_spi(Speech) public init(priority: _Concurrency.TaskPriority, modelRetention: Speech.AnalysisOptions.ModelRetention, powerContext: Speech.AnalysisOptions.PowerContext?)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, renamed: "init(priority:modelRetention:powerContext:)", message: "Logging info moved to ClientInfo")
+  public init(highPriority: Swift.Bool, loggingInfo _: Speech.AnalysisOptions.LoggingInfo?, powerContext: Speech.AnalysisOptions.PowerContext?)
+  #else
+  @_spi(Speech) @available(*, deprecated, renamed: "init(priority:modelRetention:powerContext:)", message: "Logging info moved to ClientInfo")
+  public init(highPriority: Swift.Bool, loggingInfo _: Speech.AnalysisOptions.LoggingInfo?, powerContext: Speech.AnalysisOptions.PowerContext?)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, renamed: "init(priority:modelRetention:powerContext:)", message: "Logging info moved to ClientInfo")
+  public init(highPriority: Swift.Bool, modelRetention: Speech.AnalysisOptions.ModelRetention, loggingInfo _: Speech.AnalysisOptions.LoggingInfo?, powerContext: Speech.AnalysisOptions.PowerContext?)
+  #else
+  @_spi(Speech) @available(*, deprecated, renamed: "init(priority:modelRetention:powerContext:)", message: "Logging info moved to ClientInfo")
+  public init(highPriority: Swift.Bool, modelRetention: Speech.AnalysisOptions.ModelRetention, loggingInfo _: Speech.AnalysisOptions.LoggingInfo?, powerContext: Speech.AnalysisOptions.PowerContext?)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, renamed: "init(priority:modelRetention:powerContext:)", message: "Logging info moved to ClientInfo")
+  public init(priority: _Concurrency.TaskPriority, modelRetention: Speech.AnalysisOptions.ModelRetention, loggingInfo _: Speech.AnalysisOptions.LoggingInfo?, powerContext: Speech.AnalysisOptions.PowerContext?)
+  #else
+  @_spi(Speech) @available(*, deprecated, renamed: "init(priority:modelRetention:powerContext:)", message: "Logging info moved to ClientInfo")
+  public init(priority: _Concurrency.TaskPriority, modelRetention: Speech.AnalysisOptions.ModelRetention, loggingInfo _: Speech.AnalysisOptions.LoggingInfo?, powerContext: Speech.AnalysisOptions.PowerContext?)
+  #endif
+  @_spi(Speech) @available(*, deprecated, message: "Logging info moved to ClientInfo")
+  public struct LoggingInfo : Swift.Equatable, Swift.Sendable {
+    @_spi(Speech) public let asrID: Foundation.UUID
+    @_spi(Speech) public let requestID: Foundation.UUID
+    @_spi(Speech) public init(asrID: Foundation.UUID, requestID: Foundation.UUID)
+    @_spi(Speech) public static func == (a: Speech.AnalysisOptions.LoggingInfo, b: Speech.AnalysisOptions.LoggingInfo) -> Swift.Bool
+  }
+  @_spi(Speech) public static func == (a: Speech.AnalysisOptions, b: Speech.AnalysisOptions) -> Swift.Bool
+}
+@_spi(Speech) @_inheritsConvenienceInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+@objc public class AnalysisContext : ObjectiveC.NSObject, @unchecked Swift.Sendable {
+  @_spi(Speech) @objc override dynamic public init()
+  @_spi(Speech) public var contextualStrings: [Speech.AnalysisContext.ContextualStringsTag : [Swift.String]]
+  @_spi(Speech) public var userData: [Speech.AnalysisContext.UserDataTag : any Swift.Sendable]
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @objc public func _contextualStrings(forKey key: Swift.String) -> [Swift.String]?
+  #else
+  @_spi(Speech) @objc public func _contextualStrings(forKey key: Swift.String) -> [Swift.String]?
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @objc(_setContextualStrings:forKey:) public func _set(contextualStrings strings: [Swift.String]?, forKey key: Swift.String)
+  #else
+  @_spi(Speech) @objc(_setContextualStrings:forKey:) public func _set(contextualStrings strings: [Swift.String]?, forKey key: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @objc public func _userData(forKey key: Swift.String) -> Any?
+  #else
+  @_spi(Speech) @objc public func _userData(forKey key: Swift.String) -> Any?
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @objc(_setUserData:forKey:) public func _set(userData data: Any?, forKey key: Swift.String)
+  #else
+  @_spi(Speech) @objc(_setUserData:forKey:) public func _set(userData data: Any?, forKey key: Swift.String)
+  #endif
+  @_spi(Speech) public func setWait(contextualStrings: [Speech.AnalysisContext.ContextualStringsTag : [Swift.String]]) async
+  @_spi(Speech) public func setWait(userData: [Speech.AnalysisContext.UserDataTag : some Sendable]) async
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @objc public var geoLMRegionID: Swift.String? {
+    @_spi(Speech) @objc get
+    @_spi(Speech) @objc set
+  }
+  #else
+  @_spi(Speech) @objc public var geoLMRegionID: Swift.String? {
+    @_spi(Speech) @objc get
+    @_spi(Speech) @objc set
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public var contextualNamedEntities: [Speech.ContextualNamedEntity]? {
+    @_spi(Speech) get
+    @_spi(Speech) set
+  }
+  #else
+  @_spi(Speech) public var contextualNamedEntities: [Speech.ContextualNamedEntity]? {
+    @_spi(Speech) get
+    @_spi(Speech) set
+  }
+  #endif
+  @_spi(CompatibilityPrivate) public var voiceCommandContext: Speech.VoiceCommandContext {
+    @_spi(Speech) get
+    @_spi(Speech) set
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public var profileData: Foundation.Data? {
+    @_spi(Speech) get
+    @_spi(Speech) set
+  }
+  #else
+  @_spi(Speech) public var profileData: Foundation.Data? {
+    @_spi(Speech) get
+    @_spi(Speech) set
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public var jitProfileData: Foundation.Data? {
+    @_spi(Speech) get
+    @_spi(Speech) set
+  }
+  #else
+  @_spi(Speech) public var jitProfileData: Foundation.Data? {
+    @_spi(Speech) get
+    @_spi(Speech) set
+  }
+  #endif
+  @_spi(Speech) public struct ContextualStringsTag : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    @_spi(Speech) public typealias RawValue = Swift.String
+    @_spi(Speech) public init(_ rawValue: Speech.AnalysisContext.ContextualStringsTag.RawValue)
+    @_spi(Speech) public init(rawValue: Speech.AnalysisContext.ContextualStringsTag.RawValue)
+    @_spi(Speech) public let rawValue: Speech.AnalysisContext.ContextualStringsTag.RawValue
+    @_spi(Speech) public static let jitGrammar: Speech.AnalysisContext.ContextualStringsTag
+    @_spi(Speech) public static let leftContext: Speech.AnalysisContext.ContextualStringsTag
+    @_spi(Speech) public static let rightContext: Speech.AnalysisContext.ContextualStringsTag
+    @_spi(Speech) public static let selectedText: Speech.AnalysisContext.ContextualStringsTag
+  }
+  @_spi(Speech) public struct UserDataTag : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    @_spi(Speech) public typealias RawValue = Swift.String
+    @_spi(Speech) public init(_ rawValue: Speech.AnalysisContext.UserDataTag.RawValue)
+    @_spi(Speech) public init(rawValue: Speech.AnalysisContext.UserDataTag.RawValue)
+    @_spi(Speech) public let rawValue: Speech.AnalysisContext.UserDataTag.RawValue
+    @_spi(Speech) public static let geoLMRegionID: Speech.AnalysisContext.UserDataTag
+    @_spi(Speech) public static let contextualNamedEntities: Speech.AnalysisContext.UserDataTag
+    @_spi(CompatibilityPrivate) public static let voiceCommandContext: Speech.AnalysisContext.UserDataTag
+    @_spi(Speech) public static let profileData: Speech.AnalysisContext.UserDataTag
+    @_spi(Speech) public static let jitProfileData: Speech.AnalysisContext.UserDataTag
+  }
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) public struct ContextualNamedEntity : Swift.Sendable {
+  @_spi(Speech) public let content: Swift.String
+  @_spi(Speech) public let sourceFramework: Speech.ContextualNamedEntity.SourceFramework
+  @_spi(Speech) public let score: Swift.Double?
+  @_spi(Speech) public let category: Swift.Int?
+  @_spi(Speech) public let language: Swift.String?
+  @_spi(Speech) public enum SourceFramework : Swift.Int, Swift.Sendable {
+    @_spi(Speech) case undefined, personalizationPortrait, peopleSuggester
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Speech) public init?(rawValue: Swift.Int)
+    #else
+    @_spi(Speech) public init?(rawValue: Swift.Int)
+    #endif
+    @_spi(Speech) public typealias RawValue = Swift.Int
+    @_spi(Speech) public var rawValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public init(personalizationPortraitName: Swift.String, score: Swift.Double, category: Swift.Int, language: Swift.String)
+  @_spi(Speech) public init(peopleSuggesterRecipientDisplayName: Swift.String)
+}
+@_spi(CompatibilityPrivate) public struct VoiceCommandContext : Swift.Sendable {
+  @_spi(CompatibilityPrivate) public let prefixText: Swift.String?
+  @_spi(CompatibilityPrivate) public let postfixText: Swift.String?
+  @_spi(CompatibilityPrivate) public let selectedText: Swift.String?
+  @_spi(CompatibilityPrivate) public let disambiguationActive: Foundation.NSNumber?
+  @_spi(CompatibilityPrivate) public let cursorInVisibleText: Foundation.NSNumber?
+  @_spi(CompatibilityPrivate) public let favorCommandSuppression: Foundation.NSNumber?
+  @_spi(CompatibilityPrivate) public let abortCommandSuppression: Foundation.NSNumber?
+  @_spi(CompatibilityPrivate) public let undoEvent: Foundation.NSNumber?
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(CompatibilityPrivate) public init(prefixText: Swift.String?, postfixText: Swift.String?, selectedText: Swift.String?, disambiguationActive: Foundation.NSNumber?, cursorInVisibleText: Foundation.NSNumber?, favorCommandSuppression: Foundation.NSNumber?, abortCommandSuppression: Foundation.NSNumber?, undoEvent: Foundation.NSNumber?)
+  #else
+  @_spi(CompatibilityPrivate) public init(prefixText: Swift.String?, postfixText: Swift.String?, selectedText: Swift.String?, disambiguationActive: Foundation.NSNumber?, cursorInVisibleText: Foundation.NSNumber?, favorCommandSuppression: Foundation.NSNumber?, abortCommandSuppression: Foundation.NSNumber?, undoEvent: Foundation.NSNumber?)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(CompatibilityPrivate) @available(*, deprecated, renamed: "init(prefixText:postfixText:selectedText:disambiguationActive:cursorInVisibleText:favorCommandSuppression:abortCommandSuppression:undoEvent:)", message: "Added new bool undoEvent")
+  public init(prefixText: Swift.String?, postfixText: Swift.String?, selectedText: Swift.String?, disambiguationActive: Foundation.NSNumber?, cursorInVisibleText: Foundation.NSNumber?, favorCommandSuppression: Foundation.NSNumber?, abortCommandSuppression: Foundation.NSNumber?)
+  #else
+  @_spi(CompatibilityPrivate) @available(*, deprecated, renamed: "init(prefixText:postfixText:selectedText:disambiguationActive:cursorInVisibleText:favorCommandSuppression:abortCommandSuppression:undoEvent:)", message: "Added new bool undoEvent")
+  public init(prefixText: Swift.String?, postfixText: Swift.String?, selectedText: Swift.String?, disambiguationActive: Foundation.NSNumber?, cursorInVisibleText: Foundation.NSNumber?, favorCommandSuppression: Foundation.NSNumber?, abortCommandSuppression: Foundation.NSNumber?)
+  #endif
+}
+@_spi(Speech) @objc @_hasMissingDesignatedInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+final public class ModelDownloadRequest : ObjectiveC.NSObject, Foundation.ProgressReporting, Swift.Sendable {
+  @_spi(Speech) @objc final public let progress: Foundation.Progress
+  @_spi(Speech) final public func download() async throws
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @objc final public func download(withCompletion completion: @escaping ((any Swift.Error)?) -> Swift.Void)
+  #else
+  @_spi(Speech) @objc final public func download(withCompletion completion: @escaping ((any Swift.Error)?) -> Swift.Void)
+  #endif
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @_hasMissingDesignatedInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+final public class VoiceMeasurer {
+  @_spi(Speech) final public var results: some _Concurrency.AsyncSequence<Speech.VoiceMeasurer.Result, any Swift.Error> {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public struct Result : Speech.TimeRanging, Swift.Sendable {
+    @_spi(Speech) public let range: CoreMedia.CMTimeRange
+    @_spi(Speech) public let resultsFinalToTime: CoreMedia.CMTime
+  }
+  @_spi(Speech) final public var compatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) @available(*, deprecated, renamed: "availableCompatibleAudioFormats(clientID:)")
+  final public var availableCompatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) final public func availableCompatibleAudioFormats(clientID: Swift.String) -> [AVFAudio.AVAudioFormat]
+  @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ModuleOutput = Speech.VoiceMeasurer.Result
+  @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ResultSequence = @_opaqueReturnTypeOf("$s6Speech13VoiceMeasurerC7resultsQrvp", 0) __
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+public enum TaskHint : Swift.Sendable {
+  @_spi(Speech) case dictation
+  @_spi(Speech) case search
+  @_spi(Speech) case confirmation
+  @_spi(Speech) case assistant
+  @_spi(Speech) case assistantDictation
+  @_spi(Speech) case keyboardDictation
+  @_spi(Speech) case watchDictation
+  @_spi(Speech) case voicemail
+  @_spi(Speech) case foundInCalls
+  @_spi(Speech) case captioning
+  @_spi(Speech) case dictationCC
+  @_spi(Speech) case spellCC
+  @_spi(Speech) case spelling
+  @_spi(Speech) case tshot
+  @_spi(Speech) case offlineTranscription
+  @_spi(Speech) case liveTranscription
+  @_spi(Speech) package var preferredModelTaskNames: [Swift.String] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public static func == (a: Speech.TaskHint, b: Speech.TaskHint) -> Swift.Bool
+  @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+  @_spi(Speech) public var hashValue: Swift.Int {
+    @_spi(Speech) get
+  }
+}
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public protocol DataInsertable {
+  func insert(data: Speech.SFCustomLanguageModelData)
+}
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public protocol TemplateInsertable {
+  func insert(generator: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator)
+}
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
+  public struct PhraseCount : Swift.Hashable, Swift.Sendable, Swift.CustomStringConvertible, Swift.Codable, Speech.DataInsertable {
+    public let phrase: Swift.String
+    public let count: Swift.Int
+    public init(phrase: Swift.String, count: Swift.Int)
+    public var description: Swift.String {
+      get
+    }
+    public func insert(data: Speech.SFCustomLanguageModelData)
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: Speech.SFCustomLanguageModelData.PhraseCount, b: Speech.SFCustomLanguageModelData.PhraseCount) -> Swift.Bool
+    public func encode(to encoder: any Swift.Encoder) throws
+    public var hashValue: Swift.Int {
+      get
+    }
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct CustomPronunciation : Swift.Hashable, Swift.Sendable, Swift.CustomStringConvertible, Swift.Codable, Speech.DataInsertable {
+    public let grapheme: Swift.String
+    public let phonemes: [Swift.String]
+    public init(grapheme: Swift.String, phonemes: [Swift.String])
+    public var description: Swift.String {
+      get
+    }
+    public func insert(data: Speech.SFCustomLanguageModelData)
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: Speech.SFCustomLanguageModelData.CustomPronunciation, b: Speech.SFCustomLanguageModelData.CustomPronunciation) -> Swift.Bool
+    public func encode(to encoder: any Swift.Encoder) throws
+    public var hashValue: Swift.Int {
+      get
+    }
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  @_functionBuilder public struct DataInsertableBuilder {
+    public static func buildBlock(_ components: any Speech.DataInsertable...) -> any Speech.DataInsertable
+    public static func buildEither(first: any Speech.DataInsertable) -> any Speech.DataInsertable
+    public static func buildEither(second: any Speech.DataInsertable) -> any Speech.DataInsertable
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    public static func buildOptional(_ component: (any Speech.DataInsertable)?) -> any Speech.DataInsertable
+    #else
+    public static func buildOptional(_ component: (any Speech.DataInsertable)?) -> any Speech.DataInsertable
+    #endif
+    public static func buildArray(_ components: [any Speech.DataInsertable]) -> any Speech.DataInsertable
+  }
+  public class PhraseCountGenerator : Swift.Hashable, Swift.Codable, _Concurrency.AsyncSequence, Speech.DataInsertable {
+    public typealias AsyncIterator = Speech.SFCustomLanguageModelData.PhraseCountGenerator.Iterator
+    public typealias Element = Speech.SFCustomLanguageModelData.PhraseCount
+    public func makeAsyncIterator() -> Speech.SFCustomLanguageModelData.PhraseCountGenerator.Iterator
+    public init()
+    @_hasMissingDesignatedInitializers public class Iterator : _Concurrency.AsyncIteratorProtocol {
+      public typealias Element = Speech.SFCustomLanguageModelData.PhraseCount
+      #if compiler(>=5.3) && $NoncopyableGenerics
+      public func next() async throws -> Speech.SFCustomLanguageModelData.PhraseCount?
+      #else
+      public func next() async throws -> Speech.SFCustomLanguageModelData.PhraseCount?
+      #endif
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, macOS 15.0, visionOS 2.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, macOS 15.0, visionOS 2.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+      #endif
+      @objc deinit
+    }
+    public static func == (lhs: Speech.SFCustomLanguageModelData.PhraseCountGenerator, rhs: Speech.SFCustomLanguageModelData.PhraseCountGenerator) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public func insert(data: Speech.SFCustomLanguageModelData)
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, macOS 15.0, visionOS 2.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, macOS 15.0, visionOS 2.0, *)
+    public typealias __AsyncSequence_Failure = any Swift.Error
+    #endif
+    @objc deinit
+    public func encode(to encoder: any Swift.Encoder) throws
+    public var hashValue: Swift.Int {
+      get
+    }
+    required public init(from decoder: any Swift.Decoder) throws
+  }
+  @_inheritsConvenienceInitializers public class TemplatePhraseCountGenerator : Speech.SFCustomLanguageModelData.PhraseCountGenerator {
+    public struct Template : Swift.Hashable, Swift.Codable, Speech.TemplateInsertable {
+      public let body: Swift.String
+      public let count: Swift.Int
+      public init(_ body: Swift.String, count: Swift.Int)
+      public func insert(generator: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator)
+      public func hash(into hasher: inout Swift.Hasher)
+      public static func == (a: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator.Template, b: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator.Template) -> Swift.Bool
+      public func encode(to encoder: any Swift.Encoder) throws
+      public var hashValue: Swift.Int {
+        get
+      }
+      public init(from decoder: any Swift.Decoder) throws
+    }
+    @_hasMissingDesignatedInitializers public class Iterator : Speech.SFCustomLanguageModelData.PhraseCountGenerator.Iterator {
+      public typealias Element = Speech.SFCustomLanguageModelData.PhraseCount
+      public init(templates: [Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator.Template], templateClasses: [Swift.String : [Swift.String]])
+      #if compiler(>=5.3) && $NoncopyableGenerics
+      override public func next() async throws -> Speech.SFCustomLanguageModelData.PhraseCount?
+      #else
+      override public func next() async throws -> Speech.SFCustomLanguageModelData.PhraseCount?
+      #endif
+      @objc deinit
+    }
+    public func insert(template: Swift.String, count: Swift.Int)
+    public func define(className: Swift.String, values: [Swift.String])
+    override public func makeAsyncIterator() -> Speech.SFCustomLanguageModelData.PhraseCountGenerator.Iterator
+    public static func == (lhs: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator, rhs: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator) -> Swift.Bool
+    override public func hash(into hasher: inout Swift.Hasher)
+    override public init()
+    required public init(from decoder: any Swift.Decoder) throws
+    @objc deinit
+  }
+  public struct CompoundTemplate : Speech.TemplateInsertable {
+    public init(_ components: [any Speech.TemplateInsertable])
+    public func insert(generator: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator)
+  }
+  @_functionBuilder public struct TemplateInsertableBuilder {
+    public static func buildBlock(_ components: any Speech.TemplateInsertable...) -> any Speech.TemplateInsertable
+    public static func buildEither(first: any Speech.TemplateInsertable) -> any Speech.TemplateInsertable
+    public static func buildEither(second: any Speech.TemplateInsertable) -> any Speech.TemplateInsertable
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    public static func buildOptional(_ component: (any Speech.TemplateInsertable)?) -> any Speech.TemplateInsertable
+    #else
+    public static func buildOptional(_ component: (any Speech.TemplateInsertable)?) -> any Speech.TemplateInsertable
+    #endif
+    public static func buildArray(_ components: [any Speech.TemplateInsertable]) -> any Speech.TemplateInsertable
+  }
+  public struct PhraseCountsFromTemplates : Speech.DataInsertable {
+    public init(classes: [Swift.String : [Swift.String]], @Speech.SFCustomLanguageModelData.TemplateInsertableBuilder builder: () -> any Speech.TemplateInsertable)
+    public func insert(data: Speech.SFCustomLanguageModelData)
+  }
+  final public let locale: Foundation.Locale
+  final public let identifier: Swift.String
+  final public let version: Swift.String
+  public static func supportedPhonemes(locale: Foundation.Locale) -> [Swift.String]
+  public init(locale: Foundation.Locale, identifier: Swift.String, version: Swift.String)
+  convenience public init(locale: Foundation.Locale, identifier: Swift.String, version: Swift.String, @Speech.SFCustomLanguageModelData.DataInsertableBuilder builder: () -> any Speech.DataInsertable)
+  public func insert(phraseCount: Speech.SFCustomLanguageModelData.PhraseCount)
+  public func insert(phraseCountGenerator: Speech.SFCustomLanguageModelData.PhraseCountGenerator)
+  public func insert(term: Speech.SFCustomLanguageModelData.CustomPronunciation)
+  public func export(to path: Foundation.URL) async throws
+  public static func == (lhs: Speech.SFCustomLanguageModelData, rhs: Speech.SFCustomLanguageModelData) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(Speech) public class WordErrorRateCalculator {
+  @_spi(Speech) public static func splitString(value: Swift.String, locale: Foundation.Locale) -> [Swift.String]
+  @_spi(Speech) public var minEditDistance: Swift.Int {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public var wordErrorRate: Swift.Double {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public var editCommands: [Swift.String] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public init(reference: Swift.String, hypothesis: Swift.String, locale: Foundation.Locale, substitutionCost: Swift.Int = 1, insertionCost: Swift.Int = 1, deletionCost: Swift.Int = 1)
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) public class CustomLanguageModelEvaluator {
+  @_spi(Speech) public struct AudioSampleEvaluationResult {
+    @_spi(Speech) public let baselineWordErrorRate: Swift.Double
+    @_spi(Speech) public let baselineTranscription: Swift.String
+    @_spi(Speech) public let customizedWordErrorRate: Swift.Double
+    @_spi(Speech) public let customizedTranscription: Swift.String
+    @_spi(Speech) public var wordErrorRateReduction: Swift.Double {
+      @_spi(Speech) get
+    }
+    @_spi(Speech) public var description: Swift.String {
+      @_spi(Speech) get
+    }
+    @_spi(Speech) public var json: Swift.String {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public init(languageModel: Foundation.URL, clientIdentifier: Swift.String, skipDownload: Swift.Bool = false) throws
+  @_spi(Speech) public func computeWordErrorRate(reference: Swift.String, hypothesis: Swift.String) -> Swift.Double
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public func evaluate(audioSample: Foundation.URL, referenceTranscription: Swift.String) async throws -> Swift.Result<Speech.CustomLanguageModelEvaluator.AudioSampleEvaluationResult, any Swift.Error>
+  #else
+  @_spi(Speech) public func evaluate(audioSample: Foundation.URL, referenceTranscription: Swift.String) async throws -> Swift.Result<Speech.CustomLanguageModelEvaluator.AudioSampleEvaluationResult, any Swift.Error>
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) public func evaluate(testSet: [(audioSample: Foundation.URL, referenceTranscription: Swift.String)]) async throws -> [Swift.Result<Speech.CustomLanguageModelEvaluator.AudioSampleEvaluationResult, any Swift.Error>]
+  #else
+  @_spi(Speech) public func evaluate(testSet: [(audioSample: Foundation.URL, referenceTranscription: Swift.String)]) async throws -> [Swift.Result<Speech.CustomLanguageModelEvaluator.AudioSampleEvaluationResult, any Swift.Error>]
+  #endif
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @_hasMissingDesignatedInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public class SignpostHelper {
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+final public class PhoneticTranscriber {
+  @_spi(Speech) public init(transcriptionFormat: Speech.PhoneticTranscriber.TranscriptionFormat = .ipa, reportingOptions: Swift.Set<Speech.PhoneticTranscriber.ReportingOption> = [], attributeOptions: Swift.Set<Speech.PhoneticTranscriber.ResultAttributeOption> = [])
+  @_spi(Speech) final public var compatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) @available(*, deprecated, renamed: "availableCompatibleAudioFormats(clientID:)")
+  final public var availableCompatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) final public func availableCompatibleAudioFormats(clientID: Swift.String) -> [AVFAudio.AVAudioFormat]
+  @_spi(Speech) final public var results: some _Concurrency.AsyncSequence<Speech.PhoneticTranscriber.Result, any Swift.Error> {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public struct Result : Speech.TimeRanging, Swift.Sendable {
+    @_spi(Speech) public let range: CoreMedia.CMTimeRange
+    @_spi(Speech) public let resultsFinalToTime: CoreMedia.CMTime
+    @_spi(Speech) public let transcription: Speech.TranscriptionSegment?
+  }
+  @_spi(Speech) public enum TranscriptionFormat {
+    @_spi(Speech) case ipa
+    @_spi(Speech) public static func == (a: Speech.PhoneticTranscriber.TranscriptionFormat, b: Speech.PhoneticTranscriber.TranscriptionFormat) -> Swift.Bool
+    @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Speech) public var hashValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public enum ReportingOption : Swift.Sendable {
+    @_spi(Speech) case volatileResults
+    @_spi(Speech) case alternativeTranscriptions
+    @_spi(Speech) public static func == (a: Speech.PhoneticTranscriber.ReportingOption, b: Speech.PhoneticTranscriber.ReportingOption) -> Swift.Bool
+    @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Speech) public var hashValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public typealias ResultAttributeOption = Speech.TranscriptionResultAttributeOption
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(TestCases) final public var recognizerObjectIdentifier: Swift.ObjectIdentifier? {
+    @_spi(Speech) get
+  }
+  #else
+  @_spi(TestCases) final public var recognizerObjectIdentifier: Swift.ObjectIdentifier? {
+    @_spi(Speech) get
+  }
+  #endif
+  @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ModuleOutput = Speech.PhoneticTranscriber.Result
+  @_spi(Speech) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ResultSequence = @_opaqueReturnTypeOf("$s6Speech19PhoneticTranscriberC7resultsQrvp", 0) __
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+final public class PhoneticEmbedder {
+  @_spi(Speech) public enum InputFormat : Swift.Int {
+    @_spi(Speech) case grapheme
+    @_spi(Speech) case phoneme
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Speech) public init?(rawValue: Swift.Int)
+    #else
+    @_spi(Speech) public init?(rawValue: Swift.Int)
+    #endif
+    @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, visionOS 2, *)
+    public typealias RawValue = Swift.Int
+    @_spi(Speech) public var rawValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public enum LoadingOption : Swift.Int {
+    @_spi(Speech) case all
+    @_spi(Speech) case embedder
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Speech) public init?(rawValue: Swift.Int)
+    #else
+    @_spi(Speech) public init?(rawValue: Swift.Int)
+    #endif
+    @_spi(Speech) @available(iOS 18, tvOS 18, watchOS 11, macOS 15, visionOS 2, *)
+    public typealias RawValue = Swift.Int
+    @_spi(Speech) public var rawValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public init(locale: Foundation.Locale, clientID: Swift.String, inputFormat: Speech.PhoneticEmbedder.InputFormat, loadingOption: Speech.PhoneticEmbedder.LoadingOption = .all)
+  @_spi(Speech) final public func embeddingDimensions() async throws -> Swift.Int
+  @_spi(Speech) final public func maxInputLength() async throws -> Swift.Int
+  @_spi(Speech) final public func fullModelVersion() async throws -> Swift.String
+  @_spi(Speech) final public func modelMajorVersion() async throws -> Swift.String
+  @_spi(Speech) final public func modelMinorVersion() async throws -> Swift.String
+  @_spi(Speech) final public func modelPatchVersion() async throws -> Swift.String
+  @_spi(Speech) public static func allLocales() -> [Foundation.Locale]
+  @_spi(Speech) public static func allVersions(locale: Foundation.Locale) -> [Swift.String]
+  @_spi(Speech) public static func availableLocales() -> [Foundation.Locale]
+  @_spi(Speech) final public func distanceBetween(source: Swift.String, and target: Swift.String) async throws -> Swift.Double
+  @_spi(Speech) final public func nearest(_ numberOfNeighbors: Swift.Int, neighborsOf query: Swift.String) async throws -> [Speech.PhoneticNeighbor]
+  @_spi(Speech) final public func embeddings(of sources: [Swift.String]) async throws -> [[Swift.Double]]
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) final public func embeddings(of sources: [Swift.String], completion: @escaping ([[Swift.Double]]?, (any Swift.Error)?) -> Swift.Void) throws
+  #else
+  @_spi(Speech) final public func embeddings(of sources: [Swift.String], completion: @escaping ([[Swift.Double]]?, (any Swift.Error)?) -> Swift.Void) throws
+  #endif
+  @_spi(Speech) @available(*, deprecated, message: "Use init(locale:clientID:inputFormat:loadingOption:) instead")
+  @_disfavoredOverload public init(locale: Foundation.Locale, clientID: Swift.String, encoderType: Speech.PhoneticEncoderType, initFlag: Speech.PhoneticEmbedderInitFlag = .all)
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `initFlag: PhoneticEmbedder.LoadingOption`")
+  @_disfavoredOverload convenience public init(locale: Foundation.Locale, clientID: Swift.String, inputFormat: Speech.PhoneticEmbedder.InputFormat)
+  @_spi(Speech) @available(*, deprecated, message: "Changed to async instance method PhoneticEmbedder.embeddingDimensions()")
+  final public let embeddingDimensions: Swift.Int
+  @_spi(Speech) @available(*, deprecated, message: "Changed to async instance method PhoneticEmbedder.maxInputLength()")
+  final public let maxWordLength: Swift.Int
+  @_spi(Speech) @available(*, deprecated, message: "Changed to async instance method PhoneticEmbedder.fullModelVersion()")
+  final public let modelVersion: Swift.Int
+  @_spi(Speech) @available(*, deprecated, message: "Return type changed to `[String]`")
+  public static func allVersions(locale: Foundation.Locale) -> [Swift.Int]
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+public class PhoneticNeighbor {
+  @_spi(Speech) public init(name: Swift.String, distance: Swift.Double)
+  @_spi(Speech) final public let name: Swift.String
+  @_spi(Speech) final public let distance: Swift.Double
+  @_spi(Speech) @objc deinit
+}
+@available(macOS 10.15, iOS 13.0, *)
+extension Speech.SFAcousticFeature {
+  public var acousticFeatureValuePerFrame: [Swift.Double] {
+    get
+  }
+}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.SFSpeechError.Code {
+  @_spi(Speech) public static var audioDisordered: Speech.SFSpeechError.Code {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public static var unexpectedAudioFormat: Speech.SFSpeechError.Code {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public static var noModel: Speech.SFSpeechError.Code {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public static var incompatibleAudioFormats: Speech.SFSpeechError.Code {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public static var invalidJitProfile: Speech.SFSpeechError.Code {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) public static var moduleOutputFailed: Speech.SFSpeechError.Code {
+    @_spi(Speech) get
+  }
+}
+@_spi(CompatibilityPrivate) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+final public class CommandRecognizer {
+  @_spi(CompatibilityPrivate) public init(transcriber: Speech.Transcriber, activeSet: Speech.CommandRecognizer.ActiveSet)
+  @_spi(CompatibilityPrivate) final public var results: some _Concurrency.AsyncSequence<Speech.CommandRecognizer.Result, any Swift.Error> {
+    @_spi(CompatibilityPrivate) get
+  }
+  @_spi(CompatibilityPrivate) public struct Result : Speech.TimeRanging, Swift.Sendable, Swift.CustomStringConvertible {
+    @_spi(CompatibilityPrivate) public let range: CoreMedia.CMTimeRange
+    @_spi(CompatibilityPrivate) public let resultsFinalToTime: CoreMedia.CMTime
+    @_spi(CompatibilityPrivate) public let transcriptionCommands: [[Speech.CommandRecognizer.Interpretation]]
+    @_spi(CompatibilityPrivate) public var description: Swift.String {
+      @_spi(CompatibilityPrivate) get
+    }
+  }
+  @_spi(CompatibilityPrivate) final public var compatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(CompatibilityPrivate) get
+  }
+  @_spi(CompatibilityPrivate) @available(*, deprecated, renamed: "availableCompatibleAudioFormats(clientID:)")
+  final public var availableCompatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(CompatibilityPrivate) get
+  }
+  @_spi(CompatibilityPrivate) final public func availableCompatibleAudioFormats(clientID: Swift.String) -> [AVFAudio.AVAudioFormat]
+  @_spi(CompatibilityPrivate) final public let transcriber: Speech.Transcriber
+  @_spi(CompatibilityPrivate) final public let activeSet: Speech.CommandRecognizer.ActiveSet
+  @_spi(CompatibilityPrivate) public struct ActiveSet : Swift.Equatable, Swift.Sendable {
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(CompatibilityPrivate) public init?(suiteDictionary: Swift.Dictionary<ObjectiveC.NSObject, Swift.AnyObject>, resourceBaseURL: Foundation.URL)
+    #else
+    @_spi(CompatibilityPrivate) public init?(suiteDictionary: Swift.Dictionary<ObjectiveC.NSObject, Swift.AnyObject>, resourceBaseURL: Foundation.URL)
+    #endif
+    @_spi(CompatibilityPrivate) public static func == (a: Speech.CommandRecognizer.ActiveSet, b: Speech.CommandRecognizer.ActiveSet) -> Swift.Bool
+  }
+  @_spi(CompatibilityPrivate) public struct Interpretation : Swift.Equatable, Swift.Sendable, Swift.CustomStringConvertible {
+    @_spi(CompatibilityPrivate) public let instanceIdentifier: Foundation.UUID?
+    @_spi(CompatibilityPrivate) public let commandIdentifier: Swift.String
+    @_spi(CompatibilityPrivate) public let suiteIdentifiers: Swift.Set<Swift.String>
+    @_spi(CompatibilityPrivate) public let range: Swift.Range<Swift.Int>
+    @_spi(CompatibilityPrivate) public let verbIndexes: Foundation.IndexSet
+    @_spi(CompatibilityPrivate) public let arguments: [Speech.CommandRecognizer.Argument]
+    @_spi(CompatibilityPrivate) public var description: Swift.String {
+      @_spi(CompatibilityPrivate) get
+    }
+    @_spi(CompatibilityPrivate) public static func == (a: Speech.CommandRecognizer.Interpretation, b: Speech.CommandRecognizer.Interpretation) -> Swift.Bool
+  }
+  @_spi(CompatibilityPrivate) public struct Argument : Swift.Equatable, Swift.Sendable, Swift.CustomStringConvertible {
+    @_spi(CompatibilityPrivate) public var presence: Speech.CommandRecognizer.Argument.Presence
+    @_spi(CompatibilityPrivate) public var text: Swift.String
+    @_spi(CompatibilityPrivate) public var indexes: Foundation.IndexSet
+    @_spi(CompatibilityPrivate) public var adpositionIndexes: Foundation.IndexSet
+    @_spi(CompatibilityPrivate) public enum Presence : Swift.Sendable {
+      @_spi(CompatibilityPrivate) case presentAndDelimited
+      @_spi(CompatibilityPrivate) case presentMaybeIncomplete
+      @_spi(CompatibilityPrivate) case missingMaybeExpected
+      @_spi(CompatibilityPrivate) case missing
+      @_spi(CompatibilityPrivate) public static func == (a: Speech.CommandRecognizer.Argument.Presence, b: Speech.CommandRecognizer.Argument.Presence) -> Swift.Bool
+      @_spi(CompatibilityPrivate) public func hash(into hasher: inout Swift.Hasher)
+      @_spi(CompatibilityPrivate) public var hashValue: Swift.Int {
+        @_spi(CompatibilityPrivate) get
+      }
+    }
+    @_spi(CompatibilityPrivate) public var description: Swift.String {
+      @_spi(CompatibilityPrivate) get
+    }
+    @_spi(CompatibilityPrivate) public static func == (a: Speech.CommandRecognizer.Argument, b: Speech.CommandRecognizer.Argument) -> Swift.Bool
+  }
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(TestCases) final public var recognizerObjectIdentifier: Swift.ObjectIdentifier? {
+    @_spi(CompatibilityPrivate) get
+  }
+  #else
+  @_spi(TestCases) final public var recognizerObjectIdentifier: Swift.ObjectIdentifier? {
+    @_spi(CompatibilityPrivate) get
+  }
+  #endif
+  @_spi(CompatibilityPrivate) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ModuleOutput = Speech.CommandRecognizer.Result
+  @_spi(CompatibilityPrivate) @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
+  public typealias ResultSequence = @_opaqueReturnTypeOf("$s6Speech17CommandRecognizerC7resultsQrvp", 0) __
+  @_spi(CompatibilityPrivate) @objc deinit
+}
+@_spi(Speech) @_hasMissingDesignatedInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public class Instrumentation {
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) @_hasMissingDesignatedInitializers @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+public class RequestEndMetrics {
+  @_spi(Speech) @objc deinit
+}
+extension Swift.Sequence {
+  @inlinable internal func uniqued<Subject>(on projection: (Self.Element) throws -> Subject) rethrows -> [Self.Element] where Subject : Swift.Hashable {
+    var seen: Set<Subject> = []
+    var result: [Element] = []
+    for element in self {
+      if seen.insert(try projection(element)).inserted {
+        result.append(element)
+      }
+    }
+    return result
+  }
+}
+@_spi(Speech) @available(macOS 13.3, iOS 16.4, tvOS 18, *)
+final public class EndpointDetector {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+  public init(taskHint: Speech.TaskHint? = nil, detectionOptions: Speech.EndpointDetector.DetectionOptions? = nil)
+  #else
+  @_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+  public init(taskHint: Speech.TaskHint? = nil, detectionOptions: Speech.EndpointDetector.DetectionOptions? = nil)
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint?`")
+  @_disfavoredOverload convenience public init(taskHint sfTaskHint: Speech.SFSpeechRecognitionTaskHint = .unspecified, detectionOptions: Speech.EndpointDetector.DetectionOptions? = nil)
+  #else
+  @_spi(Speech) @available(*, deprecated, message: "Use overload with `taskHint: TaskHint?`")
+  @_disfavoredOverload convenience public init(taskHint sfTaskHint: Speech.SFSpeechRecognitionTaskHint = .unspecified, detectionOptions: Speech.EndpointDetector.DetectionOptions? = nil)
+  #endif
+  @_spi(Speech) final public var compatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) @available(*, deprecated, renamed: "availableCompatibleAudioFormats(clientID:)")
+  final public var availableCompatibleAudioFormats: [AVFAudio.AVAudioFormat] {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) final public func availableCompatibleAudioFormats(clientID: Swift.String) -> [AVFAudio.AVAudioFormat]
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  @_spi(TestCases) final public var recognizerObjectIdentifier: Swift.ObjectIdentifier? {
+    @_spi(Speech) get
+  }
+  #else
+  @_spi(TestCases) final public var recognizerObjectIdentifier: Swift.ObjectIdentifier? {
+    @_spi(Speech) get
+  }
+  #endif
+  @_spi(Speech) public struct ModuleOutput : Speech.TimeRanging, Swift.Sendable, Swift.CustomStringConvertible {
+    @_spi(Speech) public let range: CoreMedia.CMTimeRange
+    @_spi(Speech) public let resultsFinalToTime: CoreMedia.CMTime
+    @_spi(Speech) public let wordCount: Swift.Int
+    @_spi(Speech) public let eosLikelihood: Swift.Double
+    @_spi(Speech) public let pauseCounts: [Swift.Int]
+    @_spi(Speech) public let silencePosterior: Swift.Double
+    @_spi(Speech) public let acousticEndpointerScore: Swift.Double
+    @_spi(Speech) public var description: Swift.String {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) public struct DetectionOptions : Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    @_spi(Speech) public let detectAfterTime: CoreMedia.CMTime?
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    @_spi(Speech) public init(detectAfterTime: CoreMedia.CMTime? = nil)
+    #else
+    @_spi(Speech) public init(detectAfterTime: CoreMedia.CMTime? = nil)
+    #endif
+    @_spi(Speech) public static func == (a: Speech.EndpointDetector.DetectionOptions, b: Speech.EndpointDetector.DetectionOptions) -> Swift.Bool
+    @_spi(Speech) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(Speech) public var hashValue: Swift.Int {
+      @_spi(Speech) get
+    }
+  }
+  @_spi(Speech) final public var results: some _Concurrency.AsyncSequence<Speech.EndpointDetector.ModuleOutput, any Swift.Error> {
+    @_spi(Speech) get
+  }
+  @_spi(Speech) @available(iOS 17, tvOS 18, watchOS 10, macOS 14, *)
+  public typealias ResultSequence = @_opaqueReturnTypeOf("$s6Speech16EndpointDetectorC7resultsQrvp", 0) __
+  @_spi(Speech) @objc deinit
+}
+@_spi(Speech) public struct EARLocaleAlternative {
+  @_spi(Speech) public let locale: Foundation.Locale
+  @_spi(Speech) public let confidence: Swift.Double
+}
+@_spi(CompatibilityPrivate) extension Speech.EARResultType : Swift.Equatable {}
+@_spi(CompatibilityPrivate) extension Speech.EARResultType : Swift.Hashable {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+extension Speech.LanguageDetector : Speech.ModuleProtocol {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+extension Speech.LanguageDetector : Swift.Sendable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.SpeechDetector : Speech.ModuleProtocol {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.Transcriber : Speech.ModuleProtocol {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.Transcriber : Swift.Sendable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.Transcriber.TranscriptionOption : Swift.Equatable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.Transcriber.TranscriptionOption : Swift.Hashable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.Transcriber.ReportingOption : Swift.Equatable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.Transcriber.ReportingOption : Swift.Hashable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.TranscriptionResultAttributeOption : Swift.Equatable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.TranscriptionResultAttributeOption : Swift.Hashable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.AnalysisOptions.ModelRetention : Swift.Hashable {}
+@_spi(Speech) extension Speech.ContextualNamedEntity.SourceFramework : Swift.Equatable {}
+@_spi(Speech) extension Speech.ContextualNamedEntity.SourceFramework : Swift.Hashable {}
+@_spi(Speech) extension Speech.ContextualNamedEntity.SourceFramework : Swift.RawRepresentable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.VoiceMeasurer : Speech.ModuleProtocol {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+extension Speech.TaskHint : Swift.Equatable {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, *)
+extension Speech.TaskHint : Swift.Hashable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.PhoneticTranscriber : Speech.ModuleProtocol {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.PhoneticTranscriber.TranscriptionFormat : Swift.Equatable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.PhoneticTranscriber.TranscriptionFormat : Swift.Hashable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.PhoneticTranscriber.ReportingOption : Swift.Equatable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.PhoneticTranscriber.ReportingOption : Swift.Hashable {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+extension Speech.PhoneticEmbedder.InputFormat : Swift.Equatable {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+extension Speech.PhoneticEmbedder.InputFormat : Swift.Hashable {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+extension Speech.PhoneticEmbedder.InputFormat : Swift.RawRepresentable {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+extension Speech.PhoneticEmbedder.LoadingOption : Swift.Equatable {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+extension Speech.PhoneticEmbedder.LoadingOption : Swift.Hashable {}
+@_spi(Speech) @available(macOS 15, iOS 18, watchOS 11, tvOS 18, visionOS 2, *)
+extension Speech.PhoneticEmbedder.LoadingOption : Swift.RawRepresentable {}
+@_spi(Speech) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.CommandRecognizer : Speech.ModuleProtocol {}
+@_spi(CompatibilityPrivate) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.CommandRecognizer : Swift.Sendable {}
+@_spi(CompatibilityPrivate) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.CommandRecognizer.Argument.Presence : Swift.Equatable {}
+@_spi(CompatibilityPrivate) @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+extension Speech.CommandRecognizer.Argument.Presence : Swift.Hashable {}
+@_spi(Speech) @available(macOS 13.3, iOS 16.4, tvOS 18, *)
+extension Speech.EndpointDetector : Speech.ModuleProtocol {}
+@_spi(Speech) @available(macOS 13.3, iOS 16.4, tvOS 18, *)
+extension Speech.EndpointDetector : Swift.Sendable {}

@@ -1,0 +1,224 @@
+module Darwin.C {
+  textual header "assert.h"
+
+  module _assert {
+    header "_assert.h"
+    export *
+  }
+
+  module _static_assert {
+    header "_static_assert.h"
+    export *
+  }
+
+  module complex {
+    header "complex.h"
+    export *
+  }
+
+  module copyfile {
+    header "copyfile.h"
+    export *
+  }
+
+  module ctermid {
+    header "_ctermid.h"
+    export *
+  }
+
+  module ctype {
+    header "ctype.h"
+    export *
+  }
+
+  module _ctype {
+    header "_ctype.h"
+    export *
+  }
+
+  module err {
+    header "err.h"
+    export *
+  }
+
+  module errno {
+    header "errno.h"
+    header "sys/errno.h"
+    export *
+  }
+
+  module fenv {
+    header "fenv.h"
+    export *
+  }
+
+  module float {
+    header "float.h"
+    export *
+  }
+
+  module stdint {
+    header "stdint.h"
+    export *
+  }
+
+  module inttypes {
+    header "inttypes.h"
+    export *
+  }
+
+  module _inttypes {
+    header "_inttypes.h"
+    export *
+  }
+
+  module iso646 {
+    header "iso646.h"
+    export *
+  }
+
+  module limits {
+    header "limits.h"
+    export *
+  }
+
+  module locale {
+    header "locale.h"
+    export *
+  }
+
+  module math {
+    header "math.h"
+    export *
+  }
+
+  module readpassphrase {
+    header "readpassphrase.h"
+    export *
+  }
+
+  module setjmp {
+    header "setjmp.h"
+    export *
+  }
+
+  module signal {
+    header "signal.h"
+    export *
+  }
+
+  module stdarg {
+    header "stdarg.h"
+    export *
+  }
+
+  module stdatomic {
+    header "stdatomic.h"
+    export *
+  }
+
+  module stdbool {
+    header "stdbool.h"
+    export *
+  }
+
+  module stddef {
+    header "stddef.h"
+    export *
+  }
+
+  module stdio {
+    header "stdio.h"
+    exclude header "secure/_stdio.h"
+    export *
+  }
+
+  module _stdio {
+    header "_stdio.h"
+    export *
+  }
+
+  module stdlib {
+    header "stdlib.h"
+    export *
+  }
+
+  module _stdlib {
+    header "_stdlib.h"
+    export *
+  }
+
+  module string {
+    header "string.h"
+    exclude header "secure/_string.h"
+    export *
+  }
+
+  module _string {
+    header "_string.h"
+    export *
+  }
+
+  explicit module tgmath {
+    header "tgmath.h"
+    export *
+  }
+
+  module time {
+    header "time.h"
+    export *
+  }
+
+  module _time {
+    header "_time.h"
+    export *
+  }
+
+  module ucontext {
+    exclude header "ucontext.h" // deprecated
+  }
+
+  module util {
+    header "util.h"
+    export *
+  }
+
+  module wchar {
+    header "wchar.h"
+    export *
+  }
+
+  module _wchar {
+    header "_wchar.h"
+    export *
+  }
+
+  module wctype {
+    header "wctype.h"
+    export *
+  }
+
+  module _wctype {
+    header "_wctype.h"
+    export *
+  }
+
+  module xattr_flags {
+    header "xattr_flags.h"
+    export *
+  }
+
+  module xlocale {
+    header "xlocale.h"
+
+    module _xlocale {
+      header "_xlocale.h"
+      export *
+    }
+
+    umbrella "xlocale"
+
+    export *
+    module * { export * }
+  }
+}

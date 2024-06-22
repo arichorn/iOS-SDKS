@@ -1,0 +1,44 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ armv7-ios, armv7s-ios, arm64-ios, arm64e-ios ]
+install-name:    '/usr/lib/libnetquality.dylib'
+current-version: 133
+swift-abi-version: 7
+exports:
+  - targets:         [ armv7-ios, armv7s-ios, arm64-ios, arm64e-ios ]
+    symbols:         [ '_$sSo33NetworkQualityServerConfigurationC10netqualityE06mirrorC2IPSbvg', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE06mirrorC2IPSbvpMV', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE06mirrorC2IPSbvpWvd', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE06mirrorC2IPSbvs', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE10listenPorts5Int32Vvg', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE10listenPorts5Int32VvpMV', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE10listenPorts5Int32VvpWvd', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE10listenPorts5Int32Vvs', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE10tlsEnabledSbvg', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE10tlsEnabledSbvpMV', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE10tlsEnabledSbvpWvd', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE10tlsEnabledSbvs', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE12httpProtocolSo0aB11HTTPVersionVvg', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE12httpProtocolSo0aB11HTTPVersionVvpMV', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE12httpProtocolSo0aB11HTTPVersionVvpWvd', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE12httpProtocolSo0aB11HTTPVersionVvs', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE14bonjourEnabledSbvg', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE14bonjourEnabledSbvpMV', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE14bonjourEnabledSbvpWvd', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE14bonjourEnabledSbvs', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE18defaultIdleTimeouts6UInt32VyFZ', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE18idleTimeoutSecondss6UInt32Vvg', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE18idleTimeoutSecondss6UInt32VvpMV', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE18idleTimeoutSecondss6UInt32VvpWvd', 
+                       '_$sSo33NetworkQualityServerConfigurationC10netqualityE18idleTimeoutSecondss6UInt32Vvs', 
+                       '_$sSo33NetworkQualityServerConfigurationCMa', _NetworkQualityErrorApplicationCanNotUseNetworkQuality, 
+                       _NetworkQualityErrorDataLimitExceeded, _NetworkQualityErrorDeviceNotFound, 
+                       _NetworkQualityErrorDomain, _NetworkQualityErrorExecutionTimeout, 
+                       _NetworkQualityErrorExecutionsCanceledByUser, _NetworkQualityErrorImplementationIssue, 
+                       _NetworkQualityErrorIncorrectHTTPResponse, _NetworkQualityErrorInvalidAPIUse, 
+                       _NetworkQualityErrorJSONParsing, _NetworkQualityErrorRemoteFailure, 
+                       _NetworkQualityErrorServerCreationIssue ]
+    objc-classes:    [ NetworkQualityAssessment, NetworkQualityConfiguration, NetworkQualityHTTPServer, 
+                       NetworkQualityRemoteConfiguration, NetworkQualityResult, NetworkQualityServerConfiguration, 
+                       NetworkQualityServersResult, NetworkQualityValue, RemoteNetworkQualityAssessment ]
+...

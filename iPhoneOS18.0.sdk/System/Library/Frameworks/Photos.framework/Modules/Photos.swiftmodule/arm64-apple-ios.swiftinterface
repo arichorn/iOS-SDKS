@@ -1,0 +1,54 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.3.38 clang-1600.0.20.6)
+// swift-module-flags: -target arm64-apple-ios18.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 700.13.105 -module-name Photos
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+import CoreData
+import Foundation
+@_exported import Photos
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os
+@available(iOS 8.0, tvOS 10.0, watchOS 8.0, macOS 10.13, *)
+extension Photos.PHChange {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func changeDetails<T>(for object: T) -> Photos.PHObjectChangeDetails<T>? where T : Photos.PHObject
+  #else
+  public func changeDetails<T>(for object: T) -> Photos.PHObjectChangeDetails<T>? where T : Photos.PHObject
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func changeDetails<T>(for fetchResult: Photos.PHFetchResult<T>) -> Photos.PHFetchResultChangeDetails<T>? where T : Photos.PHObject
+  #else
+  public func changeDetails<T>(for fetchResult: Photos.PHFetchResult<T>) -> Photos.PHFetchResultChangeDetails<T>? where T : Photos.PHObject
+  #endif
+}
+@available(iOS 15, tvOS 15, macOS 12, *)
+extension Photos.PHPhotoLibrary {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func cloudIdentifierMappings(forLocalIdentifiers localIdentifiers: [Swift.String]) -> [Swift.String : Swift.Result<Photos.PHCloudIdentifier, any Swift.Error>]
+  #else
+  public func cloudIdentifierMappings(forLocalIdentifiers localIdentifiers: [Swift.String]) -> [Swift.String : Swift.Result<Photos.PHCloudIdentifier, any Swift.Error>]
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public func localIdentifierMappings(for cloudIdentifiers: [Photos.PHCloudIdentifier]) -> [Photos.PHCloudIdentifier : Swift.Result<Swift.String, any Swift.Error>]
+  #else
+  public func localIdentifierMappings(for cloudIdentifiers: [Photos.PHCloudIdentifier]) -> [Photos.PHCloudIdentifier : Swift.Result<Swift.String, any Swift.Error>]
+  #endif
+}
+@available(iOS 16, macOS 13, tvOS 16, *)
+extension Photos.PHPersistentChangeFetchResult : Swift.Sequence {
+  final public class Iterator : Swift.IteratorProtocol {
+    public typealias Element = Photos.PHPersistentChange
+    public init(fetchResult: Photos.PHPersistentChangeFetchResult)
+    #if compiler(>=5.3) && $NoncopyableGenerics
+    final public func next() -> Photos.PHPersistentChangeFetchResult.Iterator.Element?
+    #else
+    final public func next() -> Photos.PHPersistentChangeFetchResult.Iterator.Element?
+    #endif
+    @objc deinit
+  }
+  public func makeIterator() -> Photos.PHPersistentChangeFetchResult.Iterator
+  @available(iOS 16, tvOS 16, macOS 13, *)
+  public typealias Element = Photos.PHPersistentChangeFetchResult.Iterator.Element
+}

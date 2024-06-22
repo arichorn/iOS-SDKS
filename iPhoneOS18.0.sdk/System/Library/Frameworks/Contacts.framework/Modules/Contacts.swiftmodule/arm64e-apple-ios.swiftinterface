@@ -1,0 +1,49 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.3.38 clang-1600.0.20.6)
+// swift-module-flags: -target arm64e-apple-ios18.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 3647 -module-name Contacts
+@_exported import Contacts
+import CoreData
+import ExtensionFoundation
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@available(macOS 10.11, iOS 9.0, *)
+extension Contacts.CNError {
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var affectedRecords: [Swift.AnyObject]? {
+    get
+  }
+  #else
+  public var affectedRecords: [Swift.AnyObject]? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var affectedRecordIdentifiers: [Swift.String]? {
+    get
+  }
+  #else
+  public var affectedRecordIdentifiers: [Swift.String]? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NoncopyableGenerics
+  public var keyPaths: [Swift.String]? {
+    get
+  }
+  #else
+  public var keyPaths: [Swift.String]? {
+    get
+  }
+  #endif
+}
+@available(macOS 14, iOS 17, *)
+extension Contacts.CNContact : Swift.Identifiable {
+  @objc dynamic open var id: Foundation.UUID {
+    @objc get
+  }
+  @available(iOS 17, tvOS 13.0, watchOS 6.0, macOS 14, *)
+  public typealias ID = Foundation.UUID
+}
