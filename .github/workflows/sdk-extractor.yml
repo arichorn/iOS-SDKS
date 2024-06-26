@@ -12,15 +12,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download SDK
-        run: wget https://github.com/arichornlover/iPhoneOS-SDK/releases/download/v1.0/iPhoneOS18.0.sdk.zip
+        run: wget https://github.com/arichornlover/iPhoneOS-SDK/releases/download/v1.0/iPhoneOS16.5.sdk.zip
 
       - name: Check if zip file exists
-        run: test -f iPhoneOS18.0.sdk.zip
+        run: test -f iPhoneOS16.5.sdk.zip
         continue-on-error: true
 
       - name: Unpack SDK
         if: success()
-        run: unzip iPhoneOS18.0.sdk.zip -d extracted_folder
+        run: unzip iPhoneOS16.5.sdk.zip -d extracted_folder
 
       - name: Move files
         if: success()
